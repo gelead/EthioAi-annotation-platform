@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --background: #020617; /* deep charcoal */
+  --background: #0a0a0a;
   --foreground: #e5e7eb;
 }
 
@@ -12,14 +12,14 @@
   --font-mono: var(--font-geist-mono);
 
   /* EthioAI brand palette */
-  --color-ethio-charcoal: #020617;
-  --color-ethio-slate: #111827;
-  --color-ethio-blue: #2563eb; /* Digital Ethiopia blue */
+  --color-ethio-charcoal: #0a0a0a;
+  --color-ethio-slate: #161616;
+  --color-ethio-orange: #ff8c00;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #020617;
+    --background: #0a0a0a;
     --foreground: #e5e7eb;
   }
 }
@@ -29,4 +29,24 @@ body {
   color: var(--foreground);
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Noto Sans Ethiopic", "Abyssinica SIL",
     "Helvetica Neue", Arial, sans-serif;
+}
+
+.network-grid {
+  background-image:
+    radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.09) 1px, transparent 0),
+    linear-gradient(rgba(148, 163, 184, 0.08) 1px, transparent 0),
+    linear-gradient(90deg, rgba(148, 163, 184, 0.08) 1px, transparent 0);
+  background-size: 40px 40px, 40px 40px, 40px 40px;
+  opacity: 0.45;
+  mix-blend-mode: screen;
+  animation: gridShift 32s linear infinite;
+}
+
+@keyframes gridShift {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-40px, -40px, 0);
+  }
 }
