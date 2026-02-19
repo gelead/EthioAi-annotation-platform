@@ -78,9 +78,8 @@ export default function ContactPage() {
                   </option>
                   <option value="annotator">Join as Annotator</option>
                   <option value="government">Government Partnership</option>
-                  <option value="business">Business Inquiry</option>
-                </option>
-                </select>
+              <option value="business">Business Inquiry</option>
+            </select>
               </div>
               <div className="space-y-1.5">
                 <label htmlFor="message" className="block text-[11px] font-medium text-slate-300">
