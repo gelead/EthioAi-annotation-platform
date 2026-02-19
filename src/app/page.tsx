@@ -113,6 +113,190 @@ export default function Home() {
             ))}
           </div>
         </section>
+
+        {/* Why Choose EthioAI */}
+        <section className="space-y-8">
+          <div className="space-y-2 text-center md:text-left">
+            <h2 className="text-2xl font-bold tracking-tight text-slate-50 md:text-3xl">
+              Why Choose EthioAI?
+            </h2>
+            <p className="text-sm text-slate-400 md:max-w-2xl">
+              Purpose-built for Ethiopia&apos;s languages, infrastructure, and institutional needs,
+              from national labs to fast-moving startups.
+            </p>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-3">
+            <div className="flex flex-col gap-3 rounded-2xl border border-white/5 bg-[#161616] p-5 shadow-sm">
+              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#ff8c00]/10 text-[#ff8c00]">
+                <span className="text-lg">👥</span>
+              </div>
+              <h3 className="text-sm font-semibold text-slate-50">Expert Team</h3>
+              <p className="text-xs text-slate-300">
+                Annotation specialists and domain experts who understand local languages, sectors,
+                and regulatory requirements.
+              </p>
+            </div>
+
+            <div className="flex flex-col gap-3 rounded-2xl border border-white/5 bg-[#161616] p-5 shadow-sm">
+              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#ff8c00]/10 text-[#ff8c00]">
+                <span className="text-lg">✨</span>
+              </div>
+              <h3 className="text-sm font-semibold text-slate-50">Intuitive Interface</h3>
+              <p className="text-xs text-slate-300">
+                A clean, low-friction UI tailored for large labeling teams, with clear workflows for
+                image, text, and audio tasks.
+              </p>
+            </div>
+
+            <div className="flex flex-col gap-3 rounded-2xl border border-white/5 bg-[#161616] p-5 shadow-sm">
+              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#ff8c00]/10 text-[#ff8c00]">
+                <span className="text-lg">🛡️</span>
+              </div>
+              <h3 className="text-sm font-semibold text-slate-50">Data Security</h3>
+              <p className="text-xs text-slate-300">
+                National data sovereignty by design, with encrypted storage and deployment options
+                that keep sensitive assets within trusted borders.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Contact & Footer */}
+        <section className="space-y-10">
+          {/* Contact */}
+          <div className="grid gap-8 rounded-3xl border border-white/5 bg-black/40 p-6 backdrop-blur md:grid-cols-2 md:p-8">
+            <div className="space-y-4">
+              <h2 className="text-2xl font-bold tracking-tight text-slate-50">Get in Touch</h2>
+              <p className="text-sm text-slate-400">
+                Tell us about your data needs — from pilots to nationwide deployments, we&apos;re
+                here to help you build reliable AI systems.
+              </p>
+              <form className="space-y-3 text-xs text-slate-200">
+                <div className="space-y-1.5">
+                  <label htmlFor="name" className="block text-[11px] font-medium text-slate-300">
+                    Name
+                  </label>
+                  <input
+                    id="name"
+                    type="text"
+                    className="w-full rounded-xl border border-slate-700 bg-black/40 px-3 py-2 text-xs outline-none ring-0 ring-[#ff8c00]/40 placeholder:text-slate-500 focus:border-[#ff8c00] focus:ring-2"
+                    placeholder="Your full name"
+                  />
+                </div>
+                <div className="space-y-1.5">
+                  <label htmlFor="email" className="block text-[11px] font-medium text-slate-300">
+                    Email
+                  </label>
+                  <input
+                    id="email"
+                    type="email"
+                    className="w-full rounded-xl border border-slate-700 bg-black/40 px-3 py-2 text-xs outline-none ring-0 ring-[#ff8c00]/40 placeholder:text-slate-500 focus:border-[#ff8c00] focus:ring-2"
+                    placeholder="you@example.com"
+                  />
+                </div>
+                <div className="space-y-1.5">
+                  <label
+                    htmlFor="message"
+                    className="block text-[11px] font-medium text-slate-300"
+                  >
+                    Project Details
+                  </label>
+                  <textarea
+                    id="message"
+                    rows={4}
+                    className="w-full rounded-xl border border-slate-700 bg-black/40 px-3 py-2 text-xs leading-relaxed outline-none ring-0 ring-[#ff8c00]/40 placeholder:text-slate-500 focus:border-[#ff8c00] focus:ring-2"
+                    placeholder="What kind of data do you need labeled? Timelines, modalities, scale..."
+                  />
+                </div>
+                <button
+                  type="submit"
+                  className="inline-flex items-center rounded-full bg-[#ff8c00] px-5 py-2 text-xs font-semibold text-black shadow-[0_0_24px_rgba(255,140,0,0.9)] transition hover:-translate-y-0.5 hover:shadow-[0_0_32px_rgba(255,140,0,1)]"
+                >
+                  Send Message
+                </button>
+              </form>
+            </div>
+
+            <div className="overflow-hidden rounded-2xl border border-slate-800 bg-slate-900/60">
+              <iframe
+                title="EthioAI - Addis Ababa"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3954.077531766721!2d38.746799!3d8.980603!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x164b85b9e8e4c6c9%3A0x4b4d2b969b5f364!2sAddis%20Ababa!5e0!3m2!1sen!2set!4v1700000000000"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="h-full min-h-[260px] w-full"
+              />
+            </div>
+          </div>
+
+          {/* Footer */}
+          <footer className="border-t border-white/5 pt-8 text-xs text-slate-400">
+            <div className="grid gap-8 md:grid-cols-[1.4fr_repeat(2,minmax(0,1fr))]">
+              <div className="space-y-3">
+                <div className="flex items-center gap-2">
+                  <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-[#ff8c00] text-black shadow-[0_0_18px_rgba(255,140,0,0.8)]">
+                    ⚡
+                  </span>
+                  <span className="text-sm font-semibold text-slate-50">EthioAI</span>
+                </div>
+                <p className="max-w-sm text-xs text-slate-400">
+                  Empowering AI initiatives with high-quality data annotation for Ethiopia and the
+                  region.
+                </p>
+              </div>
+
+              <div>
+                <h3 className="text-[11px] font-semibold uppercase tracking-wide text-slate-300">
+                  Quick Links
+                </h3>
+                <ul className="mt-3 space-y-1.5">
+                  {["Home", "Services", "About", "Contact"].map((item) => (
+                    <li key={item}>
+                      <a href="#" className="transition hover:text-[#ff8c00]">
+                        {item}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div>
+                <h3 className="text-[11px] font-semibold uppercase tracking-wide text-slate-300">
+                  Contact
+                </h3>
+                <ul className="mt-3 space-y-1.5">
+                  <li>
+                    <span className="text-slate-300">Email:</span> support@ethioai.com
+                  </li>
+                  <li>
+                    <span className="text-slate-300">Phone:</span> +251 (0)11 000 0000
+                  </li>
+                  <li>
+                    <span className="text-slate-300">Address:</span> Addis Ababa, Ethiopia
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div className="mt-6 flex flex-col items-center justify-between gap-3 border-t border-white/5 pt-4 text-[11px] text-slate-500 md:flex-row">
+              <span>© {new Date().getFullYear()} EthioAI. All rights reserved.</span>
+              <div className="flex items-center gap-3">
+                <a href="#" className="rounded-full bg-slate-900 px-2 py-1 hover:text-[#ff8c00]">
+                  X
+                </a>
+                <a href="#" className="rounded-full bg-slate-900 px-2 py-1 hover:text-[#ff8c00]">
+                  in
+                </a>
+                <a href="#" className="rounded-full bg-slate-900 px-2 py-1 hover:text-[#ff8c00]">
+                  TG
+                </a>
+                <a href="#" className="rounded-full bg-slate-900 px-2 py-1 hover:text-[#ff8c00]">
+                  GH
+                </a>
+              </div>
+            </div>
+          </footer>
+        </section>
       </main>
     </div>
   );
