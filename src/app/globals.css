@@ -1,9 +1,11 @@
 @import "tailwindcss";
 
 :root {
-  --background: #000000;
+  --background: #050505;
   --foreground: #ffffff;
   --muted-foreground: #a1a1aa;
+  --gold-start: #b28228;
+  --gold-mid: #ffe002;
 }
 
 @theme inline {
@@ -11,10 +13,11 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-inter);
   --font-mono: var(--font-geist-mono);
+  --font-display: var(--font-playfair);
 
-  /* EthioAI monochrome palette */
-  --color-ethio-black: #000000;
-  --color-ethio-muted: #111111;
+  /* EthioAI luxury palette */
+  --color-ethio-onyx: #050505;
+  --color-ethio-muted: #0b0b0b;
   --color-ethio-border: rgba(255, 255, 255, 0.1);
 }
 
@@ -45,6 +48,16 @@ body {
   background-size: 32px 32px, 32px 32px, 32px 32px;
   -webkit-background-clip: text;
   background-clip: text;
+}
+
+.gold-grain {
+  background-color: #050505;
+  background-image:
+    radial-gradient(circle at 1px 1px, rgba(255, 224, 2, 0.16) 1px, transparent 0),
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 0),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 0);
+  background-size: 180px 180px, 120px 120px, 120px 120px;
+  opacity: 0.9;
 }
 
 @keyframes gridShift {
