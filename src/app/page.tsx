@@ -222,7 +222,7 @@ export default function Home() {
             {/* H1 */}
             <motion.h1
               variants={slideUp}
-              className="text-4xl font-black leading-[1.08] tracking-tight sm:text-5xl md:text-6xl"
+              className="text-3xl font-black leading-[1.08] tracking-tight sm:text-4xl md:text-5xl"
               style={{ fontFamily: "var(--font-display, 'Playfair Display', Georgia, serif)" }}
             >
               <span className="text-gold-gradient">
