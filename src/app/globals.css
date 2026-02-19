@@ -1,55 +1,233 @@
 @import "tailwindcss";
 
+/* ─── Google Fonts ─────────────────────────────────────────── */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&display=swap");
+
+/* ─── Design Tokens ────────────────────────────────────────── */
 :root {
+  /* Background */
   --background: #050505;
   --foreground: #ffffff;
   --muted-foreground: #a1a1aa;
-  --gold-start: #b28228;
-  --gold-mid: #ffe002;
+
+  /* Gold System */
+  --gold-start:    #b28228;
+  --gold-mid:      #ffe002;
+  --gold-gradient: linear-gradient(90deg, #b28228 0%, #ffe002 50%, #b28228 100%);
+  --gold-gradient-v: linear-gradient(135deg, #b28228 0%, #ffe002 50%, #b28228 100%);
+  --gold-glow:     0 0 20px rgba(255, 224, 2, 0.55), 0 0 60px rgba(178, 130, 40, 0.35);
+
+  /* Layout */
+  --screen-max:    1440px;
+  --container-max: 1200px;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-inter);
-  --font-mono: var(--font-geist-mono);
-  --font-display: var(--font-playfair);
+  --color-background:    var(--background);
+  --color-foreground:    var(--foreground);
+  --font-sans:           var(--font-inter);
+  --font-mono:           var(--font-geist-mono);
+  --font-display:        var(--font-playfair), "Playfair Display", Georgia, serif;
 
-  /* EthioAI luxury palette */
-  --color-ethio-onyx: #050505;
-  --color-ethio-muted: #0b0b0b;
+  /* Palette */
+  --color-ethio-onyx:   #050505;
+  --color-ethio-muted:  #0b0b0b;
   --color-ethio-border: rgba(255, 255, 255, 0.1);
+  --color-gold-start:   #b28228;
+  --color-gold-mid:     #ffe002;
+}
+
+/* ─── Base ───────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Inter", "Noto Sans Ethiopic",
-    "Abyssinica SIL", "Helvetica Neue", Arial, sans-serif;
+  background:  var(--background);
+  color:       var(--foreground);
+  font-family: var(--font-inter), "Inter", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+  max-width:   var(--screen-max);
+  margin-inline: auto;
+  /* Golden grain noise overlay */
+  position: relative;
 }
 
+/* ─── Golden Grain Texture Overlay ──────────────────────────── */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.055;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 200px 200px;
+  /* Tint the grain gold */
+  mix-blend-mode: soft-light;
+  background-color: #b28228;
+}
+
+/* Small warm sparkle dots layered over the base */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.07;
+  background-image: radial-gradient(circle at 1px 1px, rgba(255, 224, 2, 0.9) 1px, transparent 0);
+  background-size: 32px 32px;
+  mix-blend-mode: screen;
+  animation: grainDrift 40s linear infinite;
+}
+
+/* ─── Utility Classes ────────────────────────────────────────── */
+
+/* Centered content container — 1200px */
+.container-ethio {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+}
+
+/* Gold gradient text */
+.text-gold-gradient {
+  background: var(--gold-gradient);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip:         text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: shimmer 4s linear infinite;
+}
+
+/* Gold gradient background */
+.bg-gold-gradient {
+  background: var(--gold-gradient);
+  background-size: 200% auto;
+}
+
+/* Glowing border for image card */
+.gold-glow-border {
+  border: 2px solid #ffe002;
+  box-shadow: var(--gold-glow);
+  animation: glowPulse 3s ease-in-out infinite;
+}
+
+/* Network / grid overlay (kept from original) */
 .network-grid {
   background-image:
-    radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.09) 1px, transparent 0),
-    linear-gradient(rgba(148, 163, 184, 0.08) 1px, transparent 0),
-    linear-gradient(90deg, rgba(148, 163, 184, 0.08) 1px, transparent 0);
+    radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.07) 1px, transparent 0),
+    linear-gradient(rgba(148, 163, 184, 0.05) 1px, transparent 0),
+    linear-gradient(90deg, rgba(148, 163, 184, 0.05) 1px, transparent 0);
   background-size: 40px 40px, 40px 40px, 40px 40px;
   opacity: 0.45;
   mix-blend-mode: screen;
   animation: gridShift 32s linear infinite;
 }
 
-.hero-mask {
-  color: transparent;
-  background-image:
-    radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.1) 1px, transparent 0),
-    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 0),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 0);
-  background-size: 32px 32px, 32px 32px, 32px 32px;
-  -webkit-background-clip: text;
-  background-clip: text;
+/* ─── Keyframes ──────────────────────────────────────────────── */
+@keyframes shimmer {
+  0%   { background-position: 0% center; }
+  100% { background-position: 200% center; }
 }
 
+@keyframes glowPulse {
+  0%, 100% {
+    box-shadow: 0 0 12px rgba(255, 224, 2, 0.5), 0 0 40px rgba(178, 130, 40, 0.25);
+  }
+  50% {
+    box-shadow: 0 0 28px rgba(255, 224, 2, 0.85), 0 0 80px rgba(178, 130, 40, 0.55);
+  }
+}
+
+@keyframes grainDrift {
+  0%   { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-32px, -32px, 0); }
+}
+
+@keyframes gridShift {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-40px, -40px, 0); }
+}
+
+/* ─── Button Helpers ─────────────────────────────────────────── */
+
+/* Primary: solid gold gradient */
+.btn-gold-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 2rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: #0a0a0a;
+  background: var(--gold-gradient);
+  background-size: 200% auto;
+  border: none;
+  cursor: pointer;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background-position 0.4s ease;
+}
+.btn-gold-primary:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 24px rgba(255, 224, 2, 0.9), 0 0 60px rgba(178, 130, 40, 0.55);
+  background-position: right center;
+}
+
+/* Secondary: transparent with 2px gold border that fills on hover */
+.btn-gold-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 2rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: #ffe002;
+  background: transparent;
+  border: 2px solid #ffe002;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: color 0.35s ease, box-shadow 0.25s ease;
+}
+.btn-gold-secondary::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--gold-gradient);
+  background-size: 200% auto;
+  transform: translateX(-100%);
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  z-index: 0;
+}
+.btn-gold-secondary:hover::before {
+  transform: translateX(0);
+}
+.btn-gold-secondary:hover {
+  color: #0a0a0a;
+  box-shadow: 0 0 20px rgba(255, 224, 2, 0.6);
+}
+.btn-gold-secondary span {
+  position: relative;
+  z-index: 1;
+}
+
+/* ─── Gold Grain card (legacy) ──────────────────────────────── */
 .gold-grain {
   background-color: #050505;
   background-image:
@@ -58,13 +236,4 @@ body {
     linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 0);
   background-size: 180px 180px, 120px 120px, 120px 120px;
   opacity: 0.9;
-}
-
-@keyframes gridShift {
-  from {
-    transform: translate3d(0, 0, 0);
-  }
-  to {
-    transform: translate3d(-40px, -40px, 0);
-  }
 }
