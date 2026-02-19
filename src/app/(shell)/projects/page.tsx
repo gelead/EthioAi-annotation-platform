@@ -1,3 +1,5 @@
+"use client";
+
 import { useProjectContext } from "@/lib/project-context";
 import { ProjectCard } from "@/components/ui/ProjectCard";
 

@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import { TextTagger } from "@/components/annotation/TextTagger";
 import { ImageCanvasPlaceholder } from "@/components/annotation/ImageCanvasPlaceholder";
