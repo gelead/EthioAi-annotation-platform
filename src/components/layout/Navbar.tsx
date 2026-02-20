@@ -90,7 +90,7 @@ export function Navbar() {
                   {isActive && (
                     <motion.div
                       layoutId="nav-underline"
-                      className="absolute bottom-0 left-0 h-[2px] w-full bg-gold-gradient"
+                      className="absolute bottom-[-4px] left-0 h-[2px] w-full bg-gold-gradient"
                       transition={{ type: "spring", stiffness: 380, damping: 30 }}
                     />
                   )}

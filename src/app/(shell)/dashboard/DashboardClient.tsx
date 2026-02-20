@@ -75,7 +75,7 @@ export function DashboardClient({ data }: DashboardClientProps) {
 
   return (
     <motion.div
-      className="relative flex h-full flex-col gap-6"
+      className="relative flex h-full flex-col gap-8"
       variants={containerVariants}
       initial="hidden"
       animate="visible"
@@ -85,13 +85,13 @@ export function DashboardClient({ data }: DashboardClientProps) {
       </div>
 
       <motion.div
-        className="relative z-10 flex flex-col gap-6"
+        className="relative z-10 flex flex-col gap-8"
         variants={containerVariants}
       >
         {/* Header + Quick Stats */}
         <motion.section
           variants={fadeInUp}
-          className="space-y-6"
+          className="space-y-8"
         >
           <div className="flex flex-wrap items-center justify-between gap-4">
             <div>
@@ -113,7 +113,7 @@ export function DashboardClient({ data }: DashboardClientProps) {
           </div>
 
           <motion.div
-            className="grid gap-4 sm:grid-cols-3"
+            className="grid gap-8 sm:grid-cols-3"
             variants={containerVariants}
           >
             {[
@@ -140,7 +140,7 @@ export function DashboardClient({ data }: DashboardClientProps) {
         </motion.section>
 
         {/* Analytics & Distribution Sections */}
-        <div className="grid gap-6 lg:grid-cols-[1.8fr_1fr]">
+        <div className="grid gap-8 lg:grid-cols-[1.8fr_1fr]">
           <motion.section
             variants={fadeInUp}
             className="rounded-2xl border border-white/5 bg-white/[0.01] p-6"
@@ -192,7 +192,7 @@ export function DashboardClient({ data }: DashboardClientProps) {
                   <span className="text-[8px] text-zinc-500 uppercase tracking-widest">Tasks</span>
                 </div>
               </div>
-              <div className="grid grid-cols-3 gap-4 mt-6 w-full">
+              <div className="grid grid-cols-3 gap-8 mt-6 w-full">
                 <div className="flex flex-col items-center">
                   <span className="w-1.5 h-1.5 rounded-full bg-gold-mid mb-1"></span>
                   <span className="text-[10px] text-zinc-500 font-bold">Image</span>
@@ -210,7 +210,7 @@ export function DashboardClient({ data }: DashboardClientProps) {
           </motion.section>
         </div>
 
-        <div className="grid gap-6 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1.2fr)]">
+        <div className="grid gap-8 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1.2fr)]">
           {/* Active Projects */}
           <motion.section
             variants={fadeInUp}

@@ -18,7 +18,8 @@ import {
   ClipboardList,
   Monitor,
   User,
-  HelpCircle
+  HelpCircle,
+  Undo2
 } from "lucide-react";
 
 interface MainLayoutProps {
@@ -40,21 +41,33 @@ export function MainLayout({ children }: MainLayoutProps) {
   const pathname = usePathname();
 
   return (
-    <div className="flex min-h-screen bg-[#050505] font-body text-white">
+    <div className="flex h-screen overflow-hidden bg-[#050505] font-body text-white">
       {/* Rich Sidebar */}
       <aside className="hidden w-64 flex-col border-r-[0.5px] border-white/10 bg-transparent px-4 py-8 md:flex">
         <div className="flex items-center gap-3 px-3 mb-10">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gold-gradient text-sm font-bold text-black shadow-lg shadow-gold-mid/10">
-            EA
-          </div>
-          <div className="flex flex-col">
-            <span className="text-sm font-bold tracking-tight text-white heading-premium">
-              EthioAI
-            </span>
-            <span className="text-[10px] uppercase tracking-widest text-gold-mid/80 font-semibold">
-              Platform
-            </span>
-          </div>
+          <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gold-gradient text-sm font-bold text-black shadow-lg shadow-gold-mid/10">
+              EA
+            </div>
+            <div className="flex flex-col">
+              <span className="text-sm font-bold tracking-tight text-white heading-premium">
+                EthioAI
+              </span>
+              <span className="text-[10px] uppercase tracking-widest text-gold-mid/80 font-semibold">
+                Platform
+              </span>
+            </div>
+          </Link>
+        </div>
+
+        <div className="px-1 mb-6">
+          <Link
+            href="/"
+            className="group flex items-center gap-3 rounded-xl px-4 py-2 text-xs font-bold text-zinc-500 hover:text-white hover:bg-white/[0.02] transition-all"
+          >
+            <Undo2 size={14} className="group-hover:-translate-x-1 transition-transform" />
+            <span>Back to Site</span>
+          </Link>
         </div>
 
         <nav className="flex flex-1 flex-col gap-1.5 px-1">
@@ -111,8 +124,8 @@ export function MainLayout({ children }: MainLayoutProps) {
           </div>
         </header>
 
-        <main className="flex-1 px-8 py-8">
-          <div className="mx-auto flex h-full max-w-7xl flex-col">{children}</div>
+        <main className="flex-1 overflow-y-auto px-8 py-8 custom-scrollbar">
+          <div className="mx-auto flex min-h-full max-w-7xl flex-col">{children}</div>
           <Footer />
         </main>
       </div>

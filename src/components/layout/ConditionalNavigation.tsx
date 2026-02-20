@@ -12,7 +12,7 @@ export function ConditionalNavigation({ children }: ConditionalNavigationProps) 
     const pathname = usePathname();
 
     // Routes where we want the landing Navbar and Footer
-    const isLandingPage = pathname === "/" || pathname === "/about" || pathname === "/contact";
+    const isLandingPage = pathname === "/" || pathname === "/about" || pathname === "/contact" || pathname === "/services";
 
     return (
         <>
