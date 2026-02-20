@@ -36,7 +36,7 @@ export default async function DashboardPage() {
     stats: stats ? {
       completedTasks: stats.completedTasks.toString(),
       totalRewards: `$${stats.totalRewards.toFixed(2)}`,
-      totalTasks: tasks.length.toString(),
+      totalTasks: (tasks?.length ?? 0).toString(),
     } : {
       completedTasks: "0",
       totalRewards: "$0.00",

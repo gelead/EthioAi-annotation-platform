@@ -3,7 +3,6 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { ModernButton } from "@/components/ui/ModernButton";
-import { ModernButton } from "@/components/ui/ModernButton";
 
 const services = [
     {

@@ -225,7 +225,7 @@ export default function AboutPage() {
               >
                 {team
                   .filter((member) => member.group === "Founding Team")
-                  .map((member, idx) => (
+                  .map((member) => (
                     <motion.div
                       key={member.name}
                       variants={fadeInUp}
@@ -274,7 +274,7 @@ export default function AboutPage() {
               >
                 {team
                   .filter((member) => member.group === "Core Developers")
-                  .map((member, idx) => (
+                  .map((member) => (
                     <motion.div
                       key={member.name}
                       variants={fadeInUp}

@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { useFormStatus } from "react-dom";
 import { updateProfile } from "@/app/actions";
+import Image from "next/image";
 
 interface UserData {
   id: string;
@@ -42,10 +43,6 @@ const fadeInUp = {
   },
 };
 
-const fadeIn = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { duration: 0.6, ease: "easeOut" as const } },
-};
 
 const staggerContainer = {
   hidden: { opacity: 0 },
@@ -58,7 +55,7 @@ const staggerContainer = {
 // Submit button with loading spinner using useFormStatus
 function SubmitButton() {
   const { pending } = useFormStatus();
-  
+
   return (
     <motion.button
       type="submit"
@@ -85,14 +82,14 @@ function SubmitButton() {
 export function ProfileClient({ user, recentActivity }: ProfileClientProps) {
   const [isEditing, setIsEditing] = useState(false);
   const [saveMessage, setSaveMessage] = useState("");
-  const [isPending, startTransition] = useTransition();
+  const [, startTransition] = useTransition();
 
   async function handleSubmit(formData: FormData) {
     setSaveMessage("");
-    
+
     startTransition(async () => {
       const result = await updateProfile(user.id, formData);
-      
+
       if (result.success) {
         setSaveMessage("Profile updated successfully!");
         setIsEditing(false);
@@ -133,9 +130,11 @@ export function ProfileClient({ user, recentActivity }: ProfileClientProps) {
               <div className="flex flex-col items-center text-center">
                 <div className="relative mb-4">
                   {user.image ? (
-                    <img
+                    <Image
                       src={user.image}
                       alt={user.name}
+                      width={96}
+                      height={96}
                       className="h-24 w-24 rounded-full object-cover"
                     />
                   ) : (
@@ -289,10 +288,9 @@ export function ProfileClient({ user, recentActivity }: ProfileClientProps) {
                     className="rounded-xl border border-white/10 bg-black/60 p-4"
                   >
                     <p className="text-[11px] text-zinc-500 uppercase tracking-wider">{stat.label}</p>
-                    <p className={`mt-1 text-2xl font-semibold ${
-                      stat.color === "emerald" ? "text-emerald-400" : 
-                      stat.color === "amber" ? "text-amber-400" : "text-white"
-                    }`}>
+                    <p className={`mt-1 text-2xl font-semibold ${stat.color === "emerald" ? "text-emerald-400" :
+                        stat.color === "amber" ? "text-amber-400" : "text-white"
+                      }`}>
                       {stat.value}
                     </p>
                   </motion.div>
@@ -320,11 +318,10 @@ export function ProfileClient({ user, recentActivity }: ProfileClientProps) {
                         <td className="px-4 py-3 text-sm text-zinc-300">{activity.project}</td>
                         <td className="px-4 py-3">
                           <span
-                            className={`inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-medium ${
-                              activity.status === "Verified"
+                            className={`inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-medium ${activity.status === "Verified"
                                 ? "bg-emerald-500/10 text-emerald-400 ring-1 ring-emerald-500/30"
                                 : "bg-amber-500/10 text-amber-400 ring-1 ring-amber-500/30"
-                            }`}
+                              }`}
                           >
                             {activity.status}
                           </span>
