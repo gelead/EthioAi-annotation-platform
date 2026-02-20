@@ -4,7 +4,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ReactNode } from "react";
 import { SyncStatus } from "@/components/ui/SyncStatus";
-import { Footer } from "@/components/layout/Footer";
 
 interface MainLayoutProps {
   children: ReactNode;
@@ -125,8 +124,7 @@ export function MainLayout({ children }: MainLayoutProps) {
         </header>
 
         <main className="flex-1 overflow-y-auto px-8 py-8 custom-scrollbar">
-          <div className="mx-auto flex min-h-full max-w-7xl flex-col">{children}</div>
-          <Footer />
+          <div className="mx-auto flex min-h-full max-w-7xl flex-col pb-20">{children}</div>
         </main>
       </div>
     </div>
