@@ -15,8 +15,8 @@
   --gold-glow: 0 0 20px rgba(255, 224, 2, 0.55), 0 0 60px rgba(178, 130, 40, 0.35);
 
   /* Layout */
-  --screen-max: 1280px;
-  --container-max: 960px;
+  --screen-max: 1440px;
+  --container-max: 1200px;
 }
 
 @theme inline {
@@ -49,6 +49,7 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-inter), "Inter", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+  font-size: 1.125rem; /* text-lg = 18px */
   max-width: var(--screen-max);
   margin-inline: auto;
   /* Golden grain noise overlay */
@@ -87,12 +88,19 @@ body::after {
 
 /* ─── Utility Classes ────────────────────────────────────────── */
 
-/* Centered content container — 1200px */
+/* Centered content container — 1440px with breathable luxury padding */
 .container-ethio {
   width: 100%;
   max-width: var(--container-max);
   margin-inline: auto;
-  padding-inline: 1.5rem;
+  padding-inline: 2rem;
+}
+
+/* Large screen specific padding for luxury feel */
+@media (min-width: 1024px) {
+  .container-ethio {
+    padding-inline: 4rem;
+  }
 }
 
 /* Gold gradient text */
@@ -104,6 +112,34 @@ body::after {
   -webkit-text-fill-color: transparent;
   color: transparent;
   animation: shimmer 4s linear infinite;
+}
+
+/* Premium heading styles */
+.heading-premium {
+  font-family: var(--font-playfair), "Playfair Display", Georgia, serif;
+  font-weight: 700;
+  letter-spacing: -0.05em; /* tracking-tighter */
+}
+
+/* Golden underline hover effect */
+.gold-underline-hover {
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.gold-underline-hover::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--gold-gradient);
+  transition: width 0.3s ease;
+}
+
+.gold-underline-hover:hover::after {
+  width: 100%;
 }
 
 /* Gold gradient background */
