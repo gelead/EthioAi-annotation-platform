@@ -1,4 +1,4 @@
-// Refreshing Prisma Client for MongoDB
+// Refreshing Prisma Client for MongoDB (Refined with Project model)
 import { PrismaClient } from '@prisma/client';
 
 const globalForPrisma = globalThis as unknown as {
