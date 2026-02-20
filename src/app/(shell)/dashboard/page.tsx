@@ -1,4 +1,4 @@
-import { getDashboardStats, getRecentActivity, getUserByEmail } from "@/app/actions";
+import { getDashboardStats, getRecentActivity, getUserByEmail, getTasksByUser } from "@/app/actions";
 import { DashboardClient } from "./DashboardClient";
 
 // This is a Server Component that fetches data
@@ -10,31 +10,50 @@ export default async function DashboardPage() {
   const userResult = await getUserByEmail(testUserEmail);
   const user = userResult.success ? userResult.user : null;
   
-  // Fetch dashboard stats
-  const statsResult = user ? await getDashboardStats(user.id) : null;
-  const stats = statsResult?.success ? statsResult.stats : null;
+  if (!user) {
+    return (
+      <div className="flex h-full items-center justify-center text-white">
+        <p>User not found. Please run: npx prisma db seed</p>
+      </div>
+    );
+  }
   
-  // Fetch recent activity
-  const activityResult = user ? await getRecentActivity(user.id, 5) : null;
+  // Fetch dashboard stats and tasks in parallel
+  const [statsResult, tasksResult, activityResult] = await Promise.all([
+    getDashboardStats(user.id),
+    getTasksByUser(user.id),
+    getRecentActivity(user.id, 5),
+  ]);
+  
+  const stats = statsResult?.success ? statsResult.stats : null;
+  const tasks = tasksResult?.success ? tasksResult.tasks : [];
   const recentTasks = activityResult?.success ? activityResult.tasks : [];
 
   // Format data for the client component
   const dashboardData = {
-    name: user?.name?.split(" ")[0] || "Annotator",
+    name: user.name.split(" ")[0] || "Annotator",
+    userId: user.id,
     stats: stats ? {
-      totalAnnotations: stats.totalAnnotations.toLocaleString(),
-      qualityScore: `${Math.round(stats.qualityScore)}%`,
-      earnings: `${stats.totalPoints.toLocaleString()} pts`,
+      completedTasks: stats.completedTasks.toString(),
+      totalRewards: `$${stats.totalRewards.toFixed(2)}`,
+      totalTasks: tasks.length.toString(),
     } : {
-      totalAnnotations: "0",
-      qualityScore: "0%",
-      earnings: "0 pts",
+      completedTasks: "0",
+      totalRewards: "$0.00",
+      totalTasks: "0",
     },
+    tasks: tasks.map((task: { id: string; title: string; status: string; type: string; reward: number }) => ({
+      id: task.id,
+      title: task.title,
+      status: task.status,
+      type: task.type,
+      reward: task.reward,
+    })),
     recentActivity: recentTasks.map((task: { id: string; title: string; status: string; updatedAt: Date }) => ({
       id: task.id.slice(-4).toUpperCase(),
       project: task.title,
-      status: task.status === "COMPLETED" ? "Verified" : task.status === "PENDING" ? "Pending Review" : "In Progress",
-      minutes: Math.floor(Math.random() * 10) + 3, // Simulated time for now
+      status: task.status === "Completed" ? "Verified" : task.status === "Pending" ? "Pending Review" : "In Progress",
+      minutes: Math.floor(Math.random() * 10) + 3,
     })),
   };
 

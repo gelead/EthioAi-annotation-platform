@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { updateUserProfile } from "@/app/actions";
+import { useFormStatus } from "react-dom";
+import { updateProfile } from "@/app/actions";
 
 interface UserData {
   id: string;
@@ -12,6 +13,7 @@ interface UserData {
   role: string;
   bio: string;
   image: string | null;
+  language: string;
   joinDate: string;
   totalAnnotations: number;
   qualityScore: number;
@@ -53,33 +55,52 @@ const staggerContainer = {
   },
 };
 
+// Submit button with loading spinner using useFormStatus
+function SubmitButton() {
+  const { pending } = useFormStatus();
+  
+  return (
+    <motion.button
+      type="submit"
+      whileHover={{ scale: 1.02 }}
+      whileTap={{ scale: 0.98 }}
+      disabled={pending}
+      className="rounded-lg bg-gradient-to-r from-amber-500 to-amber-300 px-4 py-2 text-sm font-semibold text-black disabled:opacity-50 transition inline-flex items-center gap-2"
+    >
+      {pending ? (
+        <>
+          <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24">
+            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+          </svg>
+          Saving...
+        </>
+      ) : (
+        "Save Changes"
+      )}
+    </motion.button>
+  );
+}
+
 export function ProfileClient({ user, recentActivity }: ProfileClientProps) {
   const [isEditing, setIsEditing] = useState(false);
-  const [formData, setFormData] = useState({
-    name: user.name,
-    bio: user.bio,
-  });
-  const [isSaving, setIsSaving] = useState(false);
   const [saveMessage, setSaveMessage] = useState("");
+  const [isPending, startTransition] = useTransition();
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSaving(true);
+  async function handleSubmit(formData: FormData) {
     setSaveMessage("");
-
-    const result = await updateUserProfile(user.id, {
-      name: formData.name,
-      bio: formData.bio,
+    
+    startTransition(async () => {
+      const result = await updateProfile(user.id, formData);
+      
+      if (result.success) {
+        setSaveMessage("Profile updated successfully!");
+        setIsEditing(false);
+      } else {
+        setSaveMessage("Failed to update profile. Please try again.");
+      }
     });
-
-    setIsSaving(false);
-    if (result.success) {
-      setSaveMessage("Profile updated successfully!");
-      setIsEditing(false);
-    } else {
-      setSaveMessage("Failed to update profile. Please try again.");
-    }
-  };
+  }
 
   return (
     <motion.div
@@ -194,16 +215,16 @@ export function ProfileClient({ user, recentActivity }: ProfileClientProps) {
             {isEditing && (
               <motion.div variants={fadeInUp}>
                 <h2 className="text-lg font-semibold text-white mb-4 heading-premium">Edit Profile</h2>
-                <form onSubmit={handleSubmit} className="rounded-xl border border-white/10 bg-black/60 p-6 space-y-4">
+                <form action={handleSubmit} className="rounded-xl border border-white/10 bg-black/60 p-6 space-y-4">
                   <div className="space-y-2">
                     <label htmlFor="name" className="block text-sm font-medium text-zinc-300">
                       Full Name
                     </label>
                     <input
                       id="name"
+                      name="name"
                       type="text"
-                      value={formData.name}
-                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      defaultValue={user.name}
                       className="w-full rounded-lg border border-white/10 bg-black/40 px-3 py-2.5 text-sm text-white outline-none focus:border-amber-400/50 transition"
                       placeholder="Your full name"
                     />
@@ -214,23 +235,31 @@ export function ProfileClient({ user, recentActivity }: ProfileClientProps) {
                     </label>
                     <textarea
                       id="bio"
-                      value={formData.bio}
-                      onChange={(e) => setFormData({ ...formData, bio: e.target.value })}
+                      name="bio"
+                      defaultValue={user.bio}
                       rows={3}
                       className="w-full rounded-lg border border-white/10 bg-black/40 px-3 py-2.5 text-sm text-white outline-none focus:border-amber-400/50 transition resize-none"
                       placeholder="Tell us about yourself..."
                     />
                   </div>
-                  <div className="flex items-center gap-3">
-                    <motion.button
-                      type="submit"
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                      disabled={isSaving}
-                      className="rounded-lg bg-gradient-to-r from-amber-500 to-amber-300 px-4 py-2 text-sm font-semibold text-black disabled:opacity-50 transition"
+                  <div className="space-y-2">
+                    <label htmlFor="language" className="block text-sm font-medium text-zinc-300">
+                      Language
+                    </label>
+                    <select
+                      id="language"
+                      name="language"
+                      defaultValue={user.language || "English"}
+                      className="w-full rounded-lg border border-white/10 bg-black/40 px-3 py-2.5 text-sm text-white outline-none focus:border-amber-400/50 transition"
                     >
-                      {isSaving ? "Saving..." : "Save Changes"}
-                    </motion.button>
+                      <option value="English">English</option>
+                      <option value="Amharic">Amharic</option>
+                      <option value="Oromo">Oromo</option>
+                      <option value="Tigrinya">Tigrinya</option>
+                    </select>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <SubmitButton />
                     {saveMessage && (
                       <span className={`text-sm ${saveMessage.includes("success") ? "text-emerald-400" : "text-red-400"}`}>
                         {saveMessage}

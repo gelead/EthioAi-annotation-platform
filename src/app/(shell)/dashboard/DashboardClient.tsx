@@ -4,11 +4,19 @@ import { motion } from "framer-motion";
 
 interface DashboardData {
   name: string;
+  userId: string;
   stats: {
-    totalAnnotations: string;
-    qualityScore: string;
-    earnings: string;
+    completedTasks: string;
+    totalRewards: string;
+    totalTasks: string;
   };
+  tasks: {
+    id: string;
+    title: string;
+    status: string;
+    type: string;
+    reward: number;
+  }[];
   recentActivity: {
     id: string;
     project: string;
@@ -119,9 +127,9 @@ export function DashboardClient({ data }: DashboardClientProps) {
             variants={containerVariants}
           >
             {[
-              { label: "Total Annotations", value: data.stats.totalAnnotations, color: "white" },
-              { label: "Quality Score", value: data.stats.qualityScore, color: "emerald" },
-              { label: "Earnings / Points", value: data.stats.earnings, color: "white" },
+              { label: "Completed Tasks", value: data.stats.completedTasks, color: "emerald" },
+              { label: "Total Tasks", value: data.stats.totalTasks, color: "white" },
+              { label: "Total Rewards", value: data.stats.totalRewards, color: "amber" },
             ].map((stat) => (
               <motion.div
                 key={stat.label}
@@ -134,7 +142,10 @@ export function DashboardClient({ data }: DashboardClientProps) {
                 className="rounded-xl border border-white/10 bg-black/60 p-4 cursor-default"
               >
                 <p className="text-[11px] text-zinc-500 uppercase tracking-wider">{stat.label}</p>
-                <p className={`mt-1 text-2xl font-semibold ${stat.color === "emerald" ? "text-emerald-400" : "text-white"}`}>
+                <p className={`mt-1 text-2xl font-semibold ${
+                  stat.color === "emerald" ? "text-emerald-400" : 
+                  stat.color === "amber" ? "text-amber-400" : "text-white"
+                }`}>
                   {stat.value}
                 </p>
               </motion.div>

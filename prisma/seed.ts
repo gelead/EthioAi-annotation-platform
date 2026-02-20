@@ -1,23 +1,28 @@
-import { PrismaClient, TaskType, Status } from '@prisma/client';
+import { PrismaClient, TaskType, TaskStatus } from '@prisma/client';
 
 const prisma = new PrismaClient();
+
+function getRandomReward(): number {
+  return parseFloat((Math.random() * 4.5 + 0.5).toFixed(2));
+}
+
+function getRandomStatus(): TaskStatus {
+  return Math.random() > 0.5 ? TaskStatus.Completed : TaskStatus.Pending;
+}
 
 async function main() {
   console.log('🌱 Starting database seed...\n');
 
-  // Create test user
+  // Create main test user
   const testUser = await prisma.user.upsert({
     where: { email: 'test@ethioai.com' },
     update: {},
     create: {
       email: 'test@ethioai.com',
       name: 'Abebe Kebede',
-      password: 'hashedpassword123',
+      bio: 'Senior data annotator specializing in Ethiopian languages and agricultural AI. Passionate about building Ethiopia\'s digital future.',
       image: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Abebe',
-      bio: 'Senior data annotator specializing in Amharic text and medical imaging. Passionate about building Ethiopia\'s AI future.',
-      role: 'annotator',
-      totalPoints: 12450,
-      qualityScore: 98.5,
+      language: 'Amharic',
     },
   });
 
@@ -27,85 +32,131 @@ async function main() {
   await prisma.task.deleteMany();
   console.log('🧹 Cleared existing tasks\n');
 
-  // Create 10 mock tasks
+  // Create 15 diverse mock tasks
   const tasks = [
-    // 4 Image Labeling tasks
+    // Required specific tasks
     {
-      title: 'Medical X-Ray Classification',
-      type: TaskType.IMAGE_LABELING,
-      description: 'Label chest X-ray images as normal or abnormal for pneumonia detection dataset.',
-      status: Status.COMPLETED,
-      reward: 2.0,
+      title: 'Amharic Sentiment Analysis',
+      type: TaskType.Text,
+      description: 'Analyze sentiment of Amharic social media posts and customer reviews for local businesses.',
+      status: getRandomStatus(),
+      reward: getRandomReward(),
       userId: testUser.id,
     },
     {
-      title: 'Agricultural Crop Disease Detection',
-      type: TaskType.IMAGE_LABELING,
-      description: 'Identify and label disease symptoms on teff and wheat crop images.',
-      status: Status.PENDING,
-      reward: 1.5,
+      title: 'Coffee Leaf Disease Detection',
+      type: TaskType.Image,
+      description: 'Label disease symptoms on coffee leaf images from Ethiopian highland farms.',
+      status: getRandomStatus(),
+      reward: getRandomReward(),
+      userId: testUser.id,
+    },
+    {
+      title: 'Oromo Speech Transcription',
+      type: TaskType.Audio,
+      description: 'Transcribe Oromo language audio recordings for speech recognition training.',
+      status: getRandomStatus(),
+      reward: getRandomReward(),
+      userId: testUser.id,
+    },
+    // Additional Image tasks
+    {
+      title: 'Teff Grain Quality Assessment',
+      type: TaskType.Image,
+      description: 'Classify teff grain quality from high-resolution images for export grading.',
+      status: getRandomStatus(),
+      reward: getRandomReward(),
+      userId: testUser.id,
     },
     {
       title: 'Ethiopian Road Sign Recognition',
-      type: TaskType.IMAGE_LABELING,
-      description: 'Label traffic signs and road markers from Addis Ababa street view images.',
-      status: Status.IN_PROGRESS,
-      reward: 1.25,
+      type: TaskType.Image,
+      description: 'Identify and label traffic signs from Addis Ababa and regional cities.',
+      status: getRandomStatus(),
+      reward: getRandomReward(),
       userId: testUser.id,
     },
     {
       title: 'Satellite Imagery Land Use',
-      type: TaskType.IMAGE_LABELING,
-      description: 'Classify land use types from satellite imagery of Ethiopian regions.',
-      status: Status.PENDING,
-      reward: 1.75,
-    },
-    // 3 Audio Transcription tasks
-    {
-      title: 'Amharic Call Center Transcription',
-      type: TaskType.AUDIO_TRANSCRIPTION,
-      description: 'Transcribe customer service calls in Amharic for chatbot training data.',
-      status: Status.COMPLETED,
-      reward: 1.8,
+      type: TaskType.Image,
+      description: 'Classify agricultural and urban land use from satellite imagery.',
+      status: getRandomStatus(),
+      reward: getRandomReward(),
       userId: testUser.id,
     },
     {
-      title: 'Oromiffa Radio Broadcast Transcription',
-      type: TaskType.AUDIO_TRANSCRIPTION,
-      description: 'Transcribe news segments from Oromiffa radio broadcasts.',
-      status: Status.PENDING,
-      reward: 1.5,
-    },
-    {
-      title: 'Tigrinya Interview Recording',
-      type: TaskType.AUDIO_TRANSCRIPTION,
-      description: 'Transcribe oral history interviews conducted in Tigrinya.',
-      status: Status.IN_PROGRESS,
-      reward: 1.6,
+      title: 'Traditional Fabric Pattern Recognition',
+      type: TaskType.Image,
+      description: 'Identify and categorize traditional Ethiopian textile patterns.',
+      status: getRandomStatus(),
+      reward: getRandomReward(),
       userId: testUser.id,
     },
-    // 3 Sentiment Analysis tasks
+    // Additional Text tasks
     {
-      title: 'Amharic Social Media Sentiment',
-      type: TaskType.SENTIMENT_ANALYSIS,
-      description: 'Analyze sentiment of Amharic tweets and Facebook posts about current events.',
-      status: Status.COMPLETED,
-      reward: 0.75,
+      title: 'Tigrinya Document Translation',
+      type: TaskType.Text,
+      description: 'Translate Tigrinya legal and administrative documents to English.',
+      status: getRandomStatus(),
+      reward: getRandomReward(),
       userId: testUser.id,
     },
     {
-      title: 'Product Review Sentiment Classification',
-      type: TaskType.SENTIMENT_ANALYSIS,
-      description: 'Classify sentiment of Ethiopian e-commerce product reviews.',
-      status: Status.PENDING,
-      reward: 0.5,
+      title: 'Amharic Named Entity Recognition',
+      type: TaskType.Text,
+      description: 'Identify names of people, places, and organizations in Amharic news articles.',
+      status: getRandomStatus(),
+      reward: getRandomReward(),
+      userId: testUser.id,
     },
     {
-      title: 'Customer Feedback Sentiment',
-      type: TaskType.SENTIMENT_ANALYSIS,
-      description: 'Analyze sentiment from customer feedback forms for local businesses.',
-      status: Status.PENDING,
-      reward: 0.65,
+      title: 'Ethiopian Product Review Classification',
+      type: TaskType.Text,
+      description: 'Categorize e-commerce product reviews by product type and sentiment.',
+      status: getRandomStatus(),
+      reward: getRandomReward(),
+      userId: testUser.id,
+    },
+    {
+      title: 'Gurage Language Text Collection',
+      type: TaskType.Text,
+      description: 'Collect and validate Gurage language text samples for NLP research.',
+      status: getRandomStatus(),
+      reward: getRandomReward(),
+      userId: testUser.id,
+    },
+    // Additional Audio tasks
+    {
+      title: 'Amharic Call Center Audio',
+      type: TaskType.Audio,
+      description: 'Transcribe customer service calls from Ethiopian telecom providers.',
+      status: getRandomStatus(),
+      reward: getRandomReward(),
+      userId: testUser.id,
+    },
+    {
+      title: 'Tigrinya Radio Broadcast Transcription',
+      type: TaskType.Audio,
+      description: 'Transcribe news segments from Tigrinya radio stations.',
+      status: getRandomStatus(),
+      reward: getRandomReward(),
+      userId: testUser.id,
+    },
+    {
+      title: 'Wolaytta Folk Song Annotation',
+      type: TaskType.Audio,
+      description: 'Transcribe and annotate traditional Wolaytta folk songs.',
+      status: getRandomStatus(),
+      reward: getRandomReward(),
+      userId: testUser.id,
+    },
+    {
+      title: 'Sidama Language Voice Commands',
+      type: TaskType.Audio,
+      description: 'Record and verify Sidama language voice commands for mobile app integration.',
+      status: getRandomStatus(),
+      reward: getRandomReward(),
+      userId: testUser.id,
     },
   ];
 
@@ -113,15 +164,16 @@ async function main() {
     const created = await prisma.task.create({
       data: task,
     });
-    console.log(`✅ Created task: ${created.title} (${created.type}) - $${created.reward}`);
+    console.log(`✅ Created task: ${created.title} (${created.type}) - $${created.reward} - ${created.status}`);
   }
 
   console.log('\n🎉 Seed completed successfully!');
   console.log(`📊 Summary:`);
   console.log(`   • 1 test user created`);
-  console.log(`   • ${tasks.filter(t => t.type === TaskType.IMAGE_LABELING).length} Image Labeling tasks`);
-  console.log(`   • ${tasks.filter(t => t.type === TaskType.AUDIO_TRANSCRIPTION).length} Audio Transcription tasks`);
-  console.log(`   • ${tasks.filter(t => t.type === TaskType.SENTIMENT_ANALYSIS).length} Sentiment Analysis tasks`);
+  console.log(`   • ${tasks.filter(t => t.type === TaskType.Image).length} Image tasks`);
+  console.log(`   • ${tasks.filter(t => t.type === TaskType.Text).length} Text tasks`);
+  console.log(`   • ${tasks.filter(t => t.type === TaskType.Audio).length} Audio tasks`);
+  console.log(`   • Total rewards: $${tasks.reduce((sum, t) => sum + t.reward, 0).toFixed(2)}`);
 }
 
 main()
