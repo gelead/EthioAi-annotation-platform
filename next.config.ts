@@ -1,3 +1,4 @@
+// MongoDB Migration: Standardizing connection
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
