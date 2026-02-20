@@ -105,9 +105,9 @@ export default function AboutPage() {
               <div className="absolute inset-0 flex items-end justify-center bg-[radial-gradient(circle_at_50%_0,#fbbf24_0,transparent_55%)] opacity-20" />
               <div className="relative z-10 flex w-full items-end justify-between px-6 pb-6 text-xs text-zinc-300">
                 <div>
-                  <p className="font-bold text-white text-sm">Addis Ababa Skyline</p>
-                  <p className="text-[11px] text-zinc-500 mt-1">
-                    Placeholder for a future photo capturing Ethiopia&apos;s digital future.
+                  <p className="font-bold text-white body-premium-sm">Addis Ababa Skyline</p>
+                  <p className="body-premium-xs opacity-50 mt-1">
+                    Future photo capturing Ethiopia&apos;s digital landscape.
                   </p>
                 </div>
                 <span className="rounded-full bg-black/60 px-4 py-1.5 text-[10px] text-amber-400 ring-1 ring-amber-500/30 uppercase tracking-widest font-bold">
@@ -171,7 +171,7 @@ export default function AboutPage() {
 
           <div className="space-y-6">
             <h3 className="text-base font-bold text-white heading-premium uppercase tracking-widest text-amber-500/80">Nile Academy in Action</h3>
-            <p className="text-sm text-zinc-400 leading-relaxed">
+            <p className="body-premium-sm opacity-60">
               Future photos will highlight the teams designing guidelines, annotating complex data,
               and validating quality at every step of the pipeline.
             </p>
@@ -191,9 +191,9 @@ export default function AboutPage() {
                   transition={{ duration: 0.3 }}
                   className="flex h-36 items-end overflow-hidden rounded-2xl border border-white/5 bg-black/40 backdrop-blur-sm group"
                 >
-                  <div className="flex w-full items-end justify-between px-4 pb-4 text-[10px] text-zinc-400 font-bold uppercase tracking-wider">
-                    <span>Team {idx}</span>
-                    <span className="rounded-full bg-black/50 px-2.5 py-1 text-[9px] text-zinc-500 ring-1 ring-white/10 group-hover:text-amber-400 group-hover:ring-amber-400/30 transition-all">
+                  <div className="flex w-full items-end justify-between px-4 pb-4 body-premium-xs font-bold uppercase tracking-wider">
+                    <span className="opacity-60">Team {idx}</span>
+                    <span className="rounded-full bg-black/50 px-2.5 py-1 body-premium-xs text-zinc-500 ring-1 ring-white/10 group-hover:text-amber-400 group-hover:ring-amber-400/30 transition-all">
                       Placeholder
                     </span>
                   </div>
@@ -251,8 +251,8 @@ export default function AboutPage() {
                       </div>
                       <div className="flex items-center justify-between gap-2">
                         <div>
-                          <p className="text-base font-bold text-white">{member.name}</p>
-                          <p className="text-xs font-medium text-zinc-400 mt-1">{member.title}</p>
+                          <p className="text-base font-bold text-white heading-premium">{member.name}</p>
+                          <p className="body-premium-xs font-medium text-zinc-500 mt-1">{member.title}</p>
                         </div>
                         <motion.button
                           type="button"
@@ -300,8 +300,8 @@ export default function AboutPage() {
                       </div>
                       <div className="flex items-center justify-between gap-2">
                         <div>
-                          <p className="text-base font-bold text-white">{member.name}</p>
-                          <p className="text-xs font-medium text-zinc-400 mt-1">{member.title}</p>
+                          <p className="text-base font-bold text-white heading-premium">{member.name}</p>
+                          <p className="body-premium-xs font-medium text-zinc-500 mt-1">{member.title}</p>
                         </div>
                         <motion.button
                           type="button"

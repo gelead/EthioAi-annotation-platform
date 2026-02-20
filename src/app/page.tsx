@@ -41,13 +41,13 @@ function MagneticCard() {
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
-  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [8, -8]), {
-    stiffness: 180,
-    damping: 20,
+  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [6, -6]), {
+    stiffness: 150,
+    damping: 25,
   });
-  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-8, 8]), {
-    stiffness: 180,
-    damping: 20,
+  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-6, 6]), {
+    stiffness: 150,
+    damping: 25,
   });
 
   function handleMouseMove(e: React.MouseEvent<HTMLDivElement>) {
@@ -72,75 +72,87 @@ function MagneticCard() {
       style={{
         rotateX,
         rotateY,
-        transformPerspective: 900,
+        transformPerspective: 1200,
         transformStyle: "preserve-3d",
       }}
       initial={{ opacity: 0, scale: 0.94, y: 32 }}
       animate={{ opacity: 1, scale: 1, y: 0 }}
-      transition={{ duration: 0.9, ease: EASE_OUT, delay: 0.5 }}
-      className="gold-glow-border relative w-full overflow-hidden bg-[#0a0a0a] p-6 md:p-7"
+      transition={{ duration: 1.2, ease: EASE_OUT, delay: 0.6 }}
+      className="relative w-full overflow-hidden border border-white/5 bg-[#050505]/80 p-0 shadow-2xl backdrop-blur-2xl ring-1 ring-white/10"
     >
-      {/* Gold shimmer top bar */}
-      <div className="mb-5 flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <span
-            className="inline-block h-2 w-2 rounded-full"
-            style={{ background: "var(--gold-gradient)" }}
-          />
-          <span
-            className="text-xs font-semibold tracking-widest uppercase"
-            style={{ fontFamily: "'Inter', sans-serif", color: "#ffe002" }}
-          >
-            Live Labeling Overview
-          </span>
-        </div>
-        <span
-          className="border px-2 py-0.5 text-[10px] tracking-wider"
-          style={{ borderColor: "rgba(255,224,2,0.35)", color: "rgba(255,224,2,0.7)" }}
-        >
-          Low-Bandwidth
-        </span>
-      </div>
-
-      {/* Stats */}
-      <div className="space-y-5 text-xs">
-        {[
-          { label: "Image Annotation", sub: "82% capacity", pct: "82%" },
-          { label: "Text Annotation", sub: "Amharic & Afaan Oromo", pct: "74%" },
-          { label: "Audio Annotation", sub: "Studio-grade quality", pct: "66%" },
-        ].map(({ label, sub, pct }) => (
-          <div key={label} className="space-y-1.5">
-            <div className="flex items-center justify-between">
-              <span className="text-zinc-300">{label}</span>
-              <span style={{ color: "rgba(255,224,2,0.85)" }}>{sub}</span>
-            </div>
-            <div className="h-1.5 overflow-hidden bg-zinc-900">
-              <motion.div
-                className="h-full"
-                style={{ background: "var(--gold-gradient)" }}
-                initial={{ width: 0 }}
-                animate={{ width: pct }}
-                transition={{ duration: 1.2, delay: 0.8, ease: "easeOut" }}
-              />
-            </div>
+      {/* Dashboard Header Overlay */}
+      <div className="flex items-center justify-between border-b border-white/5 bg-white/5 px-6 py-4">
+        <div className="flex items-center gap-3">
+          <div className="flex gap-1.5">
+            <div className="h-2 w-2 rounded-full bg-red-500/40" />
+            <div className="h-2 w-2 rounded-full bg-amber-500/40" />
+            <div className="h-2 w-2 rounded-full bg-emerald-500/40" />
           </div>
-        ))}
+          <span className="text-premium-label text-[9.5px] opacity-70">Batch_Live_Feed.v2</span>
+        </div>
+        <div className="flex items-center gap-2">
+          <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-500" />
+          <span className="body-premium-xs text-[10px] font-bold text-emerald-400">SYNCED</span>
+        </div>
       </div>
 
-      {/* Bottom decoration */}
-      <div className="mt-6 flex items-center gap-2 border-t pt-4" style={{ borderColor: "rgba(255,224,2,0.12)" }}>
-        <span className="text-[10px] tracking-widest uppercase" style={{ color: "rgba(255,224,2,0.45)" }}>
-          Powered by EthioAI · Addis Ababa
-        </span>
+      <div className="p-6">
+        {/* Premium Data Table */}
+        <div className="mb-6 overflow-hidden rounded-xl border border-white/5 bg-black/40">
+          <table className="w-full text-left">
+            <thead className="border-b border-white/5 bg-white/5 text-[10px] font-bold tracking-widest text-zinc-500 uppercase">
+              <tr>
+                <th className="px-4 py-2.5">Batch Name</th>
+                <th className="px-4 py-2.5">Progress</th>
+                <th className="px-4 py-2.5 font-mono text-zinc-600">ID</th>
+              </tr>
+            </thead>
+            <tbody className="body-premium-xs text-[11px]">
+              {[
+                { name: "Amh_NER_Medical", progress: "88%", id: "A102" },
+                { name: "Crop_Disease_V3", progress: "62%", id: "B942" },
+                { name: "Oro_Dialect_STS", progress: "45%", id: "C011" }
+              ].map((batch, idx) => (
+                <tr key={batch.id} className="border-b border-white/5 last:border-0 hover:bg-white/5 transition-colors">
+                  <td className="px-4 py-3 text-zinc-300 font-medium">{batch.name}</td>
+                  <td className="px-4 py-3">
+                    <div className="flex items-center gap-3">
+                      <div className="h-1 flex-1 bg-zinc-900 rounded-full overflow-hidden">
+                        <motion.div
+                          className="h-full bg-gold-gradient"
+                          initial={{ width: 0 }}
+                          animate={{ width: batch.progress }}
+                          transition={{ duration: 1.5, delay: 0.8 + (idx * 0.2) }}
+                        />
+                      </div>
+                      <span className="text-gold-mid font-bold w-6">{batch.progress}</span>
+                    </div>
+                  </td>
+                  <td className="px-4 py-3 font-mono text-zinc-500">{batch.id}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        {/* Floating Metrics Row */}
+        <div className="grid grid-cols-3 gap-3">
+          {[
+            { label: "Active Nodes", val: "1.2k", sub: "+12%" },
+            { label: "Throughput", val: "4.8m", sub: "tasks/h" },
+            { label: "Confidence", val: "99.4%", sub: "human-v" }
+          ].map((stat) => (
+            <div key={stat.label} className="rounded-lg border border-white/5 bg-white/2 p-3 text-center">
+              <p className="text-[9px] font-bold uppercase tracking-tight text-zinc-500">{stat.label}</p>
+              <p className="heading-premium mt-0.5 text-lg text-white">{stat.val}</p>
+              <p className="body-premium-xs mt-0.5 text-[8px] text-zinc-600">{stat.sub}</p>
+            </div>
+          ))}
+        </div>
       </div>
 
-      {/* Corner glow accent */}
-      <div
-        className="pointer-events-none absolute -bottom-10 -right-10 h-40 w-40 rounded-full"
-        style={{
-          background: "radial-gradient(circle, rgba(255,224,2,0.18) 0%, transparent 70%)",
-        }}
-      />
+      {/* Decorative Shimmer Overlay */}
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-transparent opacity-30" />
     </motion.div>
   );
 }
@@ -214,8 +226,7 @@ export default function Home() {
             {/* Amharic tagline */}
             <motion.p
               variants={slideUp}
-              className="text-xs"
-              style={{ color: "rgba(255,224,2,0.4)" }}
+              className="body-premium-xs opacity-40 italic"
             >
               ከሰፊ የአማርኛ እና Afaan Oromo መረጃ ጋር የታመቀ መድረክ።
             </motion.p>
@@ -339,7 +350,7 @@ export default function Home() {
                   <h3 className="text-base font-semibold text-white heading-premium group-hover:text-gold-mid transition-colors">
                     {item.title}
                   </h3>
-                  <p className="text-sm text-zinc-500">{item.desc}</p>
+                  <p className="body-premium-sm opacity-60">{item.desc}</p>
                 </div>
                 <span className="text-gold-mid opacity-0 group-hover:opacity-100 transition-opacity">→</span>
               </motion.a>
@@ -380,7 +391,85 @@ export default function Home() {
                 <h3 className="text-base font-semibold text-slate-50 heading-premium">
                   {title}
                 </h3>
-                <p className="text-[1.0625rem] leading-[1.6] text-slate-300">{body}</p>
+                <p className="body-premium-sm text-slate-400">{body}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* ── The Verification Loop (Workflow) ───────────────── */}
+        <section className="relative overflow-hidden py-16">
+          <div className="grid gap-16 lg:grid-cols-[1fr_1.2fr] items-center">
+            <div className="space-y-6">
+              <p className="text-premium-label">The Quality Standard</p>
+              <h2 className="text-3xl font-extrabold md:text-5xl heading-gold leading-tight">
+                The Triple-Layer <span className="text-white">Validation Loop</span>
+              </h2>
+              <p className="text-lg leading-relaxed text-silver-gradient body-premium">
+                We believe raw data isn&apos;t enough. Our proprietary workflow ensures
+                every label is cross-referenced by local experts and validated by secondary
+                quality assurance nodes.
+              </p>
+
+              <div className="space-y-6 pt-4">
+                {[
+                  { title: "Distributed Sourcing", desc: "Datasets are split across independent verification nodes to eliminate bias." },
+                  { title: "Linguistic Calibration", desc: "Expert linguists verify sentiment and intent for 5+ Ethiopian languages." },
+                  { title: "Final Consensus", desc: "Our engine triggers multi-user consensus for high-uncertainty samples." }
+                ].map((step, i) => (
+                  <div key={step.title} className="flex gap-4">
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-gold-mid/30 bg-gold-mid/5 heading-premium text-gold-mid">
+                      {i + 1}
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-white body-premium-sm">{step.title}</h4>
+                      <p className="body-premium-xs opacity-60 mt-0.5">{step.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Visual breakdown of the loop */}
+            <div className="relative rounded-3xl border border-white/5 bg-[#0a0a0a] p-1 shadow-2xl">
+              <div className="grid grid-cols-2 gap-px bg-white/5 overflow-hidden rounded-3xl">
+                {[
+                  { label: "Linguists", val: "240+", icon: "✍️" },
+                  { label: "SMEs", val: "85", icon: "🔬" },
+                  { label: "Latency", val: "< 200ms", icon: "⚡" },
+                  { label: "Accuracy", val: "99.8%", icon: "🎯" }
+                ].map((item) => (
+                  <div key={item.label} className="bg-[#0a0a0a] p-8 text-center">
+                    <span className="text-2xl block mb-2">{item.icon}</span>
+                    <p className="heading-premium text-2xl text-white">{item.val}</p>
+                    <p className="text-premium-label text-[9px] mt-1 opacity-50">{item.label}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ── Industrial Impact (Metrics) ───────────────────── */}
+        <section className="space-y-12 py-16">
+          <div className="text-center space-y-3">
+            <p className="text-premium-label">Industrial Impact</p>
+            <h2 className="text-3xl font-extrabold md:text-5xl heading-gold mx-auto max-w-2xl leading-tight">
+              Sovereign Infrastructure for <span className="text-white">National Growth</span>
+            </h2>
+          </div>
+
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              { label: "Labeled Tokens", val: "4.2B", desc: "Amharic & Afaan Oromo" },
+              { label: "Active Nodes", val: "15k+", desc: "Annotator Network" },
+              { label: "Sector Focus", val: "12", desc: "Targeted Industries" },
+              { label: "Data Uptime", val: "99.9%", desc: "Enterprise SLA" }
+            ].map((stat) => (
+              <div key={stat.label} className="group relative rounded-2xl border border-white/5 bg-[#0d0d0d] p-8 transition-all hover:border-gold-mid/30">
+                <p className="text-premium-label text-[10px] opacity-60 mb-1">{stat.label}</p>
+                <p className="heading-premium text-4xl text-white group-hover:text-gold-mid transition-colors">{stat.val}</p>
+                <p className="body-premium-xs mt-3 opacity-40">{stat.desc}</p>
               </div>
             ))}
           </div>
@@ -407,7 +496,7 @@ export default function Home() {
                   { id: "email", label: "Email", type: "email", placeholder: "you@example.com" },
                 ].map(({ id, label, type, placeholder }) => (
                   <div key={id} className="space-y-1.5">
-                    <label htmlFor={id} className="block text-[11px] font-medium text-zinc-400">
+                    <label htmlFor={id} className="block body-premium-xs text-zinc-500 mb-1.5">
                       {label}
                     </label>
                     <input
@@ -420,7 +509,7 @@ export default function Home() {
                   </div>
                 ))}
                 <div className="space-y-1.5">
-                  <label htmlFor="message" className="block text-[11px] font-medium text-zinc-400">
+                  <label htmlFor="message" className="block body-premium-xs text-zinc-500 mb-1.5">
                     Project Details
                   </label>
                   <textarea

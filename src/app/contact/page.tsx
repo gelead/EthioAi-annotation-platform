@@ -150,7 +150,7 @@ export default function ContactPage() {
               <form className="space-y-6">
                 <div className="grid gap-6 md:grid-cols-2">
                   <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-zinc-300 mb-2">
+                    <label htmlFor="name" className="block body-premium-xs text-zinc-500 mb-2">
                       Full Name
                     </label>
                     <input
@@ -162,7 +162,7 @@ export default function ContactPage() {
                     />
                   </div>
                   <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-zinc-300 mb-2">
+                    <label htmlFor="email" className="block body-premium-xs text-zinc-500 mb-2">
                       Email Address
                     </label>
                     <input
@@ -176,32 +176,32 @@ export default function ContactPage() {
                 </div>
 
                 <div>
-                  <label htmlFor="subject" className="block text-sm font-medium text-zinc-300 mb-2">
-                    Subject
+                  <label htmlFor="subject" className="block text-premium-label text-[10px] opacity-70 mb-2">
+                    Inquiry Subject
                   </label>
                   <select
                     id="subject"
-                    className="w-full rounded-xl border border-zinc-700 bg-black/40 px-4 py-3 text-base text-white focus:border-gold-mid focus:outline-none focus:ring-2 focus:ring-gold-mid/20 transition-all"
+                    className="w-full rounded-xl border border-white/10 bg-black/40 px-4 py-3 text-sm text-white focus:border-gold-mid/50 focus:ring-1 focus:ring-gold-mid/20 transition-all appearance-none"
                     defaultValue=""
                     required
                   >
-                    <option value="" disabled>Select a topic</option>
-                    <option value="annotator">Join as Annotator</option>
-                    <option value="government">Government Partnership</option>
-                    <option value="business">Business Inquiry</option>
-                    <option value="technical">Technical Support</option>
-                    <option value="general">General Question</option>
+                    <option value="" disabled className="bg-zinc-900 text-zinc-500">Select a topic</option>
+                    <option value="annotator" className="bg-zinc-900">Join as Annotator</option>
+                    <option value="government" className="bg-zinc-900">Government Partnership</option>
+                    <option value="business" className="bg-zinc-900">Business Inquiry</option>
+                    <option value="technical" className="bg-zinc-900">Technical Support</option>
+                    <option value="general" className="bg-zinc-900">General Question</option>
                   </select>
                 </div>
 
                 <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-zinc-300 mb-2">
-                    Message
+                  <label htmlFor="message" className="block text-premium-label text-[10px] opacity-70 mb-2">
+                    Message Details
                   </label>
                   <textarea
                     id="message"
                     rows={6}
-                    className="w-full rounded-xl border border-zinc-700 bg-black/40 px-4 py-3 text-base text-white placeholder:text-zinc-500 focus:border-gold-mid focus:outline-none focus:ring-2 focus:ring-gold-mid/20 transition-all resize-none"
+                    className="w-full rounded-xl border border-white/10 bg-black/40 px-4 py-3 text-sm text-white placeholder:text-zinc-600 focus:border-gold-mid/50 focus:ring-1 focus:ring-gold-mid/20 transition-all resize-none"
                     placeholder="Tell us how we can help. Please include timelines, data types, and any key constraints."
                     required
                   />
@@ -241,8 +241,8 @@ export default function ContactPage() {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                     </svg>
                   </div>
-                  <p className="text-gold-mid font-medium">Visit Us</p>
-                  <p className="text-zinc-400 text-sm mt-1">Bole, Addis Ababa</p>
+                  <p className="text-gold-mid font-bold body-premium-sm">Visit Us</p>
+                  <p className="body-premium-xs opacity-60 mt-1">Bole, Addis Ababa</p>
                 </div>
               </div>
             </div>

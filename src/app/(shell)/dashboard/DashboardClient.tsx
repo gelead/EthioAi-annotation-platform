@@ -38,12 +38,12 @@ const containerVariants = {
 };
 
 const fadeInUp = {
-  hidden: { 
-    opacity: 0, 
-    y: 20 
+  hidden: {
+    opacity: 0,
+    y: 20
   },
-  visible: { 
-    opacity: 1, 
+  visible: {
+    opacity: 1,
     y: 0,
     transition: {
       duration: 0.5,
@@ -53,10 +53,10 @@ const fadeInUp = {
 };
 
 const fadeIn = {
-  hidden: { 
-    opacity: 0 
+  hidden: {
+    opacity: 0
   },
-  visible: { 
+  visible: {
     opacity: 1,
     transition: {
       duration: 0.6,
@@ -86,7 +86,7 @@ export function DashboardClient({ data }: DashboardClientProps) {
   ];
 
   return (
-    <motion.div 
+    <motion.div
       className="relative flex h-full flex-col gap-6"
       variants={containerVariants}
       initial="hidden"
@@ -96,12 +96,12 @@ export function DashboardClient({ data }: DashboardClientProps) {
         <div className="network-grid h-full w-full" />
       </div>
 
-      <motion.div 
+      <motion.div
         className="relative z-10 flex flex-col gap-6"
         variants={containerVariants}
       >
         {/* Header + Quick Stats */}
-        <motion.section 
+        <motion.section
           variants={fadeInUp}
           className="space-y-4 rounded-2xl border border-white/10 bg-black/80 p-5 backdrop-blur-sm"
         >
@@ -122,7 +122,7 @@ export function DashboardClient({ data }: DashboardClientProps) {
             </button>
           </div>
 
-          <motion.div 
+          <motion.div
             className="mt-2 grid gap-3 sm:grid-cols-3"
             variants={containerVariants}
           >
@@ -134,18 +134,17 @@ export function DashboardClient({ data }: DashboardClientProps) {
               <motion.div
                 key={stat.label}
                 variants={fadeInUp}
-                whileHover={{ 
-                  borderColor: "rgba(251, 191, 36, 0.4)",
-                  boxShadow: "0 0 20px rgba(251, 191, 36, 0.1)",
+                whileHover={{
+                  borderColor: "rgba(255, 224, 2, 0.4)",
+                  backgroundColor: "rgba(255, 224, 2, 0.02)",
                 }}
                 transition={{ duration: 0.2 }}
-                className="rounded-xl border border-white/10 bg-black/60 p-4 cursor-default"
+                className="rounded-xl border border-white/5 bg-black/40 p-5"
               >
-                <p className="text-[11px] text-zinc-500 uppercase tracking-wider">{stat.label}</p>
-                <p className={`mt-1 text-2xl font-semibold ${
-                  stat.color === "emerald" ? "text-emerald-400" : 
-                  stat.color === "amber" ? "text-amber-400" : "text-white"
-                }`}>
+                <p className="text-premium-label text-[9px] opacity-60 tracking-[0.15em] uppercase">{stat.label}</p>
+                <p className={`mt-2 text-3xl font-extrabold heading-premium ${stat.color === "emerald" ? "text-emerald-400" :
+                    stat.color === "amber" ? "text-gold-mid" : "text-white"
+                  }`}>
                   {stat.value}
                 </p>
               </motion.div>
@@ -155,7 +154,7 @@ export function DashboardClient({ data }: DashboardClientProps) {
 
         <div className="grid gap-6 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1.2fr)]">
           {/* Active Projects */}
-          <motion.section 
+          <motion.section
             variants={fadeInUp}
             className="space-y-4 rounded-2xl border border-white/10 bg-black/80 p-5 backdrop-blur-sm"
           >
@@ -166,7 +165,7 @@ export function DashboardClient({ data }: DashboardClientProps) {
               </p>
             </div>
 
-            <motion.div 
+            <motion.div
               className="grid gap-4 md:grid-cols-2"
               variants={containerVariants}
             >
@@ -174,7 +173,7 @@ export function DashboardClient({ data }: DashboardClientProps) {
                 <motion.div
                   key={project.name}
                   variants={fadeInUp}
-                  whileHover={{ 
+                  whileHover={{
                     borderColor: "rgba(251, 191, 36, 0.3)",
                     backgroundColor: "rgba(0, 0, 0, 0.8)",
                   }}
@@ -223,7 +222,7 @@ export function DashboardClient({ data }: DashboardClientProps) {
           </motion.section>
 
           {/* Recent Activity */}
-          <motion.section 
+          <motion.section
             variants={fadeInUp}
             className="space-y-4 rounded-2xl border border-white/10 bg-black/80 p-5 backdrop-blur-sm"
           >
@@ -232,42 +231,41 @@ export function DashboardClient({ data }: DashboardClientProps) {
               <p className="text-[11px] text-zinc-400">Last {data.recentActivity.length} tasks</p>
             </div>
 
-            <motion.div 
+            <motion.div
               variants={fadeIn}
               className="overflow-hidden rounded-xl border border-white/10 bg-black/60"
             >
-              <table className="min-w-full border-collapse text-xs">
-                <thead className="bg-white/5 text-[11px] uppercase tracking-wide text-zinc-500">
+              <table className="min-w-full border-collapse">
+                <thead className="bg-white/5 text-premium-label text-[9px] tracking-widest text-zinc-500 uppercase">
                   <tr>
-                    <th className="px-3 py-3 text-left font-medium">Task ID</th>
-                    <th className="px-3 py-3 text-left font-medium">Project</th>
-                    <th className="px-3 py-3 text-left font-medium">Status</th>
-                    <th className="px-3 py-3 text-right font-medium">Time</th>
+                    <th className="px-5 py-4 text-left font-bold">Task ID</th>
+                    <th className="px-5 py-4 text-left font-bold">Project Reference</th>
+                    <th className="px-5 py-4 text-left font-bold">Verification</th>
+                    <th className="px-5 py-4 text-right font-bold">Duration</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody className="body-premium-xs text-[12px]">
                   {data.recentActivity.map((row, idx) => (
                     <motion.tr
                       key={row.id}
                       initial={{ opacity: 0, x: -10 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: idx * 0.05 + 0.3 }}
-                      className={idx % 2 === 0 ? "bg-white/2" : "bg-transparent"}
+                      className="border-t border-white/5 hover:bg-white/2 transition-colors"
                     >
-                      <td className="px-3 py-3 font-mono text-[11px] text-zinc-300">T-{row.id}</td>
-                      <td className="px-3 py-3 text-zinc-300 truncate max-w-30">{row.project}</td>
-                      <td className="px-3 py-3">
+                      <td className="px-5 py-4 font-mono text-zinc-400">T-{row.id}</td>
+                      <td className="px-5 py-4 text-white font-medium">{row.project}</td>
+                      <td className="px-5 py-4">
                         <span
-                          className={`inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-medium ${
-                            row.status === "Verified"
-                              ? "bg-emerald-500/10 text-emerald-400 ring-1 ring-emerald-500/30"
-                              : "bg-amber-500/10 text-amber-400 ring-1 ring-amber-500/30"
-                          }`}
+                          className={`inline-flex items-center rounded-full px-2.5 py-1 text-[10px] font-bold ${row.status === "Verified"
+                              ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"
+                              : "bg-gold-mid/10 text-gold-mid border border-gold-mid/20"
+                            }`}
                         >
                           {row.status}
                         </span>
                       </td>
-                      <td className="px-3 py-3 text-right text-zinc-400">{row.minutes}m</td>
+                      <td className="px-5 py-4 text-right text-zinc-500">{row.minutes}m</td>
                     </motion.tr>
                   ))}
                 </tbody>

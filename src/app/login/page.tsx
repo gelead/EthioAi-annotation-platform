@@ -8,13 +8,13 @@ const fadeInUp = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.5, ease: [0.25, 0.1, 0.25, 1] },
+    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }
   },
 };
 
 const fadeIn = {
   hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { duration: 0.6, ease: "easeOut" } },
+  visible: { opacity: 1, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } },
 };
 
 const staggerContainer = {
@@ -41,7 +41,7 @@ export default function LoginPage() {
         <div className="pointer-events-none absolute inset-0 opacity-30">
           <div className="network-grid h-full w-full" />
         </div>
-        
+
         <div className="relative z-10 flex items-center gap-3">
           <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-amber-500 to-amber-300 text-black shadow-lg shadow-amber-500/30">
             <span className="text-lg font-bold">EA</span>
@@ -53,11 +53,11 @@ export default function LoginPage() {
         </div>
 
         <motion.div variants={fadeInUp} className="relative z-10 space-y-4">
-          <h2 className="max-w-md text-2xl font-semibold text-white heading-premium">
+          <h2 className="max-w-md text-3xl font-extrabold text-white heading-premium tracking-tighter leading-tight">
             &quot;Data sovereignty is the foundation for Ethiopia&apos;s{" "}
             <span className="text-gold-gradient">AI future.</span>&quot;
           </h2>
-          <p className="max-w-md text-[1.0625rem] leading-[1.6] text-zinc-400">
+          <p className="max-w-md text-lg leading-relaxed text-silver-gradient body-premium">
             EthioAI keeps your labeled datasets local, secure, and tailored to the realities of
             Ethiopian institutions and businesses.
           </p>
@@ -74,11 +74,11 @@ export default function LoginPage() {
           variants={fadeInUp}
           className="w-full max-w-sm rounded-2xl border border-white/10 bg-black/60 p-6 backdrop-blur-sm"
         >
-          <div className="space-y-1">
-            <h1 className="text-xl font-semibold text-white heading-premium">
+          <div className="space-y-2 text-center sm:text-left">
+            <h1 className="text-2xl font-extrabold text-white heading-premium">
               Login to <span className="text-gold-gradient">EthioAI</span>
             </h1>
-            <p className="text-sm text-zinc-400">
+            <p className="body-premium-sm opacity-60">
               Access your annotation dashboard and continue contributing to Ethiopia&apos;s AI ecosystem.
             </p>
           </div>
@@ -118,24 +118,24 @@ export default function LoginPage() {
 
           <form className="mt-6 space-y-4">
             <div className="space-y-1.5">
-              <label htmlFor="email" className="block text-xs font-medium text-zinc-300">
-                Email
+              <label htmlFor="email" className="block text-premium-label text-[10px] opacity-70">
+                Email Address
               </label>
               <input
                 id="email"
                 type="email"
-                className="w-full rounded-lg border border-white/10 bg-black/40 px-3 py-2.5 text-sm text-white outline-none ring-0 placeholder:text-zinc-600 focus:border-amber-400/50 focus:ring-1 focus:ring-amber-400/30 transition"
+                className="w-full rounded-xl border border-white/10 bg-black/40 px-4 py-3 text-sm text-white outline-none ring-0 placeholder:text-zinc-600 focus:border-gold-mid/50 focus:ring-1 focus:ring-gold-mid/20 transition-all"
                 placeholder="you@example.com"
               />
             </div>
             <div className="space-y-1.5">
-              <label htmlFor="password" className="block text-xs font-medium text-zinc-300">
-                Password
+              <label htmlFor="password" className="block text-premium-label text-[10px] opacity-70">
+                Security Password
               </label>
               <input
                 id="password"
                 type="password"
-                className="w-full rounded-lg border border-white/10 bg-black/40 px-3 py-2.5 text-sm text-white outline-none ring-0 placeholder:text-zinc-600 focus:border-amber-400/50 focus:ring-1 focus:ring-amber-400/30 transition"
+                className="w-full rounded-xl border border-white/10 bg-black/40 px-4 py-3 text-sm text-white outline-none ring-0 placeholder:text-zinc-600 focus:border-gold-mid/50 focus:ring-1 focus:ring-gold-mid/20 transition-all"
                 placeholder="Enter your password"
               />
             </div>

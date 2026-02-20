@@ -137,13 +137,32 @@ body::after {
   line-height: 1.1;
 }
 
-/* Huge hero text for high-impact sections */
+/* Impactful hero text - Further Refined */
 .text-hero-huge {
   font-family: var(--font-heading);
-  font-size: clamp(3.5rem, 10vw, 8rem);
+  font-size: clamp(2.5rem, 8vw, 5.5rem);
   font-weight: 900;
-  letter-spacing: -0.06em;
-  line-height: 0.95;
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+}
+
+/* Refined body text - Secondary/Small contexts */
+.body-premium-sm {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  /* 16px */
+  line-height: 1.6;
+  color: var(--foreground);
+  opacity: 0.8;
+}
+
+.body-premium-xs {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  /* 14px */
+  line-height: 1.5;
+  color: var(--foreground);
+  opacity: 0.7;
 }
 
 /* Silver/Zinc metallic gradient for descriptions */

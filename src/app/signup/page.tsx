@@ -41,7 +41,7 @@ export default function SignupPage() {
         <div className="pointer-events-none absolute inset-0 opacity-30">
           <div className="network-grid h-full w-full" />
         </div>
-        
+
         <div className="relative z-10 flex items-center gap-3">
           <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-amber-500 to-amber-300 text-black shadow-lg shadow-amber-500/30">
             <span className="text-lg font-bold">EA</span>
@@ -53,11 +53,11 @@ export default function SignupPage() {
         </div>
 
         <motion.div variants={fadeInUp} className="relative z-10 space-y-4">
-          <h2 className="max-w-md text-2xl font-semibold text-white heading-premium">
+          <h2 className="max-w-md text-3xl font-extrabold text-white heading-premium tracking-tighter leading-tight">
             &quot;Join a community building Ethiopia&apos;s{" "}
             <span className="text-gold-gradient">AI-ready datasets.</span>&quot;
           </h2>
-          <p className="max-w-md text-[1.0625rem] leading-[1.6] text-zinc-400">
+          <p className="max-w-md text-lg leading-relaxed text-silver-gradient body-premium">
             Annotators, domain experts, and institutions work together on EthioAI to create
             trustworthy, high-quality data.
           </p>
@@ -74,11 +74,11 @@ export default function SignupPage() {
           variants={fadeInUp}
           className="w-full max-w-sm rounded-2xl border border-white/10 bg-black/60 p-6 backdrop-blur-sm"
         >
-          <div className="space-y-1">
-            <h1 className="text-xl font-semibold text-white heading-premium">
+          <div className="space-y-2 text-center sm:text-left">
+            <h1 className="text-2xl font-extrabold text-white heading-premium">
               Create your <span className="text-gold-gradient">EthioAI</span> account
             </h1>
-            <p className="text-sm text-zinc-400">
+            <p className="body-premium-sm opacity-60">
               Sign up to start labeling image, text, and audio datasets tailored to Ethiopia.
             </p>
           </div>
@@ -118,34 +118,34 @@ export default function SignupPage() {
 
           <form className="mt-6 space-y-4">
             <div className="space-y-1.5">
-              <label htmlFor="fullName" className="block text-xs font-medium text-zinc-300">
+              <label htmlFor="fullName" className="block text-premium-label text-[10px] opacity-70">
                 Full Name
               </label>
               <input
                 id="fullName"
                 type="text"
-                className="w-full rounded-lg border border-white/10 bg-black/40 px-3 py-2.5 text-sm text-white outline-none ring-0 placeholder:text-zinc-600 focus:border-amber-400/50 focus:ring-1 focus:ring-amber-400/30 transition"
+                className="w-full rounded-xl border border-white/10 bg-black/40 px-4 py-3 text-sm text-white outline-none ring-0 placeholder:text-zinc-600 focus:border-gold-mid/50 focus:ring-1 focus:ring-gold-mid/20 transition-all"
                 placeholder="Your full name"
               />
             </div>
             <div className="space-y-1.5">
-              <label htmlFor="email" className="block text-xs font-medium text-zinc-300">
-                Email
+              <label htmlFor="email" className="block text-premium-label text-[10px] opacity-70">
+                Email Address
               </label>
               <input
                 id="email"
                 type="email"
-                className="w-full rounded-lg border border-white/10 bg-black/40 px-3 py-2.5 text-sm text-white outline-none ring-0 placeholder:text-zinc-600 focus:border-amber-400/50 focus:ring-1 focus:ring-amber-400/30 transition"
+                className="w-full rounded-xl border border-white/10 bg-black/40 px-4 py-3 text-sm text-white outline-none ring-0 placeholder:text-zinc-600 focus:border-gold-mid/50 focus:ring-1 focus:ring-gold-mid/20 transition-all"
                 placeholder="you@example.com"
               />
             </div>
             <div className="space-y-1.5">
-              <label htmlFor="expertise" className="block text-xs font-medium text-zinc-300">
-                Expertise
+              <label htmlFor="expertise" className="block text-premium-label text-[10px] opacity-70">
+                Expertise Area
               </label>
               <select
                 id="expertise"
-                className="w-full rounded-lg border border-white/10 bg-black/40 px-3 py-2.5 text-sm text-white outline-none ring-0 focus:border-amber-400/50 focus:ring-1 focus:ring-amber-400/30 transition"
+                className="w-full rounded-xl border border-white/10 bg-black/40 px-4 py-3 text-sm text-white outline-none ring-0 focus:border-gold-mid/50 focus:ring-1 focus:ring-gold-mid/20 transition-all appearance-none"
                 defaultValue=""
               >
                 <option value="" disabled className="bg-zinc-900 text-zinc-500">
@@ -158,13 +158,13 @@ export default function SignupPage() {
               </select>
             </div>
             <div className="space-y-1.5">
-              <label htmlFor="password" className="block text-xs font-medium text-zinc-300">
-                Password
+              <label htmlFor="password" className="block text-premium-label text-[10px] opacity-70">
+                Security Password
               </label>
               <input
                 id="password"
                 type="password"
-                className="w-full rounded-lg border border-white/10 bg-black/40 px-3 py-2.5 text-sm text-white outline-none ring-0 placeholder:text-zinc-600 focus:border-amber-400/50 focus:ring-1 focus:ring-amber-400/30 transition"
+                className="w-full rounded-xl border border-white/10 bg-black/40 px-4 py-3 text-sm text-white outline-none ring-0 placeholder:text-zinc-600 focus:border-gold-mid/50 focus:ring-1 focus:ring-gold-mid/20 transition-all"
                 placeholder="Enter a strong password"
               />
             </div>

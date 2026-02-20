@@ -6,8 +6,8 @@ import React from "react";
 export function Footer() {
   return (
     <footer className="bg-black border-t border-white/10 mt-24">
-      <div className="container-ethio py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+      <div className="mx-auto max-w-[1440px] px-8 py-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1.2fr] gap-16">
           {/* Brand Column */}
           <div className="space-y-4">
             <div className="flex items-center gap-3 mb-6">
@@ -19,7 +19,7 @@ export function Footer() {
                 <p className="text-silver-gradient text-sm body-premium opacity-70">A Nile Academy Initiative</p>
               </div>
             </div>
-            <p className="text-silver-gradient text-base leading-relaxed body-premium">
+            <p className="text-silver-gradient text-sm leading-relaxed body-premium opacity-60">
               Empowering Ethiopia&apos;s AI future through high-quality, ethically sourced data annotations
               tailored for Ethiopian languages and cultural context.
             </p>
@@ -31,31 +31,31 @@ export function Footer() {
             <nav className="space-y-3">
               <Link
                 href="/services/image"
-                className="block text-zinc-400 hover:text-amber-400 transition-colors text-sm"
+                className="block text-zinc-400 hover:text-amber-400 transition-colors body-premium-sm underline-offset-4 hover:underline"
               >
                 Image Annotation
               </Link>
               <Link
                 href="/services/text"
-                className="block text-zinc-400 hover:text-amber-400 transition-colors text-sm"
+                className="block text-zinc-400 hover:text-amber-400 transition-colors body-premium-sm underline-offset-4 hover:underline"
               >
                 Text Annotation
               </Link>
               <Link
                 href="/services/audio"
-                className="block text-zinc-400 hover:text-amber-400 transition-colors text-sm"
+                className="block text-zinc-400 hover:text-amber-400 transition-colors body-premium-sm underline-offset-4 hover:underline"
               >
                 Audio Annotation
               </Link>
               <Link
                 href="/dashboard"
-                className="block text-zinc-400 hover:text-amber-400 transition-colors text-sm"
+                className="block text-zinc-400 hover:text-amber-400 transition-colors body-premium-sm underline-offset-4 hover:underline"
               >
                 Dashboard
               </Link>
               <Link
                 href="/workspace"
-                className="block text-zinc-400 hover:text-amber-400 transition-colors text-sm"
+                className="block text-zinc-400 hover:text-amber-400 transition-colors body-premium-sm underline-offset-4 hover:underline"
               >
                 Workspace
               </Link>
@@ -68,25 +68,25 @@ export function Footer() {
             <nav className="space-y-3">
               <Link
                 href="/privacy"
-                className="block text-zinc-400 hover:text-amber-400 transition-colors text-sm"
+                className="block text-zinc-400 hover:text-amber-400 transition-colors body-premium-sm underline-offset-4 hover:underline"
               >
                 Data Sovereignty Policy
               </Link>
               <Link
                 href="/security"
-                className="block text-zinc-400 hover:text-amber-400 transition-colors text-sm"
+                className="block text-zinc-400 hover:text-amber-400 transition-colors body-premium-sm underline-offset-4 hover:underline"
               >
                 Security Policy
               </Link>
               <Link
                 href="/terms"
-                className="block text-zinc-400 hover:text-amber-400 transition-colors text-sm"
+                className="block text-zinc-400 hover:text-amber-400 transition-colors body-premium-sm underline-offset-4 hover:underline"
               >
                 Terms of Service
               </Link>
               <Link
                 href="/compliance"
-                className="block text-zinc-400 hover:text-amber-400 transition-colors text-sm"
+                className="block text-zinc-400 hover:text-amber-400 transition-colors body-premium-sm underline-offset-4 hover:underline"
               >
                 Compliance
               </Link>
@@ -99,7 +99,7 @@ export function Footer() {
             <nav className="space-y-3">
               <a
                 href="mailto:hello@ethioai.com"
-                className="flex items-center gap-2 text-zinc-400 hover:text-amber-400 transition-colors text-sm"
+                className="flex items-center gap-2 text-zinc-400 hover:text-amber-400 transition-colors body-premium-sm"
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
@@ -108,7 +108,7 @@ export function Footer() {
               </a>
               <Link
                 href="/demo"
-                className="flex items-center gap-2 text-zinc-400 hover:text-amber-400 transition-colors text-sm"
+                className="flex items-center gap-2 text-zinc-400 hover:text-amber-400 transition-colors body-premium-sm"
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
@@ -149,7 +149,7 @@ export function Footer() {
         {/* Bottom Row */}
         <div className="border-t border-white/10 mt-12 pt-8">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            <p className="text-sm text-zinc-500">
+            <p className="text-sm body-premium-xs opacity-50">
               © 2025 EthioAI. A Nile Academy Initiative
             </p>
           </div>
