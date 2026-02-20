@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
 const navLinks = [
@@ -49,19 +49,36 @@ const MagneticLink = ({ href, children, className, isActive, ...props }: any) =>
 export function Navbar() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   if (pathname === "/login" || pathname === "/signup") {
     return null;
   }
 
   return (
-    <header className="sticky top-0 z-40 border-b border-white/10 bg-black/80 backdrop-blur h-24">
+    <motion.header 
+      className="sticky top-0 z-40 border-b border-white/10 bg-black/80 h-20"
+      initial={{ backdropFilter: "blur(8px)" }}
+      animate={{ 
+        backdropFilter: scrolled ? "blur(16px)" : "blur(8px)",
+        backgroundColor: scrolled ? "rgba(0,0,0,0.9)" : "rgba(0,0,0,0.8)"
+      }}
+      transition={{ duration: 0.3 }}
+    >
       <div className="mx-auto flex max-w-[1440px] items-center justify-between gap-4 px-8 h-full">
         <Link href="/" className="flex items-center gap-2">
           <span className="text-lg font-semibold tracking-tight text-white heading-premium">EthioAI</span>
         </Link>
 
-        <nav className="hidden items-center gap-8 text-base font-semibold text-white md:flex">
+        <nav className="hidden items-center gap-8 text-[15px] font-medium text-white md:flex">
           {navLinks.map((link) => (
             <MagneticLink
               key={link.href}
@@ -74,24 +91,34 @@ export function Navbar() {
           ))}
         </nav>
 
-        <div className="flex items-center gap-4">
-          <MagneticButton>
+        <div className="flex items-center gap-3">
+          {/* Login - Ghost button with thin white border */}
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            transition={{ type: "spring", stiffness: 400, damping: 17 }}
+          >
             <Link
               href="/login"
-              className="px-4 py-2 text-base font-semibold text-white border border-white/20 rounded-md hover:bg-white/10 transition-colors block"
+              className="px-4 py-2 text-[15px] font-medium text-white border border-white/30 rounded-md hover:bg-white/10 transition-colors block"
             >
               Login
             </Link>
-          </MagneticButton>
+          </motion.div>
           
-          <MagneticButton>
+          {/* Sign Up - Solid golden with scale animation */}
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            transition={{ type: "spring", stiffness: 400, damping: 17 }}
+          >
             <Link
               href="/signup"
-              className="px-4 py-2 text-base font-semibold text-black bg-gold-gradient rounded-md hover:scale-105 transition-transform block"
+              className="px-4 py-2 text-[15px] font-medium text-black bg-gold-gradient rounded-md transition-transform block"
             >
               Sign Up
             </Link>
-          </MagneticButton>
+          </motion.div>
           
           <div className="relative">
             <MagneticButton

@@ -219,11 +219,10 @@ export default function Home() {
               Welcome to EthioAI
             </motion.p>
 
-            {/* H1 */}
+            {/* H1 with Urbanist font */}
             <motion.h1
               variants={slideUp}
-              className="text-3xl font-black leading-[1.08] tracking-tight sm:text-4xl md:text-5xl"
-              style={{ fontFamily: "var(--font-display, 'Playfair Display', Georgia, serif)" }}
+              className="text-3xl font-semibold leading-[1.2] tracking-tight sm:text-4xl md:text-5xl heading-premium"
             >
               <span className="text-gold-gradient">
                 Bridging the Gap:
@@ -237,10 +236,10 @@ export default function Home() {
               </span>
             </motion.h1>
 
-            {/* Body copy */}
+            {/* Body copy - Modern Modest 17px */}
             <motion.p
               variants={slideUp}
-              className="max-w-xl text-sm leading-relaxed text-zinc-400 md:text-base"
+              className="max-w-xl text-[1.0625rem] leading-[1.6] text-zinc-400"
             >
               EthioAI makes data labeling effortless — helping businesses and national
               institutions create accurate AI models faster with expert-curated image,
@@ -297,14 +296,11 @@ export default function Home() {
 
         {/* ── Services ────────────────────────────────────────── */}
         <section className="space-y-8">
-          <div className="space-y-2">
-            <h2
-              className="text-2xl font-bold tracking-tight md:text-3xl"
-              style={{ fontFamily: "var(--font-display, 'Playfair Display', Georgia, serif)" }}
-            >
-              <span className="text-gold-gradient">Our Comprehensive Services</span>
+          <div className="space-y-3">
+            <h2 className="text-2xl font-semibold tracking-tight md:text-3xl heading-gold">
+              Our Comprehensive Services
             </h2>
-            <p className="text-sm leading-relaxed text-zinc-400 md:max-w-2xl">
+            <p className="text-[1.0625rem] leading-[1.6] text-zinc-400 md:max-w-2xl">
               From satellite imagery to call-center audio, EthioAI provides end-to-end
               labeling workflows tuned for local languages, domains, and infrastructure realities.
             </p>
@@ -344,13 +340,10 @@ export default function Home() {
                 >
                   {service.icon}
                 </div>
-                <h3
-                  className="text-sm font-semibold text-white"
-                  style={{ fontFamily: "var(--font-display, 'Playfair Display', serif)" }}
-                >
+                <h3 className="text-base font-semibold text-white heading-premium">
                   {service.title}
                 </h3>
-                <p className="text-xs leading-relaxed text-zinc-400">{service.description}</p>
+                <p className="text-[1.0625rem] leading-[1.6] text-zinc-400">{service.description}</p>
 
                 {/* Hover glow underline */}
                 <div
@@ -364,15 +357,11 @@ export default function Home() {
 
         {/* ── Why EthioAI ─────────────────────────────────────── */}
         <section className="space-y-8">
-          <div className="space-y-2">
-            <h2
-              className="text-2xl font-bold tracking-tight md:text-3xl"
-              style={{ fontFamily: "var(--font-display, 'Playfair Display', Georgia, serif)" }}
-            >
-              Why Choose{" "}
-              <span className="text-gold-gradient">EthioAI?</span>
+          <div className="space-y-3">
+            <h2 className="text-2xl font-semibold tracking-tight md:text-3xl heading-premium">
+              Why Choose <span className="text-gold-gradient">EthioAI?</span>
             </h2>
-            <p className="text-sm text-zinc-400 md:max-w-2xl">
+            <p className="text-[1.0625rem] leading-[1.6] text-zinc-400 md:max-w-2xl">
               Purpose-built for Ethiopia&apos;s languages, infrastructure, and institutional
               needs — from national labs to fast-moving startups.
             </p>
@@ -395,36 +384,30 @@ export default function Home() {
                 >
                   {icon}
                 </div>
-                <h3
-                  className="text-sm font-semibold text-slate-50"
-                  style={{ fontFamily: "var(--font-display, 'Playfair Display', serif)" }}
-                >
+                <h3 className="text-base font-semibold text-slate-50 heading-premium">
                   {title}
                 </h3>
-                <p className="text-xs text-slate-300">{body}</p>
+                <p className="text-[1.0625rem] leading-[1.6] text-slate-300">{body}</p>
               </div>
             ))}
           </div>
         </section>
 
-        {/* ── Contact & Footer ─────────────────────────────────── */}
+        {/* ── Contact Section ─────────────────────────────────── */}
         <section className="space-y-10">
           <div
             className="grid gap-8 border p-6 backdrop-blur md:grid-cols-2 md:p-8"
             style={{ borderColor: "rgba(255,224,2,0.12)", background: "rgba(10,10,10,0.6)" }}
           >
             <div className="space-y-4">
-              <h2
-                className="text-2xl font-bold tracking-tight text-slate-50"
-                style={{ fontFamily: "var(--font-display, 'Playfair Display', serif)" }}
-              >
+              <h2 className="text-2xl font-semibold tracking-tight text-slate-50 heading-premium">
                 Get in Touch
               </h2>
-              <p className="text-sm text-zinc-400">
+              <p className="text-[1.0625rem] leading-[1.6] text-zinc-400">
                 Tell us about your data needs — from pilots to nationwide deployments,
                 we&apos;re here to help you build reliable AI systems.
               </p>
-              <form className="space-y-3 text-xs text-slate-200">
+              <form className="space-y-3 text-sm text-slate-200">
                 {[
                   { id: "name", label: "Name", type: "text", placeholder: "Your full name" },
                   { id: "email", label: "Email", type: "email", placeholder: "you@example.com" },
@@ -436,7 +419,7 @@ export default function Home() {
                     <input
                       id={id}
                       type={type}
-                      className="w-full border bg-black/40 px-3 py-2 text-xs outline-none transition placeholder:text-zinc-600 focus:border-yellow-400"
+                      className="w-full border bg-black/40 px-3 py-2 text-sm outline-none transition placeholder:text-zinc-600 focus:border-yellow-400"
                       style={{ borderColor: "rgba(255,224,2,0.2)" }}
                       placeholder={placeholder}
                     />
@@ -449,7 +432,7 @@ export default function Home() {
                   <textarea
                     id="message"
                     rows={4}
-                    className="w-full border bg-black/40 px-3 py-2 text-xs leading-relaxed outline-none transition placeholder:text-zinc-600 focus:border-yellow-400"
+                    className="w-full border bg-black/40 px-3 py-2 text-sm leading-relaxed outline-none transition placeholder:text-zinc-600 focus:border-yellow-400"
                     style={{ borderColor: "rgba(255,224,2,0.2)" }}
                     placeholder="What kind of data do you need labeled?"
                   />
@@ -470,66 +453,6 @@ export default function Home() {
               />
             </div>
           </div>
-
-          {/* Footer */}
-          <footer className="border-t pt-8 text-xs text-zinc-500" style={{ borderColor: "rgba(255,224,2,0.1)" }}>
-            <div className="grid gap-8 md:grid-cols-[1.4fr_repeat(2,minmax(0,1fr))]">
-              <div className="space-y-3">
-                <div className="flex items-center gap-2">
-                  <span
-                    className="flex h-8 w-8 items-center justify-center text-black text-sm font-bold"
-                    style={{ background: "var(--gold-gradient)" }}
-                  >
-                    ⚡
-                  </span>
-                  <span className="text-sm font-semibold text-white">EthioAI</span>
-                </div>
-                <p className="max-w-sm text-zinc-500">
-                  Empowering AI initiatives with high-quality data annotation for Ethiopia and the region.
-                </p>
-              </div>
-
-              <div>
-                <h3 className="text-[11px] font-semibold uppercase tracking-wide" style={{ color: "rgba(255,224,2,0.7)" }}>
-                  Quick Links
-                </h3>
-                <ul className="mt-3 space-y-1.5">
-                  {["Home", "Services", "About", "Contact"].map((item) => (
-                    <li key={item}>
-                      <a href="#" className="transition hover:text-yellow-400">{item}</a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div>
-                <h3 className="text-[11px] font-semibold uppercase tracking-wide" style={{ color: "rgba(255,224,2,0.7)" }}>
-                  Contact
-                </h3>
-                <ul className="mt-3 space-y-1.5">
-                  <li><span className="text-zinc-400">Email:</span> support@ethioai.com</li>
-                  <li><span className="text-zinc-400">Phone:</span> +251 (0)11 000 0000</li>
-                  <li><span className="text-zinc-400">Address:</span> Addis Ababa, Ethiopia</li>
-                </ul>
-              </div>
-            </div>
-
-            <div className="mt-6 flex flex-col items-center justify-between gap-3 border-t pt-4 text-[11px] md:flex-row" style={{ borderColor: "rgba(255,224,2,0.08)" }}>
-              <span>© {new Date().getFullYear()} EthioAI. All rights reserved.</span>
-              <div className="flex items-center gap-3">
-                {["X", "in", "TG", "GH"].map((s) => (
-                  <a
-                    key={s}
-                    href="#"
-                    className="border px-2 py-1 transition hover:text-yellow-400"
-                    style={{ borderColor: "rgba(255,224,2,0.15)", borderRadius: "9999px" }}
-                  >
-                    {s}
-                  </a>
-                ))}
-              </div>
-            </div>
-          </footer>
         </section>
       </main>
     </div>
