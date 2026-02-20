@@ -39,7 +39,7 @@ export default function Home() {
       {/* Animated grid overlay */}
       <div className="network-grid pointer-events-none absolute inset-0" aria-hidden="true" />
 
-      <div className="relative z-10 flex min-h-[calc(100vh-6rem)] flex-col gap-64 py-32 mx-auto max-w-[1440px] px-8 md:px-12 md:py-64">
+      <div className="relative z-10 flex min-h-[calc(100vh-6rem)] flex-col gap-48 pt-8 pb-32 mx-auto max-w-[1440px] px-8 md:px-12 md:pt-12 md:pb-64">
 
         {/* ── Hero ─────────────────────────────────────────────── */}
         <section className="grid items-center gap-12 lg:grid-cols-[1.2fr_1fr]">

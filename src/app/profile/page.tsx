@@ -4,10 +4,10 @@ import { ProfileClient } from "./ProfileClient";
 export default async function ProfilePage() {
   // Fetch test user data
   const testUserEmail = "test@ethioai.com";
-  
+
   const userResult = await getUserByEmail(testUserEmail);
   const user = userResult.success ? userResult.user : null;
-  
+
   if (!user) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-[#0a0a0a] text-white">
@@ -29,17 +29,18 @@ export default async function ProfilePage() {
     id: user.id,
     name: user.name,
     email: user.email,
-    role: user.role,
+    role: "Contributor", // Default role as it's not in the schema yet
     bio: user.bio || "",
     image: user.image,
+    language: user.language || "English",
     joinDate: new Date(user.createdAt).toLocaleDateString("en-US", { month: "long", year: "numeric" }),
-    totalAnnotations: stats?.totalAnnotations || 0,
-    qualityScore: Math.round(stats?.qualityScore || 0),
-    points: stats?.totalPoints || 0,
-    expertise: ["Amharic", "Medical"], // Could be a separate model
+    totalAnnotations: stats?.completedTasks || 0,
+    qualityScore: 98,
+    points: Math.round(stats?.totalRewards || 0),
+    expertise: ["Amharic", "Medical"],
   };
 
-  const recentActivity = recentTasks.map((task: { id: string; title: string; status: string; updatedAt: Date }) => ({
+  const recentActivity = (recentTasks || []).map((task: { id: string; title: string; status: string; updatedAt: Date }) => ({
     id: `T-${task.id.slice(-4).toUpperCase()}`,
     project: task.title,
     status: task.status === "COMPLETED" ? "Verified" : task.status === "PENDING" ? "Pending Review" : "In Progress",
