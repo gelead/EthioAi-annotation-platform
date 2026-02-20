@@ -4,6 +4,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { ModernButton } from "@/components/ui/ModernButton";
 import { InteractiveLink } from "@/components/ui/InteractiveLink";
+import { Footer } from "@/components/layout/Footer";
 
 const services = [
     {
@@ -65,7 +66,7 @@ export default function ServicesPage() {
                 <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-gold-mid/5 blur-[120px] rounded-full" />
             </div>
 
-            <div className="container-ethio relative z-10 max-w-[1200px] mx-auto px-6">
+            <div className="container-ethio relative z-10">
                 <header className="mb-24 text-center max-w-3xl mx-auto">
                     <motion.p
                         initial={{ opacity: 0, y: 20 }}
@@ -78,7 +79,7 @@ export default function ServicesPage() {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.1 }}
-                        className="text-5xl md:text-6xl font-display font-bold mb-8 text-gold-gradient"
+                        className="text-5xl md:text-6xl heading-premium font-bold mb-8 text-gold-gradient"
                     >
                         Precision Labeling Services
                     </motion.h1>
@@ -110,7 +111,7 @@ export default function ServicesPage() {
                                     <div className="w-16 h-16 rounded-2xl bg-zinc-900 border border-gold-mid/20 flex items-center justify-center shadow-2xl shadow-gold-mid/5">
                                         {service.icon}
                                     </div>
-                                    <h2 className="text-3xl font-display font-bold text-white">
+                                    <h2 className="text-3xl heading-premium font-bold text-white">
                                         {service.title}
                                     </h2>
                                 </div>
@@ -166,20 +167,8 @@ export default function ServicesPage() {
                         </motion.div>
                     ))}
                 </section>
-
-                <footer className="mt-48 text-center border-t border-zinc-900 pt-24 pb-12">
-                    <h3 className="text-3xl font-display font-bold mb-8">Ready to scale your AI?</h3>
-                    <div className="flex flex-col md:flex-row items-center justify-center gap-8">
-                        <InteractiveLink href="/contact" className="text-xl text-gold-mid font-medium">
-                            Schedule a technical consultation
-                        </InteractiveLink>
-                        <span className="text-zinc-600 hidden md:block">|</span>
-                        <InteractiveLink href="/about" className="text-xl text-white font-medium">
-                            View our case studies
-                        </InteractiveLink>
-                    </div>
-                </footer>
             </div>
+            <Footer />
         </div>
     );
 }
