@@ -1,11 +1,8 @@
 "use client";
 
-import React, { useRef } from "react";
+import React from "react";
 import {
   motion,
-  useMotionValue,
-  useTransform,
-  useSpring,
 } from "framer-motion";
 
 /* ─── Animation Variants ─────────────────────────────────────── */
@@ -33,129 +30,7 @@ const slideUp = {
   },
 };
 
-/* ─── Magnetic Image Card ─────────────────────────────────────── */
-
-function MagneticCard() {
-  const cardRef = useRef<HTMLDivElement>(null);
-
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-
-  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [6, -6]), {
-    stiffness: 150,
-    damping: 25,
-  });
-  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-6, 6]), {
-    stiffness: 150,
-    damping: 25,
-  });
-
-  function handleMouseMove(e: React.MouseEvent<HTMLDivElement>) {
-    const rect = cardRef.current?.getBoundingClientRect();
-    if (!rect) return;
-    const x = (e.clientX - rect.left) / rect.width - 0.5;
-    const y = (e.clientY - rect.top) / rect.height - 0.5;
-    mouseX.set(x);
-    mouseY.set(y);
-  }
-
-  function handleMouseLeave() {
-    mouseX.set(0);
-    mouseY.set(0);
-  }
-
-  return (
-    <motion.div
-      ref={cardRef}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      style={{
-        rotateX,
-        rotateY,
-        transformPerspective: 1200,
-        transformStyle: "preserve-3d",
-      }}
-      initial={{ opacity: 0, scale: 0.94, y: 32 }}
-      animate={{ opacity: 1, scale: 1, y: 0 }}
-      transition={{ duration: 1.2, ease: EASE_OUT, delay: 0.6 }}
-      className="relative w-full overflow-hidden border border-white/5 bg-[#050505]/80 p-0 shadow-2xl backdrop-blur-2xl ring-1 ring-white/10"
-    >
-      {/* Dashboard Header Overlay */}
-      <div className="flex items-center justify-between border-b border-white/5 bg-white/5 px-6 py-4">
-        <div className="flex items-center gap-3">
-          <div className="flex gap-1.5">
-            <div className="h-2 w-2 rounded-full bg-red-500/40" />
-            <div className="h-2 w-2 rounded-full bg-amber-500/40" />
-            <div className="h-2 w-2 rounded-full bg-emerald-500/40" />
-          </div>
-          <span className="text-premium-label text-[9.5px] opacity-70">Batch_Live_Feed.v2</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-500" />
-          <span className="body-premium-xs text-[10px] font-bold text-emerald-400">SYNCED</span>
-        </div>
-      </div>
-
-      <div className="p-6">
-        {/* Premium Data Table */}
-        <div className="mb-6 overflow-hidden rounded-xl border border-white/5 bg-black/40">
-          <table className="w-full text-left">
-            <thead className="border-b border-white/5 bg-white/5 text-[10px] font-bold tracking-widest text-zinc-500 uppercase">
-              <tr>
-                <th className="px-4 py-2.5">Batch Name</th>
-                <th className="px-4 py-2.5">Progress</th>
-                <th className="px-4 py-2.5 font-mono text-zinc-600">ID</th>
-              </tr>
-            </thead>
-            <tbody className="body-premium-xs text-[11px]">
-              {[
-                { name: "Amh_NER_Medical", progress: "88%", id: "A102" },
-                { name: "Crop_Disease_V3", progress: "62%", id: "B942" },
-                { name: "Oro_Dialect_STS", progress: "45%", id: "C011" }
-              ].map((batch, idx) => (
-                <tr key={batch.id} className="border-b border-white/5 last:border-0 hover:bg-white/5 transition-colors">
-                  <td className="px-4 py-3 text-zinc-300 font-medium">{batch.name}</td>
-                  <td className="px-4 py-3">
-                    <div className="flex items-center gap-3">
-                      <div className="h-1 flex-1 bg-zinc-900 rounded-full overflow-hidden">
-                        <motion.div
-                          className="h-full bg-gold-gradient"
-                          initial={{ width: 0 }}
-                          animate={{ width: batch.progress }}
-                          transition={{ duration: 1.5, delay: 0.8 + (idx * 0.2) }}
-                        />
-                      </div>
-                      <span className="text-gold-mid font-bold w-6">{batch.progress}</span>
-                    </div>
-                  </td>
-                  <td className="px-4 py-3 font-mono text-zinc-500">{batch.id}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-
-        {/* Floating Metrics Row */}
-        <div className="grid grid-cols-3 gap-3">
-          {[
-            { label: "Active Nodes", val: "1.2k", sub: "+12%" },
-            { label: "Throughput", val: "4.8m", sub: "tasks/h" },
-            { label: "Confidence", val: "99.4%", sub: "human-v" }
-          ].map((stat) => (
-            <div key={stat.label} className="rounded-lg border border-white/5 bg-white/2 p-3 text-center">
-              <p className="text-[9px] font-bold uppercase tracking-tight text-zinc-500">{stat.label}</p>
-              <p className="heading-premium mt-0.5 text-lg text-white">{stat.val}</p>
-              <p className="body-premium-xs mt-0.5 text-[8px] text-zinc-600">{stat.sub}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Decorative Shimmer Overlay */}
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-transparent opacity-30" />
-    </motion.div>
-  );
-}
+import { AIDataCard } from "@/components/ui/AIDataCard";
 
 /* ─── Page ──────────────────────────────────────────────────── */
 export default function Home() {
@@ -232,10 +107,10 @@ export default function Home() {
             </motion.p>
           </motion.div>
 
-          {/* Right: Magnetic card */}
+          {/* Right: Interactive AI Data Card */}
           <div className="flex items-center justify-center">
-            <div className="w-full max-w-[480px]">
-              <MagneticCard />
+            <div className="w-full max-w-[560px]">
+              <AIDataCard />
             </div>
           </div>
         </section>
