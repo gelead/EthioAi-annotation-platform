@@ -35,7 +35,7 @@
   --color-gold-mid: #FFE002;
 
   /* Modern Premium Typography */
-  --font-heading: var(--font-playfair), "Playfair Display", serif;
+  --font-heading: var(--font-outfit), "Outfit", sans-serif;
   --font-body: var(--font-inter), "Inter", system-ui, -apple-system, sans-serif;
 }
 
@@ -129,12 +129,40 @@ body::after {
   animation: shimmer 4s linear infinite;
 }
 
-/* Modern Premium heading styles - Playfair Display */
+/* Modern Premium heading styles - Outfit */
 .heading-premium {
   font-family: var(--font-heading);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+}
+
+/* Huge hero text for high-impact sections */
+.text-hero-huge {
+  font-family: var(--font-heading);
+  font-size: clamp(3.5rem, 10vw, 8rem);
+  font-weight: 900;
+  letter-spacing: -0.06em;
+  line-height: 0.95;
+}
+
+/* Silver/Zinc metallic gradient for descriptions */
+.text-silver-gradient {
+  background: linear-gradient(180deg, #ffffff 0%, #a1a1aa 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* Tracking-widest label for section breadcrumbs/titles */
+.text-premium-label {
+  font-size: 0.75rem;
   font-weight: 700;
-  letter-spacing: -0.05em;
-  line-height: 1.2;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: #FFE002;
+  opacity: 0.9;
 }
 
 .heading-gold {
@@ -151,13 +179,15 @@ body::after {
   animation: shimmer 5s linear infinite;
 }
 
-/* Modern Premium Body text styling - 18px with 1.6 line-height */
+/* Modern Premium Body text styling - Refined 18px-20px */
 .body-premium {
   font-family: var(--font-body);
-  font-size: 1.125rem;
-  /* 18px */
-  line-height: 1.6;
+  font-size: 1.1875rem;
+  /* ~19px */
+  line-height: 1.7;
+  letter-spacing: -0.01em;
   color: var(--foreground);
+  opacity: 0.92;
 }
 
 /* Golden underline hover effect with sliding animation */

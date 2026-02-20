@@ -15,11 +15,11 @@ export function Footer() {
                 <span className="text-black font-bold text-sm">EA</span>
               </div>
               <div>
-                <h3 className="text-white font-semibold text-lg">EthioAI</h3>
-                <p className="text-zinc-400 text-sm">A Nile Academy Initiative for Sovereign AI</p>
+                <h3 className="text-white font-bold text-lg heading-premium">EthioAI</h3>
+                <p className="text-silver-gradient text-sm body-premium opacity-70">A Nile Academy Initiative</p>
               </div>
             </div>
-            <p className="text-zinc-400 text-sm leading-relaxed">
+            <p className="text-silver-gradient text-base leading-relaxed body-premium">
               Empowering Ethiopia&apos;s AI future through high-quality, ethically sourced data annotations
               tailored for Ethiopian languages and cultural context.
             </p>
@@ -27,7 +27,7 @@ export function Footer() {
 
           {/* Platform Column */}
           <div className="space-y-4">
-            <h3 className="text-white font-semibold text-lg mb-6">Platform</h3>
+            <h3 className="text-white font-bold text-base mb-6 heading-premium uppercase tracking-widest">Platform</h3>
             <nav className="space-y-3">
               <Link
                 href="/services/image"
@@ -64,7 +64,7 @@ export function Footer() {
 
           {/* Legal Column */}
           <div className="space-y-4">
-            <h3 className="text-white font-semibold text-lg mb-6">Legal</h3>
+            <h3 className="text-white font-bold text-base mb-6 heading-premium uppercase tracking-widest">Legal</h3>
             <nav className="space-y-3">
               <Link
                 href="/privacy"
@@ -95,7 +95,7 @@ export function Footer() {
 
           {/* Contact Column - NEW */}
           <div className="space-y-4">
-            <h3 className="text-white font-semibold text-lg mb-6">Contact</h3>
+            <h3 className="text-white font-bold text-base mb-6 heading-premium uppercase tracking-widest">Contact</h3>
             <nav className="space-y-3">
               <a
                 href="mailto:hello@ethioai.com"

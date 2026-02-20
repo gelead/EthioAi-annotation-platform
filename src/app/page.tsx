@@ -165,35 +165,28 @@ export default function Home() {
             animate="visible"
           >
             {/* Subtitle */}
+            {/* Premium Label */}
             <motion.p
               variants={slideUp}
-              className="text-[11px] font-semibold uppercase tracking-[0.28em]"
-              style={{ color: "#ffe002" }}
+              className="text-premium-label mb-2"
             >
-              Welcome to EthioAI
+              Precision Intelligence for Ethiopia
             </motion.p>
 
-            {/* H1 with Playfair Display */}
+            {/* Huge Hero Heading */}
             <motion.h1
               variants={slideUp}
-              className="text-4xl font-bold leading-[1.1] tracking-tight sm:text-5xl md:text-7xl heading-premium"
+              className="text-hero-huge mb-6"
             >
-              <span className="text-gold-gradient">
-                Bridging the Gap:
-              </span>
-              <br />
-              <span className="text-white">
-                Powering AI with{" "}
-              </span>
-              <span className="text-gold-gradient text-[1.1em]">
-                Local Context.
-              </span>
+              <span className="text-gold-gradient block">Bridging the Gap:</span>
+              <span className="text-white block mt-2">Powering AI with</span>
+              <span className="text-gold-gradient block mt-1">Local Context.</span>
             </motion.h1>
 
-            {/* Body copy - Premium 18px */}
+            {/* Body copy - Silver Gradient */}
             <motion.p
               variants={slideUp}
-              className="max-w-2xl text-xl leading-relaxed text-zinc-400 body-premium"
+              className="max-w-3xl text-xl leading-relaxed text-silver-gradient body-premium mb-8"
             >
               EthioAI makes data labeling effortless — helping businesses and national
               institutions create accurate AI models faster with expert-curated image,
@@ -239,10 +232,11 @@ export default function Home() {
         {/* ── Services ────────────────────────────────────────── */}
         <section className="space-y-8">
           <div className="space-y-3">
-            <h2 className="text-2xl font-semibold tracking-tight md:text-3xl heading-gold">
+            <p className="text-premium-label">Scalable Solutions</p>
+            <h2 className="text-4xl font-extrabold tracking-tight md:text-5xl heading-gold">
               Our Comprehensive Services
             </h2>
-            <p className="text-[1.0625rem] leading-[1.6] text-zinc-400 md:max-w-2xl">
+            <p className="text-xl leading-relaxed text-silver-gradient md:max-w-3xl body-premium">
               From satellite imagery to call-center audio, EthioAI provides end-to-end
               labeling workflows tuned for local languages, domains, and infrastructure realities.
             </p>
@@ -282,10 +276,10 @@ export default function Home() {
                 >
                   {service.icon}
                 </div>
-                <h3 className="text-base font-semibold text-white heading-premium">
+                <h3 className="text-xl font-bold text-white heading-premium">
                   {service.title}
                 </h3>
-                <p className="text-[1.0625rem] leading-[1.6] text-zinc-400">{service.description}</p>
+                <p className="text-base text-silver-gradient body-premium">{service.description}</p>
 
                 {/* Hover glow underline */}
                 <div
@@ -298,14 +292,15 @@ export default function Home() {
         </section>
 
         {/* ── Dashboard Quick Access ──────────────────────────── */}
-        <section className="space-y-6">
+        <section className="space-y-8">
           <div className="space-y-3">
-            <h2 className="text-2xl font-semibold tracking-tight md:text-3xl heading-premium">
-              Access Your <span className="text-gold-gradient">Dashboard</span>
+            <p className="text-premium-label">Productive Workflows</p>
+            <h2 className="text-4xl font-extrabold tracking-tight md:text-5xl heading-gold">
+              The Professional Dashboard
             </h2>
-            <p className="text-[1.0625rem] leading-[1.6] text-zinc-400 md:max-w-2xl">
-              Jump directly into your workspace or view project analytics.
-              Manage annotations, track progress, and collaborate with your team.
+            <p className="text-xl leading-relaxed text-silver-gradient md:max-w-3xl body-premium">
+              Real-time collaboration tools designed for thousands of annotators.
+              Manage tasks, review quality, and track rewards with ease.
             </p>
           </div>
 
@@ -353,12 +348,13 @@ export default function Home() {
         </section>
 
         {/* ── Why EthioAI ─────────────────────────────────────── */}
-        <section className="space-y-8">
+        <section className="space-y-8 pb-10">
           <div className="space-y-3">
-            <h2 className="text-2xl font-semibold tracking-tight md:text-3xl heading-premium">
-              Why Choose <span className="text-gold-gradient">EthioAI?</span>
+            <p className="text-premium-label">The EthioAI Advantage</p>
+            <h2 className="text-4xl font-extrabold tracking-tight md:text-5xl heading-gold">
+              Why Choose EthioAI?
             </h2>
-            <p className="text-[1.0625rem] leading-[1.6] text-zinc-400 md:max-w-2xl">
+            <p className="text-xl leading-relaxed text-silver-gradient md:max-w-3xl body-premium">
               Purpose-built for Ethiopia&apos;s languages, infrastructure, and institutional
               needs — from national labs to fast-moving startups.
             </p>
@@ -397,10 +393,11 @@ export default function Home() {
             style={{ borderColor: "rgba(255,224,2,0.12)", background: "rgba(10,10,10,0.6)" }}
           >
             <div className="space-y-4">
-              <h2 className="text-2xl font-semibold tracking-tight text-slate-50 heading-premium">
-                Get in Touch
+              <p className="text-premium-label">Get Started</p>
+              <h2 className="text-4xl font-extrabold tracking-tight text-white heading-premium">
+                Ready to build the future?
               </h2>
-              <p className="text-xl leading-relaxed text-zinc-400 body-premium">
+              <p className="text-xl leading-relaxed text-silver-gradient body-premium">
                 Tell us about your data needs — from pilots to nationwide deployments,
                 we&apos;re here to help you build reliable AI systems.
               </p>

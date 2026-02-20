@@ -86,10 +86,11 @@ export default function AboutPage() {
           className="grid gap-12 md:grid-cols-[1.4fr_minmax(0,1fr)] items-center"
         >
           <div className="space-y-6">
-            <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl heading-premium">
+            <p className="text-premium-label">Our Philosophy</p>
+            <h1 className="text-hero-huge">
               Sovereign Data for a <span className="text-gold-gradient">Digital Ethiopia</span>
             </h1>
-            <p className="max-w-xl text-xl leading-relaxed text-zinc-400 body-premium">
+            <p className="max-w-2xl text-xl leading-relaxed text-silver-gradient body-premium">
               EthioAI is built to ensure that Ethiopia owns the data infrastructure behind its
               emerging AI ecosystem — from research labs to national institutions.
             </p>
@@ -123,10 +124,11 @@ export default function AboutPage() {
           className="grid gap-16 md:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)]"
         >
           <div>
-            <h2 className="text-3xl font-bold tracking-tight text-white md:text-4xl heading-premium">
-              Our <span className="text-gold-gradient">Journey</span>
+            <p className="text-premium-label">The Evolution</p>
+            <h2 className="text-4xl font-extrabold tracking-tight text-white md:text-5xl heading-gold">
+              Our Journey
             </h2>
-            <p className="mt-4 text-lg leading-relaxed text-zinc-400 md:max-w-xl body-premium">
+            <p className="mt-4 text-xl leading-relaxed text-silver-gradient md:max-w-2xl body-premium">
               From the first conversations at Nile Academy to national-scale deployments, EthioAI
               has been designed as a bridge between local expertise and world-class AI tooling.
             </p>
@@ -158,8 +160,8 @@ export default function AboutPage() {
                       <p className="text-xs font-bold uppercase tracking-[0.2em] text-amber-400">
                         {item.year}
                       </p>
-                      <h3 className="mt-2 text-lg font-bold text-white heading-premium">{item.title}</h3>
-                      <p className="mt-2 text-sm text-zinc-400 leading-relaxed font-medium">{item.description}</p>
+                      <h3 className="mt-2 text-xl font-bold text-white heading-premium">{item.title}</h3>
+                      <p className="mt-2 text-base text-silver-gradient leading-relaxed body-premium">{item.description}</p>
                     </motion.div>
                   </motion.div>
                 ))}
@@ -207,10 +209,11 @@ export default function AboutPage() {
           className="space-y-12"
         >
           <div className="space-y-4 text-center">
-            <h2 className="text-3xl font-bold tracking-tight text-white md:text-5xl heading-premium">
-              The <span className="text-gold-gradient">Team</span> Behind EthioAI
+            <p className="text-premium-label">The Workforce</p>
+            <h2 className="text-4xl font-extrabold tracking-tight text-white md:text-5xl heading-gold">
+              The Team Behind EthioAI
             </h2>
-            <p className="text-xl text-zinc-400 body-premium">
+            <p className="text-xl text-silver-gradient body-premium">
               A blend of researchers, engineers, and operators committed to Ethiopia&apos;s digital
               future.
             </p>
@@ -320,7 +323,7 @@ export default function AboutPage() {
             variants={fadeIn}
             className="mt-12 border-t border-white/5 pt-12 text-center"
           >
-            <p className="mx-auto max-w-4xl text-2xl font-bold text-white heading-premium leading-relaxed">
+            <p className="mx-auto max-w-4xl text-3xl font-extrabold text-white heading-premium leading-relaxed">
               &quot;Building the foundational data that allows Ethiopia to <span className="text-gold-gradient">own its AI future.</span>&quot;
             </p>
           </motion.div>

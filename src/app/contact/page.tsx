@@ -51,13 +51,13 @@ export default function ContactPage() {
         <motion.header
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-24 max-w-4xl mx-auto"
+          className="text-center mb-24 max-w-5xl mx-auto"
         >
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-gold-mid text-sm font-bold tracking-widest uppercase mb-4"
+            className="text-premium-label mb-4"
           >
             Get in Touch
           </motion.p>
@@ -65,7 +65,7 @@ export default function ContactPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="text-5xl md:text-6xl heading-premium font-bold mb-8 text-gold-gradient"
+            className="text-hero-huge mb-8 text-gold-gradient"
           >
             Connect With EthioAI
           </motion.h1>
@@ -73,7 +73,7 @@ export default function ContactPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
-            className="text-zinc-400 text-lg leading-relaxed"
+            className="text-silver-gradient text-xl leading-relaxed body-premium"
           >
             Whether you&apos;re an annotator, researcher, or institution, we&apos;re here to help you
             build the future of AI in Ethiopia.
@@ -103,11 +103,11 @@ export default function ContactPage() {
                   {item.icon}
                 </div>
 
-                <h3 className="text-xl heading-premium font-bold text-white mb-3">
+                <h3 className="text-2xl heading-premium font-bold text-white mb-3">
                   {item.title}
                 </h3>
 
-                <p className="text-zinc-400 text-sm leading-relaxed mb-4">
+                <p className="text-silver-gradient text-base leading-relaxed mb-4 body-premium">
                   {item.description}
                 </p>
 
@@ -138,10 +138,11 @@ export default function ContactPage() {
             className="bg-zinc-900/50 border border-zinc-800 hover:border-gold-mid/30 rounded-3xl p-8 lg:p-12 transition-all duration-500"
           >
             <div className="relative z-10">
-              <h2 className="text-3xl heading-premium font-bold text-white mb-4">
+              <p className="text-premium-label mb-2">Direct Message</p>
+              <h2 className="text-4xl heading-premium font-extrabold text-white mb-4">
                 Send us a message
               </h2>
-              <p className="text-zinc-400 text-base leading-relaxed mb-8">
+              <p className="text-silver-gradient text-lg leading-relaxed mb-8 body-premium">
                 Share your needs and we&apos;ll connect you with the right team.
                 We typically respond within 24 business hours.
               </p>
@@ -222,10 +223,11 @@ export default function ContactPage() {
             className="bg-zinc-900/50 border border-zinc-800 hover:border-gold-mid/30 rounded-3xl overflow-hidden transition-all duration-500"
           >
             <div className="p-6 border-b border-zinc-800">
-              <h3 className="text-xl heading-premium font-bold text-white mb-2">
+              <p className="text-premium-label text-[10px] mb-1">Our Location</p>
+              <h3 className="text-2xl heading-premium font-bold text-white mb-1">
                 Nile Academy Office
               </h3>
-              <p className="text-zinc-400 text-sm">
+              <p className="text-silver-gradient text-sm body-premium">
                 Addis Ababa, Ethiopia
               </p>
             </div>
