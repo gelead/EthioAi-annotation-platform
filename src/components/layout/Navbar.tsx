@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useRef } from "react";
-import { motion, useSpring, useMotionValue } from "framer-motion";
+import { motion, useSpring, useMotionValue, useScroll, useTransform } from "framer-motion";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -55,6 +55,22 @@ const Magnetic = ({ children }: { children: React.ReactNode }) => {
 export function Navbar() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const { scrollY } = useScroll();
+
+  // Blur-Slide: Navbar transitions on scroll
+  const height = useTransform(scrollY, [0, 50], ["5rem", "4rem"]);
+  const backgroundColor = useTransform(
+    scrollY,
+    [0, 50],
+    ["rgba(0, 0, 0, 0.4)", "rgba(0, 0, 0, 0.8)"]
+  );
+  const backdropBlur = useTransform(scrollY, [0, 50], ["12px", "24px"]);
+  const borderOpacity = useTransform(scrollY, [0, 50], [0.05, 0.15]);
+  const boxShadow = useTransform(
+    scrollY,
+    [0, 50],
+    ["0 0 0 0 rgba(0,0,0,0)", "0 10px 30px -10px rgba(0,0,0,0.5)"]
+  );
 
   if (pathname === "/login" || pathname === "/signup") {
     return null;
@@ -62,7 +78,14 @@ export function Navbar() {
 
   return (
     <motion.header
-      className="sticky top-0 z-40 border-b border-white/5 bg-black/40 backdrop-blur-md h-20"
+      className="sticky top-0 z-40 border-b"
+      style={{
+        height,
+        backgroundColor,
+        backdropFilter: `blur(${backdropBlur})`,
+        borderBottomColor: `rgba(255, 255, 255, ${borderOpacity})`,
+        boxShadow,
+      }}
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
@@ -108,7 +131,12 @@ export function Navbar() {
                 href="/login"
                 className="px-6 py-2.5 text-base font-semibold text-white border border-white/40 rounded-full hover:bg-white/10 transition-all duration-300 backdrop-blur-sm"
               >
-                Login
+                <motion.span
+                  whileHover={{ scale: 1.02 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                >
+                  Login
+                </motion.span>
               </Link>
             </Magnetic>
 
@@ -117,7 +145,12 @@ export function Navbar() {
                 href="/signup"
                 className="px-6 py-2.5 text-base font-bold text-black bg-gold-gradient rounded-full shadow-[0_4px_20px_-5px_rgba(178,130,40,0.5)] hover:shadow-[0_8px_30px_-5px_rgba(255,224,2,0.6)] transition-all duration-300"
               >
-                Sign Up
+                <motion.span
+                  whileHover={{ scale: 1.02 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                >
+                  Sign Up
+                </motion.span>
               </Link>
             </Magnetic>
           </div>

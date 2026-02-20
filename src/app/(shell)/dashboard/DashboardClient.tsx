@@ -124,8 +124,8 @@ export function DashboardClient({ data }: DashboardClientProps) {
               <motion.div
                 key={stat.label}
                 variants={fadeInUp}
-                className="rounded-2xl border border-white/5 bg-white/[0.01] p-6 hover:bg-white/[0.02] transition-colors"
-                whileHover={{ y: -2 }}
+                className="group rounded-2xl border border-white/5 bg-white/[0.01] p-6 transition-all duration-500 hover:border-gold-mid/30 hover:bg-white/[0.03]"
+                whileHover={{ y: -4 }}
               >
                 <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">{stat.label}</p>
                 <div className="flex items-baseline gap-2 mt-4">
@@ -231,12 +231,8 @@ export function DashboardClient({ data }: DashboardClientProps) {
                 <motion.div
                   key={project.name}
                   variants={fadeInUp}
-                  whileHover={{
-                    borderColor: "rgba(251, 191, 36, 0.3)",
-                    backgroundColor: "rgba(0, 0, 0, 0.8)",
-                  }}
-                  transition={{ duration: 0.2 }}
-                  className="flex items-center gap-4 rounded-xl border border-white/10 bg-black/60 p-4"
+                  className="flex items-center gap-4 rounded-xl border border-white/10 bg-black/60 p-4 transition-all duration-500 hover:border-gold-mid/30"
+                  whileHover={{ y: -4 }}
                 >
                   <div className="relative h-14 w-14 shrink-0">
                     <svg viewBox="0 0 36 36" className="h-full w-full -rotate-90">
@@ -308,7 +304,7 @@ export function DashboardClient({ data }: DashboardClientProps) {
                       key={task.id}
                       initial={{ opacity: 0, y: 5 }}
                       animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.2 + idx * 0.05 }}
+                      transition={{ duration: 0.5, delay: 0.2 + idx * 0.05, ease: [0.16, 1, 0.3, 1] as const }}
                       className="group border-b border-white/5 last:border-none hover:bg-white/[0.02] transition-colors"
                     >
                       <td className="px-6 py-4 font-mono text-[11px] text-zinc-500">

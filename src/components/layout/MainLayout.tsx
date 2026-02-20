@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ReactNode } from "react";
 import { SyncStatus } from "@/components/ui/SyncStatus";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface MainLayoutProps {
   children: ReactNode;
@@ -124,7 +125,21 @@ export function MainLayout({ children }: MainLayoutProps) {
         </header>
 
         <main className="flex-1 overflow-y-auto px-8 py-8 custom-scrollbar">
-          <div className="mx-auto flex min-h-full max-w-7xl flex-col pb-20">{children}</div>
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.div
+              key={pathname}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              transition={{
+                duration: 0.5,
+                ease: [0.16, 1, 0.3, 1],
+              }}
+              className="mx-auto flex min-h-full max-w-7xl flex-col pb-20"
+            >
+              {children}
+            </motion.div>
+          </AnimatePresence>
         </main>
       </div>
     </div>

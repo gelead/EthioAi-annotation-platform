@@ -6,26 +6,39 @@ import {
 } from "framer-motion";
 
 /* ─── Animation Variants ─────────────────────────────────────── */
-const EASE_OUT: [number, number, number, number] = [0.25, 0.46, 0.45, 0.94];
 
 const containerVariants = {
   hidden: {},
   visible: {
     transition: {
-      staggerChildren: 0.15,
+      staggerChildren: 0.1,
       delayChildren: 0.2,
     },
   },
 };
 
 const slideUp = {
-  hidden: { opacity: 0, y: 48 },
+  hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.72,
-      ease: EASE_OUT,
+      type: "spring" as const,
+      stiffness: 100,
+      damping: 20,
+    },
+  },
+};
+
+const revealOnScroll = {
+  hidden: { opacity: 0, scale: 0.98, y: 20 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: [0.16, 1, 0.3, 1] as const,
     },
   },
 };
@@ -39,10 +52,9 @@ export default function Home() {
       {/* Animated grid overlay */}
       <div className="network-grid pointer-events-none absolute inset-0" aria-hidden="true" />
 
-      <div className="relative z-10 flex min-h-[calc(100vh-6rem)] flex-col gap-48 pt-8 pb-32 mx-auto max-w-[1440px] px-8 md:px-12 md:pt-12 md:pb-64">
+      <div className="relative z-10 flex min-h-[calc(100vh-6rem)] flex-col mx-auto max-w-[1440px] px-8 md:px-12">
 
-        {/* ── Hero ─────────────────────────────────────────────── */}
-        <section className="grid items-center gap-12 lg:grid-cols-[1.2fr_1fr]">
+        <section className="grid items-center gap-12 lg:grid-cols-[1.2fr_1fr] py-20 md:py-32">
 
           {/* Left: staggered text entrance */}
           <motion.div
@@ -116,7 +128,13 @@ export default function Home() {
         </section>
 
         {/* ── Services ────────────────────────────────────────── */}
-        <section className="space-y-8">
+        <motion.section
+          className="space-y-12 py-32"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={revealOnScroll}
+        >
           <div className="space-y-3">
             <p className="text-premium-label">Scalable Solutions</p>
             <h2 className="text-4xl font-extrabold tracking-tight md:text-5xl heading-gold">
@@ -175,10 +193,16 @@ export default function Home() {
               </motion.div>
             ))}
           </div>
-        </section>
+        </motion.section>
 
         {/* ── Dashboard Quick Access ──────────────────────────── */}
-        <section className="space-y-8">
+        <motion.section
+          className="space-y-12 py-32"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={revealOnScroll}
+        >
           <div className="space-y-3">
             <p className="text-premium-label">Productive Workflows</p>
             <h2 className="text-4xl font-extrabold tracking-tight md:text-5xl heading-gold">
@@ -231,10 +255,16 @@ export default function Home() {
               </motion.a>
             ))}
           </div>
-        </section>
+        </motion.section>
 
         {/* ── Why EthioAI ─────────────────────────────────────── */}
-        <section className="space-y-8 pb-10">
+        <motion.section
+          className="space-y-12 py-32"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={revealOnScroll}
+        >
           <div className="space-y-3">
             <p className="text-premium-label">The EthioAI Advantage</p>
             <h2 className="text-4xl font-extrabold tracking-tight md:text-5xl heading-gold">
@@ -270,10 +300,16 @@ export default function Home() {
               </div>
             ))}
           </div>
-        </section>
+        </motion.section>
 
         {/* ── The Verification Loop (Workflow) ───────────────── */}
-        <section className="relative overflow-hidden py-16">
+        <motion.section
+          className="relative overflow-hidden py-32"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={revealOnScroll}
+        >
           <div className="grid gap-16 lg:grid-cols-[1fr_1.2fr] items-center">
             <div className="space-y-6">
               <p className="text-premium-label">The Quality Standard</p>
@@ -323,10 +359,16 @@ export default function Home() {
               </div>
             </div>
           </div>
-        </section>
+        </motion.section>
 
         {/* ── Industrial Impact (Metrics) ───────────────────── */}
-        <section className="space-y-12 py-16">
+        <motion.section
+          className="space-y-12 py-32"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={revealOnScroll}
+        >
           <div className="text-center space-y-3">
             <p className="text-premium-label">Industrial Impact</p>
             <h2 className="text-3xl font-extrabold md:text-5xl heading-gold mx-auto max-w-2xl leading-tight">
@@ -348,10 +390,16 @@ export default function Home() {
               </div>
             ))}
           </div>
-        </section>
+        </motion.section>
 
         {/* ── Contact Section ─────────────────────────────────── */}
-        <section className="space-y-10">
+        <motion.section
+          className="space-y-10 py-32"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={revealOnScroll}
+        >
           <div
             className="grid gap-8 border p-6 backdrop-blur md:grid-cols-2 md:p-8"
             style={{ borderColor: "rgba(255,224,2,0.12)", background: "rgba(10,10,10,0.6)" }}
@@ -411,7 +459,7 @@ export default function Home() {
               />
             </div>
           </div>
-        </section>
+        </motion.section>
       </div>
     </div>
   );
