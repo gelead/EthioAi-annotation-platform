@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Urbanist, Geist_Mono } from "next/font/google";
+import { Inter, Playfair_Display, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
@@ -9,10 +9,9 @@ const inter = Inter({
   subsets: ["latin"],
 });
 
-const urbanist = Urbanist({
-  variable: "--font-urbanist",
+const playfair = Playfair_Display({
+  variable: "--font-playfair",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
 });
 
 const geistMono = Geist_Mono({
@@ -33,20 +32,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Urbanist:wght@400;500;600;700&display=swap"
-          rel="stylesheet"
-        />
-      </head>
       <body
-        className={`${inter.variable} ${urbanist.variable} ${geistMono.variable} antialiased bg-ethio-onyx text-white`}
+        className={`${inter.variable} ${playfair.variable} ${geistMono.variable} antialiased bg-ethio-onyx text-white`}
       >
         <div className="min-h-screen bg-ethio-onyx">
           <Navbar />
-          {children}
+          <main>{children}</main>
           <Footer />
         </div>
       </body>

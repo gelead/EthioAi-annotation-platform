@@ -12,7 +12,8 @@
   --gold-mid: #FFE002;
   --gold-gradient: linear-gradient(90deg, #B28228 0%, #FFE002 50%, #B28228 100%);
   --gold-gradient-v: linear-gradient(135deg, #B28228 0%, #FFE002 50%, #B28228 100%);
-  --gold-glow: 0 0 20px rgba(255, 224, 2, 0.55), 0 0 60px rgba(178, 130, 40, 0.35);
+  --gold-glow: 0 0 20px rgba(255, 224, 2, 0.55),
+    0 0 60px rgba(178, 130, 40, 0.35);
 
   /* Layout - Premium Safe Area */
   --screen-max: 1440px;
@@ -32,9 +33,9 @@
   --color-ethio-border: rgba(255, 255, 255, 0.1);
   --color-gold-start: #B28228;
   --color-gold-mid: #FFE002;
-  
-  /* Modern Modest Typography */
-  --font-heading: var(--font-urbanist), "Urbanist", system-ui, sans-serif;
+
+  /* Modern Premium Typography */
+  --font-heading: var(--font-playfair), "Playfair Display", serif;
   --font-body: var(--font-inter), "Inter", system-ui, -apple-system, sans-serif;
 }
 
@@ -53,7 +54,8 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-body);
-  font-size: 1.0625rem; /* 17px - Modern Modest size */
+  font-size: 1.125rem;
+  /* 18px - Premium size */
   line-height: 1.6;
   max-width: var(--screen-max);
   margin-inline: auto;
@@ -127,32 +129,33 @@ body::after {
   animation: shimmer 4s linear infinite;
 }
 
-/* Modern Modest heading styles - Urbanist Semi-bold */
+/* Modern Premium heading styles - Playfair Display */
 .heading-premium {
   font-family: var(--font-heading);
-  font-weight: 600; /* Semi-bold for modest look */
-  letter-spacing: -0.02em;
-  line-height: 1.3;
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  line-height: 1.2;
 }
 
 .heading-gold {
   font-family: var(--font-heading);
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  line-height: 1.3;
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  line-height: 1.2;
   background: linear-gradient(90deg, #B28228 0%, #FFE002 50%, #B28228 100%);
-  background-size: 200% auto;
+  background-size: 300% auto;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
-  animation: shimmer 4s linear infinite;
+  animation: shimmer 5s linear infinite;
 }
 
-/* Modern Modest Body text styling - 17px with 1.6 line-height */
+/* Modern Premium Body text styling - 18px with 1.6 line-height */
 .body-premium {
   font-family: var(--font-body);
-  font-size: 1.0625rem; /* 17px */
+  font-size: 1.125rem;
+  /* 18px */
   line-height: 1.6;
   color: var(--foreground);
 }

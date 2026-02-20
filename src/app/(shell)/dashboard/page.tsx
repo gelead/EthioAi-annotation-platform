@@ -5,11 +5,11 @@ import { DashboardClient } from "./DashboardClient";
 export default async function DashboardPage() {
   // For now, using a hardcoded test user email - in production this would come from auth session
   const testUserEmail = "test@ethioai.com";
-  
+
   // Fetch user data
   const userResult = await getUserByEmail(testUserEmail);
   const user = userResult.success ? userResult.user : null;
-  
+
   if (!user) {
     return (
       <div className="flex h-full items-center justify-center text-white">
@@ -17,14 +17,14 @@ export default async function DashboardPage() {
       </div>
     );
   }
-  
+
   // Fetch dashboard stats and tasks in parallel
   const [statsResult, tasksResult, activityResult] = await Promise.all([
     getDashboardStats(user.id),
     getTasksByUser(user.id),
     getRecentActivity(user.id, 5),
   ]);
-  
+
   const stats = statsResult?.success ? statsResult.stats : null;
   const tasks = tasksResult?.success ? tasksResult.tasks : [];
   const recentTasks = activityResult?.success ? activityResult.tasks : [];
@@ -53,7 +53,7 @@ export default async function DashboardPage() {
       id: task.id.slice(-4).toUpperCase(),
       project: task.title,
       status: task.status === "Completed" ? "Verified" : task.status === "Pending" ? "Pending Review" : "In Progress",
-      minutes: Math.floor(Math.random() * 10) + 3,
+      minutes: 5, // Using a fixed value for demo activity
     })),
   };
 

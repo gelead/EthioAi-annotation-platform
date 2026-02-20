@@ -2,11 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { 
-  Mail, 
-  Phone, 
-  MapPin, 
-  Clock,
+import {
   Send
 } from "lucide-react";
 
@@ -54,7 +50,7 @@ export default function ContactPage() {
 
       <div className="container-ethio relative z-10 pt-24 pb-32">
         {/* Header */}
-        <motion.header 
+        <motion.header
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-24 max-w-4xl mx-auto"
@@ -81,13 +77,13 @@ export default function ContactPage() {
             transition={{ delay: 0.3 }}
             className="text-zinc-400 text-lg leading-relaxed"
           >
-            Whether you're an annotator, researcher, or institution, we're here to help you 
+            Whether you&apos;re an annotator, researcher, or institution, we&apos;re here to help you
             build the future of AI in Ethiopia.
           </motion.p>
         </motion.header>
 
         {/* Contact Cards */}
-        <motion.section 
+        <motion.section
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
@@ -103,21 +99,21 @@ export default function ContactPage() {
               className="group relative bg-zinc-900/50 border border-zinc-800 hover:border-gold-mid/50 rounded-3xl p-8 transition-all duration-500"
             >
               <div className="absolute inset-0 bg-gradient-to-br from-gold-start/5 to-transparent pointer-events-none rounded-3xl" />
-              
+
               <div className="relative z-10">
                 <div className="w-14 h-14 rounded-2xl bg-zinc-800 border border-gold-mid/20 flex items-center justify-center mb-6 text-gold-mid">
                   {item.icon}
                 </div>
-                
+
                 <h3 className="text-xl heading-premium font-bold text-white mb-3">
                   {item.title}
                 </h3>
-                
+
                 <p className="text-zinc-400 text-sm leading-relaxed mb-4">
                   {item.description}
                 </p>
-                
-                <a 
+
+                <a
                   href={`mailto:${item.email}`}
                   className="inline-flex items-center gap-2 text-gold-mid text-sm font-medium hover:text-gold-mid/80 transition-colors gold-underline-hover"
                 >
@@ -132,7 +128,7 @@ export default function ContactPage() {
         </motion.section>
 
         {/* Contact Form and Map */}
-        <motion.section 
+        <motion.section
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.7 }}
@@ -148,7 +144,7 @@ export default function ContactPage() {
                 Send us a message
               </h2>
               <p className="text-zinc-400 text-base leading-relaxed mb-8">
-                Share your needs and we'll connect you with the right team. 
+                Share your needs and we&apos;ll connect you with the right team.
                 We typically respond within 24 business hours.
               </p>
 
@@ -235,7 +231,7 @@ export default function ContactPage() {
                 Addis Ababa, Ethiopia
               </p>
             </div>
-            
+
             <div className="h-80 bg-gradient-to-br from-gold-start/10 to-transparent relative">
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="text-center">

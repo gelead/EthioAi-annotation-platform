@@ -33,52 +33,6 @@ const slideUp = {
   },
 };
 
-/* ─── Gold Outline Button ─────────────────────────────────────── */
-function GoldOutlineButton({ children }: { children: React.ReactNode }) {
-  const [hovered, setHovered] = React.useState(false);
-  return (
-    <motion.button
-      type="button"
-      onHoverStart={() => setHovered(true)}
-      onHoverEnd={() => setHovered(false)}
-      whileHover={{ boxShadow: "0 0 20px rgba(255,224,2,0.6)" }}
-      whileTap={{ scale: 0.98 }}
-      transition={{ duration: 0.2 }}
-      style={{
-        position: "relative",
-        overflow: "hidden",
-        display: "inline-flex",
-        alignItems: "center",
-        justifyContent: "center",
-        padding: "0.75rem 2rem",
-        fontSize: "0.875rem",
-        fontWeight: 600,
-        letterSpacing: "0.04em",
-        color: hovered ? "#0a0a0a" : "#ffe002",
-        background: "transparent",
-        border: "2px solid #ffe002",
-        cursor: "pointer",
-        transition: "color 0.35s ease",
-      }}
-    >
-      {/* Fill layer */}
-      <motion.span
-        aria-hidden
-        initial={{ x: "-100%" }}
-        animate={{ x: hovered ? "0%" : "-100%" }}
-        transition={{ duration: 0.38, ease: [0.25, 0.46, 0.45, 0.94] as [number, number, number, number] }}
-        style={{
-          position: "absolute",
-          inset: 0,
-          background: "linear-gradient(90deg, #b28228 0%, #ffe002 50%, #b28228 100%)",
-          zIndex: 0,
-        }}
-      />
-      <span style={{ position: "relative", zIndex: 1 }}>{children}</span>
-    </motion.button>
-  );
-}
-
 /* ─── Magnetic Image Card ─────────────────────────────────────── */
 
 function MagneticCard() {
@@ -194,11 +148,11 @@ function MagneticCard() {
 /* ─── Page ──────────────────────────────────────────────────── */
 export default function Home() {
   return (
-    <div className="relative overflow-x-hidden bg-[#050505] text-white">
+    <div className="relative bg-[#050505] text-white">
       {/* Animated grid overlay */}
       <div className="network-grid pointer-events-none absolute inset-0" aria-hidden="true" />
 
-      <main className="container-ethio relative z-10 flex min-h-[calc(100vh-3.5rem)] flex-col gap-28 py-14 md:py-20">
+      <div className="relative z-10 flex min-h-[calc(100vh-6rem)] flex-col gap-32 py-20 mx-auto max-w-[1440px] px-8 md:px-12 md:py-32">
 
         {/* ── Hero ─────────────────────────────────────────────── */}
         <section className="grid items-center gap-12 lg:grid-cols-[1.2fr_1fr]">
@@ -219,10 +173,10 @@ export default function Home() {
               Welcome to EthioAI
             </motion.p>
 
-            {/* H1 with Urbanist font */}
+            {/* H1 with Playfair Display */}
             <motion.h1
               variants={slideUp}
-              className="text-3xl font-semibold leading-[1.2] tracking-tight sm:text-4xl md:text-5xl heading-premium"
+              className="text-4xl font-bold leading-[1.1] tracking-tight sm:text-5xl md:text-7xl heading-premium"
             >
               <span className="text-gold-gradient">
                 Bridging the Gap:
@@ -231,15 +185,15 @@ export default function Home() {
               <span className="text-white">
                 Powering AI with{" "}
               </span>
-              <span className="text-gold-gradient">
+              <span className="text-gold-gradient text-[1.1em]">
                 Local Context.
               </span>
             </motion.h1>
 
-            {/* Body copy - Modern Modest 17px */}
+            {/* Body copy - Premium 18px */}
             <motion.p
               variants={slideUp}
-              className="max-w-xl text-[1.0625rem] leading-[1.6] text-zinc-400"
+              className="max-w-2xl text-xl leading-relaxed text-zinc-400 body-premium"
             >
               EthioAI makes data labeling effortless — helping businesses and national
               institutions create accurate AI models faster with expert-curated image,
@@ -251,29 +205,17 @@ export default function Home() {
               {/* Primary — solid gold gradient */}
               <motion.button
                 type="button"
-                whileHover={{ scale: 1.05, boxShadow: "0 0 28px rgba(255,224,2,0.9), 0 0 70px rgba(178,130,40,0.55)" }}
+                whileHover={{ scale: 1.05, boxShadow: "0 0 40px rgba(255,224,2,0.9), 0 0 100px rgba(178,130,40,0.4)" }}
                 whileTap={{ scale: 0.98 }}
-                transition={{ duration: 0.2 }}
-                style={{
-                  background: "linear-gradient(90deg, #b28228 0%, #ffe002 50%, #b28228 100%)",
-                  backgroundSize: "200% auto",
-                  color: "#0a0a0a",
-                  fontWeight: 600,
-                  fontSize: "0.875rem",
-                  letterSpacing: "0.04em",
-                  padding: "0.75rem 2rem",
-                  border: "none",
-                  cursor: "pointer",
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: "0.5rem",
-                }}
+                className="btn-gold-primary rounded-full px-10 py-4 shadow-xl"
               >
                 Get Started →
               </motion.button>
 
               {/* Secondary — transparent with gold border that fills */}
-              <GoldOutlineButton>Learn More</GoldOutlineButton>
+              <div className="flex px-10 py-4 items-center justify-center border-2 border-gold-mid text-gold-mid rounded-full font-bold hover:bg-gold-mid hover:text-black transition-all cursor-pointer">
+                Learn More
+              </div>
             </motion.div>
 
             {/* Amharic tagline */}
@@ -362,28 +304,28 @@ export default function Home() {
               Access Your <span className="text-gold-gradient">Dashboard</span>
             </h2>
             <p className="text-[1.0625rem] leading-[1.6] text-zinc-400 md:max-w-2xl">
-              Jump directly into your workspace or view project analytics. 
+              Jump directly into your workspace or view project analytics.
               Manage annotations, track progress, and collaborate with your team.
             </p>
           </div>
 
           <div className="grid gap-4 md:grid-cols-3">
             {[
-              { 
-                href: "/dashboard", 
-                title: "Dashboard", 
+              {
+                href: "/dashboard",
+                title: "Dashboard",
                 desc: "View projects and analytics",
                 icon: "📊"
               },
-              { 
-                href: "/workspace", 
-                title: "Workspace", 
+              {
+                href: "/workspace",
+                title: "Workspace",
                 desc: "Start annotating data",
                 icon: "🎯"
               },
-              { 
-                href: "/projects", 
-                title: "Projects", 
+              {
+                href: "/projects",
+                title: "Projects",
                 desc: "Manage your datasets",
                 icon: "📁"
               },
@@ -458,7 +400,7 @@ export default function Home() {
               <h2 className="text-2xl font-semibold tracking-tight text-slate-50 heading-premium">
                 Get in Touch
               </h2>
-              <p className="text-[1.0625rem] leading-[1.6] text-zinc-400">
+              <p className="text-xl leading-relaxed text-zinc-400 body-premium">
                 Tell us about your data needs — from pilots to nationwide deployments,
                 we&apos;re here to help you build reliable AI systems.
               </p>
@@ -509,7 +451,7 @@ export default function Home() {
             </div>
           </div>
         </section>
-      </main>
+      </div>
     </div>
   );
 }

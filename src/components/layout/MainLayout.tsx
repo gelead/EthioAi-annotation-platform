@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ReactNode } from "react";
@@ -11,8 +10,8 @@ interface MainLayoutProps {
 }
 
 const navItems = [
-  { 
-    href: "/dashboard", 
+  {
+    href: "/dashboard",
     label: "Overview",
     icon: (
       <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -20,8 +19,8 @@ const navItems = [
       </svg>
     )
   },
-  { 
-    href: "/projects", 
+  {
+    href: "/projects",
     label: "My Tasks",
     icon: (
       <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -29,8 +28,8 @@ const navItems = [
       </svg>
     )
   },
-  { 
-    href: "/workspace", 
+  {
+    href: "/workspace",
     label: "Workspace",
     icon: (
       <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -38,8 +37,8 @@ const navItems = [
       </svg>
     )
   },
-  { 
-    href: "/admin", 
+  {
+    href: "/admin",
     label: "Profile",
     icon: (
       <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -74,11 +73,10 @@ export function MainLayout({ children }: MainLayoutProps) {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-all duration-200 ${
-                  active
+                className={`flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-all duration-200 ${active
                     ? "bg-white/5 text-amber-400 border-l-2 border-amber-400"
                     : "text-zinc-400 hover:bg-white/5 hover:text-white border-l-2 border-transparent"
-                }`}
+                  }`}
               >
                 <span className={active ? "text-amber-400" : "text-zinc-500 group-hover:text-zinc-400"}>
                   {item.icon}

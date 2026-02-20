@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { useState, useRef } from "react";
+import { motion, useSpring, useMotionValue } from "framer-motion";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -12,36 +12,42 @@ const navLinks = [
   { href: "/contact", label: "Contact" },
 ];
 
-// Magnetic button component
-const MagneticButton = ({ children, className, ...props }: any) => {
-  return (
-    <motion.button
-      className={className}
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.95 }}
-      transition={{ type: "spring", stiffness: 400, damping: 17 }}
-      {...props}
-    >
-      {children}
-    </motion.button>
-  );
-};
+/**
+ * Magnetic Component for smooth "pull" effect
+ */
+const Magnetic = ({ children }: { children: React.ReactNode }) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
 
-// Magnetic link component
-const MagneticLink = ({ href, children, className, isActive, ...props }: any) => {
+  const springConfig = { damping: 20, stiffness: 150, mass: 0.5 };
+  const springX = useSpring(x, springConfig);
+  const springY = useSpring(y, springConfig);
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    const { clientX, clientY } = e;
+    if (ref.current) {
+      const { height, width, left, top } = ref.current.getBoundingClientRect();
+      const middleX = clientX - (left + width / 2);
+      const middleY = clientY - (top + height / 2);
+      x.set(middleX * 0.35);
+      y.set(middleY * 0.35);
+    }
+  };
+
+  const handleMouseLeave = () => {
+    x.set(0);
+    y.set(0);
+  };
+
   return (
     <motion.div
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.95 }}
-      transition={{ type: "spring", stiffness: 400, damping: 17 }}
+      ref={ref}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{ x: springX, y: springY }}
     >
-      <Link
-        href={href}
-        className={`${className} ${isActive ? 'nav-link-active' : 'gold-underline-hover'}`}
-        {...props}
-      >
-        {children}
-      </Link>
+      {children}
     </motion.div>
   );
 };
@@ -49,117 +55,119 @@ const MagneticLink = ({ href, children, className, isActive, ...props }: any) =>
 export function Navbar() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   if (pathname === "/login" || pathname === "/signup") {
     return null;
   }
 
   return (
-    <motion.header 
-      className="sticky top-0 z-40 border-b border-white/10 bg-black/80 h-20"
-      initial={{ backdropFilter: "blur(8px)" }}
-      animate={{ 
-        backdropFilter: scrolled ? "blur(16px)" : "blur(8px)",
-        backgroundColor: scrolled ? "rgba(0,0,0,0.9)" : "rgba(0,0,0,0.8)"
-      }}
-      transition={{ duration: 0.3 }}
+    <motion.header
+      className="sticky top-0 z-40 border-b border-white/5 bg-black/40 backdrop-blur-md h-24"
+      initial={{ y: -100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
     >
       <div className="mx-auto flex max-w-[1440px] items-center justify-between gap-4 px-8 h-full">
-        <Link href="/" className="flex items-center gap-2">
-          <span className="text-lg font-semibold tracking-tight text-white heading-premium">EthioAI</span>
+        {/* Logo */}
+        <Link href="/" className="group flex items-center gap-2">
+          <span className="text-xl font-bold tracking-tight text-white heading-premium group-hover:text-gold-mid transition-colors">
+            EthioAI
+          </span>
         </Link>
 
-        <nav className="hidden items-center gap-8 text-[15px] font-medium text-white md:flex">
-          {navLinks.map((link) => (
-            <MagneticLink
-              key={link.href}
-              href={link.href}
-              isActive={pathname === link.href}
-              className="transition hover:text-zinc-400"
-            >
-              {link.label}
-            </MagneticLink>
-          ))}
+        {/* Navigation Links */}
+        <nav className="hidden items-center gap-10 md:flex">
+          {navLinks.map((link) => {
+            const isActive = pathname === link.href;
+            return (
+              <Magnetic key={link.href}>
+                <Link
+                  href={link.href}
+                  className={`relative text-base font-medium tracking-wide transition-colors py-2 ${isActive ? "text-white" : "text-zinc-400 hover:text-white"
+                    }`}
+                >
+                  {link.label}
+                  {isActive && (
+                    <motion.div
+                      layoutId="nav-underline"
+                      className="absolute bottom-0 left-0 h-[2px] w-full bg-gold-gradient"
+                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                    />
+                  )}
+                </Link>
+              </Magnetic>
+            );
+          })}
         </nav>
 
-        <div className="flex items-center gap-3">
-          {/* Login - Ghost button with thin white border */}
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            transition={{ type: "spring", stiffness: 400, damping: 17 }}
-          >
-            <Link
-              href="/login"
-              className="px-4 py-2 text-[15px] font-medium text-white border border-white/30 rounded-md hover:bg-white/10 transition-colors block"
-            >
-              Login
-            </Link>
-          </motion.div>
-          
-          {/* Sign Up - Solid golden with scale animation */}
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            transition={{ type: "spring", stiffness: 400, damping: 17 }}
-          >
-            <Link
-              href="/signup"
-              className="px-4 py-2 text-[15px] font-medium text-black bg-gold-gradient rounded-md transition-transform block"
-            >
-              Sign Up
-            </Link>
-          </motion.div>
-          
+        {/* Actions */}
+        <div className="flex items-center gap-6">
+          <div className="hidden items-center gap-4 sm:flex">
+            <Magnetic>
+              <Link
+                href="/login"
+                className="px-6 py-2.5 text-base font-semibold text-white border border-white/40 rounded-full hover:bg-white/10 transition-all duration-300 backdrop-blur-sm"
+              >
+                Login
+              </Link>
+            </Magnetic>
+
+            <Magnetic>
+              <Link
+                href="/signup"
+                className="px-6 py-2.5 text-base font-bold text-black bg-gold-gradient rounded-full shadow-[0_4px_20px_-5px_rgba(178,130,40,0.5)] hover:shadow-[0_8px_30px_-5px_rgba(255,224,2,0.6)] transition-all duration-300"
+              >
+                Sign Up
+              </Link>
+            </Magnetic>
+          </div>
+
+          {/* User Profile / Dashboard Access */}
           <div className="relative">
-            <MagneticButton
-              type="button"
-              onClick={() => setOpen((prev) => !prev)}
-              className="flex h-8 w-8 items-center justify-center rounded-full border border-white/20 bg-zinc-900 text-xs font-medium text-white"
-            >
-              U
-            </MagneticButton>
+            <Magnetic>
+              <button
+                type="button"
+                onClick={() => setOpen((prev) => !prev)}
+                className="flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-zinc-900/50 text-sm font-semibold text-white hover:border-gold-mid/50 transition-colors"
+              >
+                U
+              </button>
+            </Magnetic>
             {open && (
-              <div className="absolute right-0 mt-2 w-48 rounded-md border border-white/10 bg-zinc-900/95 p-1.5 text-sm text-white shadow-lg">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9, y: 10 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                className="absolute right-0 mt-3 w-56 overflow-hidden rounded-2xl border border-white/10 bg-black/90 backdrop-blur-xl p-2 text-sm text-white shadow-2xl ring-1 ring-white/5"
+              >
                 <Link
                   href="/dashboard"
                   onClick={() => setOpen(false)}
-                  className="flex w-full items-center gap-2 rounded-sm px-3 py-2 text-left hover:bg-zinc-800 transition-colors"
+                  className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-left hover:bg-zinc-800/50 transition-colors"
                 >
-                  <span>📊</span>
-                  <span>Dashboard</span>
+                  <span className="text-amber-400">📊</span>
+                  <span className="font-medium">Dashboard</span>
                 </Link>
                 <Link
                   href="/profile"
                   onClick={() => setOpen(false)}
-                  className="flex w-full items-center gap-2 rounded-sm px-3 py-2 text-left hover:bg-zinc-800 transition-colors"
+                  className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-left hover:bg-zinc-800/50 transition-colors"
                 >
-                  <span>⚙️</span>
-                  <span>Edit Profile</span>
+                  <span className="text-amber-400">⚙️</span>
+                  <span className="font-medium">Edit Profile</span>
                 </Link>
-                <div className="my-1 h-px bg-white/10" />
+                <div className="my-2 h-px bg-white/5 mx-2" />
                 <button
                   type="button"
                   onClick={() => {
                     setOpen(false);
-                    // Handle logout logic here
                     console.log("Logging out...");
                   }}
-                  className="flex w-full items-center gap-2 rounded-sm px-3 py-2 text-left text-red-400 hover:bg-red-950/40 transition-colors"
+                  className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-left text-red-400 hover:bg-red-950/20 transition-colors"
                 >
                   <span>🚪</span>
-                  <span>Log Out</span>
+                  <span className="font-medium">Log Out</span>
                 </button>
-              </div>
+              </motion.div>
             )}
           </div>
         </div>
