@@ -1,3 +1,41 @@
+"use client";
+
+import { motion } from "framer-motion";
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.1,
+    },
+  },
+};
+
+const fadeInUp = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: [0.25, 0.1, 0.25, 1],
+    },
+  },
+};
+
+const fadeIn = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      duration: 0.6,
+      ease: "easeOut",
+    },
+  },
+};
+
 export default function AboutPage() {
   const timeline = [
     {
@@ -35,101 +73,142 @@ export default function AboutPage() {
   ];
 
   return (
-    <div className="relative overflow-hidden bg-[#0a0a0a] text-slate-50">
+    <motion.div 
+      className="relative overflow-hidden bg-[#0a0a0a] text-white"
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+    >
       <main className="relative z-10 mx-auto flex max-w-6xl flex-col gap-16 px-4 py-10 md:px-6 md:py-16">
         {/* Hero */}
-        <section className="grid gap-8 md:grid-cols-[1.4fr_minmax(0,1fr)]">
+        <motion.section 
+          variants={fadeInUp}
+          className="grid gap-8 md:grid-cols-[1.4fr_minmax(0,1fr)]"
+        >
           <div className="space-y-4">
-            <h1 className="text-3xl font-extrabold tracking-tight text-slate-50 sm:text-4xl md:text-5xl">
-              Sovereign Data for a Digital Ethiopia
+            <h1 className="text-3xl font-semibold tracking-tight text-white sm:text-4xl md:text-5xl heading-premium">
+              Sovereign Data for a <span className="text-gold-gradient">Digital Ethiopia</span>
             </h1>
-            <p className="max-w-xl text-sm text-slate-300 md:text-base">
+            <p className="max-w-xl text-[1.0625rem] leading-[1.6] text-zinc-400">
               EthioAI is built to ensure that Ethiopia owns the data infrastructure behind its
               emerging AI ecosystem — from research labs to national institutions.
             </p>
           </div>
-          <div className="relative">
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-[#ff8c00]/30 via-transparent to-sky-500/30 blur-3xl" />
-            <div className="relative flex h-52 items-end overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-t from-black via-slate-900 to-slate-800 shadow-2xl">
-              <div className="absolute inset-0 flex items-end justify-center bg-[radial-gradient(circle_at_50%_0,#f97316_0,transparent_55%)] opacity-40" />
-              <div className="relative z-10 flex w-full items-end justify-between px-5 pb-4 text-xs text-slate-200">
+          <motion.div 
+            className="relative"
+            whileHover={{ scale: 1.02 }}
+            transition={{ duration: 0.3 }}
+          >
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-amber-500/30 via-transparent to-amber-300/30 blur-3xl" />
+            <div className="relative flex h-52 items-end overflow-hidden rounded-2xl border border-white/10 bg-black/60 shadow-2xl">
+              <div className="absolute inset-0 flex items-end justify-center bg-[radial-gradient(circle_at_50%_0,#fbbf24_0,transparent_55%)] opacity-40" />
+              <div className="relative z-10 flex w-full items-end justify-between px-5 pb-4 text-xs text-zinc-300">
                 <div>
-                  <p className="font-semibold text-slate-50">Addis Ababa Skyline</p>
-                  <p className="text-[11px] text-slate-400">
+                  <p className="font-semibold text-white">Addis Ababa Skyline</p>
+                  <p className="text-[11px] text-zinc-500">
                     Placeholder for a future photo capturing Ethiopia&apos;s digital future.
                   </p>
                 </div>
-                <span className="rounded-full bg-black/60 px-3 py-1 text-[10px] text-orange-300">
+                <span className="rounded-full bg-black/60 px-3 py-1 text-[10px] text-amber-400 ring-1 ring-amber-500/30">
                   Image Placeholder
                 </span>
               </div>
             </div>
-          </div>
-        </section>
+          </motion.div>
+        </motion.section>
 
         {/* Journey Timeline */}
-        <section className="grid gap-10 md:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)]">
+        <motion.section 
+          variants={fadeInUp}
+          className="grid gap-10 md:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)]"
+        >
           <div>
-            <h2 className="text-2xl font-bold tracking-tight text-slate-50 md:text-3xl">
-              Our Journey
+            <h2 className="text-2xl font-semibold tracking-tight text-white md:text-3xl heading-premium">
+              Our <span className="text-gold-gradient">Journey</span>
             </h2>
-            <p className="mt-2 text-sm text-slate-400 md:max-w-xl">
+            <p className="mt-2 text-[1.0625rem] leading-[1.6] text-zinc-400 md:max-w-xl">
               From the first conversations at Nile Academy to national-scale deployments, EthioAI
               has been designed as a bridge between local expertise and world-class AI tooling.
             </p>
 
             <div className="mt-6 relative">
-              <div className="absolute left-4 top-0 h-full w-px bg-gradient-to-b from-[#ff8c00] via-slate-700 to-slate-800" />
-              <div className="space-y-6 pl-10">
+              <div className="absolute left-4 top-0 h-full w-px bg-gradient-to-b from-amber-400 via-zinc-700 to-zinc-800" />
+              <motion.div 
+                className="space-y-6 pl-10"
+                variants={containerVariants}
+              >
                 {timeline.map((item, idx) => (
-                  <div key={item.year} className="relative">
+                  <motion.div 
+                    key={item.year} 
+                    variants={fadeInUp}
+                    className="relative"
+                  >
                     <div className="absolute left-[-22px] top-1 flex h-4 w-4 items-center justify-center rounded-full bg-[#0a0a0a]">
-                      <span className="h-2.5 w-2.5 rounded-full bg-[#ff8c00] shadow-[0_0_12px_rgba(255,140,0,0.9)]" />
+                      <span className="h-2.5 w-2.5 rounded-full bg-amber-400 shadow-[0_0_12px_rgba(251,191,36,0.9)]" />
                     </div>
-                    <div className="rounded-2xl border border-slate-800 bg-slate-950/80 p-4">
-                      <p className="text-[11px] font-semibold uppercase tracking-wide text-orange-300">
+                    <motion.div 
+                      whileHover={{ 
+                        borderColor: "rgba(251, 191, 36, 0.3)",
+                        backgroundColor: "rgba(0, 0, 0, 0.8)",
+                      }}
+                      transition={{ duration: 0.2 }}
+                      className="rounded-xl border border-white/10 bg-black/60 p-4"
+                    >
+                      <p className="text-[11px] font-semibold uppercase tracking-wide text-amber-400">
                         {item.year}
                       </p>
-                      <h3 className="mt-1 text-sm font-semibold text-slate-50">{item.title}</h3>
-                      <p className="mt-1 text-xs text-slate-300">{item.description}</p>
-                    </div>
-                  </div>
+                      <h3 className="mt-1 text-sm font-semibold text-white heading-premium">{item.title}</h3>
+                      <p className="mt-1 text-xs text-zinc-400">{item.description}</p>
+                    </motion.div>
+                  </motion.div>
                 ))}
-              </div>
+              </motion.div>
             </div>
           </div>
 
           <div className="space-y-4">
-            <h3 className="text-sm font-semibold text-slate-50">Nile Academy in Action</h3>
-            <p className="text-xs text-slate-300">
+            <h3 className="text-sm font-semibold text-white heading-premium">Nile Academy in Action</h3>
+            <p className="text-xs text-zinc-400">
               Future photos will highlight the teams designing guidelines, annotating complex data,
               and validating quality at every step of the pipeline.
             </p>
-            <div className="grid gap-4 sm:grid-cols-2">
+            <motion.div 
+              className="grid gap-4 sm:grid-cols-2"
+              variants={containerVariants}
+            >
               {[1, 2, 3, 4].map((idx) => (
-                <div
+                <motion.div
                   key={idx}
-                  className="flex h-28 items-end overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-t from-black via-slate-900 to-slate-800"
+                  variants={fadeInUp}
+                  whileHover={{ 
+                    borderColor: "rgba(251, 191, 36, 0.2)",
+                    scale: 1.02,
+                  }}
+                  transition={{ duration: 0.2 }}
+                  className="flex h-28 items-end overflow-hidden rounded-xl border border-white/10 bg-black/60"
                 >
-                  <div className="flex w-full items-end justify-between px-3 pb-3 text-[11px] text-slate-200">
+                  <div className="flex w-full items-end justify-between px-3 pb-3 text-[11px] text-zinc-300">
                     <span>Nile Academy • Team {idx}</span>
-                    <span className="rounded-full bg-black/50 px-2 py-0.5 text-[10px] text-orange-300">
+                    <span className="rounded-full bg-black/50 px-2 py-0.5 text-[10px] text-amber-400 ring-1 ring-amber-500/20">
                       Photo Placeholder
                     </span>
                   </div>
-                </div>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           </div>
-        </section>
+        </motion.section>
 
         {/* Team Section */}
-        <section className="space-y-8">
+        <motion.section 
+          variants={fadeInUp}
+          className="space-y-8"
+        >
           <div className="space-y-1 text-center">
-            <h2 className="text-2xl font-bold tracking-tight text-slate-50 md:text-3xl">
-              The Team Behind EthioAI
+            <h2 className="text-2xl font-semibold tracking-tight text-white md:text-3xl heading-premium">
+              The <span className="text-gold-gradient">Team</span> Behind EthioAI
             </h2>
-            <p className="text-sm text-slate-400">
+            <p className="text-[1.0625rem] leading-[1.6] text-zinc-400">
               A blend of researchers, engineers, and operators committed to Ethiopia&apos;s digital
               future.
             </p>
@@ -137,88 +216,115 @@ export default function AboutPage() {
 
           <div className="space-y-6">
             <div className="space-y-2">
-              <h3 className="text-sm font-semibold text-slate-100">Founding Team</h3>
-              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              <h3 className="text-sm font-semibold text-white heading-premium">Founding Team</h3>
+              <motion.div 
+                className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4"
+                variants={containerVariants}
+              >
                 {team
                   .filter((member) => member.group === "Founding Team")
-                  .map((member) => (
-                    <div
+                  .map((member, idx) => (
+                    <motion.div
                       key={member.name}
-                      className="flex flex-col gap-3 rounded-2xl border border-slate-800 bg-slate-950/80 p-4"
+                      variants={fadeInUp}
+                      whileHover={{ 
+                        borderColor: "rgba(251, 191, 36, 0.3)",
+                        backgroundColor: "rgba(0, 0, 0, 0.8)",
+                        y: -4,
+                      }}
+                      transition={{ duration: 0.2 }}
+                      className="flex flex-col gap-3 rounded-xl border border-white/10 bg-black/60 p-4"
                     >
-                      <div className="group relative h-32 overflow-hidden rounded-xl bg-slate-800">
-                        <div className="absolute inset-0 bg-gradient-to-tr from-slate-900 via-slate-700 to-slate-500 grayscale transition group-hover:grayscale-0" />
-                        <div className="relative z-10 flex h-full items-end justify-between px-3 pb-2 text-[10px] text-slate-200">
+                      <div className="group relative h-32 overflow-hidden rounded-xl bg-zinc-800">
+                        <div className="absolute inset-0 bg-gradient-to-tr from-zinc-900 via-zinc-700 to-zinc-500 grayscale transition group-hover:grayscale-0" />
+                        <div className="relative z-10 flex h-full items-end justify-between px-3 pb-2 text-[10px] text-zinc-300">
                           <span>Profile Photo</span>
-                          <span className="rounded-full bg-black/60 px-2 py-0.5 text-orange-300">
+                          <span className="rounded-full bg-black/60 px-2 py-0.5 text-amber-400 ring-1 ring-amber-500/20">
                             Placeholder
                           </span>
                         </div>
                       </div>
                       <div className="flex items-center justify-between gap-2">
                         <div>
-                          <p className="text-sm font-semibold text-slate-50">{member.name}</p>
-                          <p className="text-[11px] text-slate-400">{member.title}</p>
+                          <p className="text-sm font-semibold text-white">{member.name}</p>
+                          <p className="text-[11px] text-zinc-400">{member.title}</p>
                         </div>
-                        <button
+                        <motion.button
                           type="button"
-                          className="inline-flex h-7 w-7 items-center justify-center rounded-full border border-slate-700 bg-slate-900 text-[13px] text-slate-300 transition hover:border-[#0a66c2] hover:text-[#0a66c2]"
+                          whileHover={{ scale: 1.1 }}
+                          whileTap={{ scale: 0.95 }}
+                          className="inline-flex h-7 w-7 items-center justify-center rounded-full border border-white/20 bg-black text-[13px] text-zinc-300 transition hover:border-amber-400 hover:text-amber-400"
                           aria-label="LinkedIn profile"
                         >
                           in
-                        </button>
+                        </motion.button>
                       </div>
-                    </div>
+                    </motion.div>
                   ))}
-              </div>
+              </motion.div>
             </div>
 
             <div className="space-y-2">
-              <h3 className="text-sm font-semibold text-slate-100">Core Developers</h3>
-              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              <h3 className="text-sm font-semibold text-white heading-premium">Core Developers</h3>
+              <motion.div 
+                className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4"
+                variants={containerVariants}
+              >
                 {team
                   .filter((member) => member.group === "Core Developers")
-                  .map((member) => (
-                    <div
+                  .map((member, idx) => (
+                    <motion.div
                       key={member.name}
-                      className="flex flex-col gap-3 rounded-2xl border border-slate-800 bg-slate-950/80 p-4"
+                      variants={fadeInUp}
+                      whileHover={{ 
+                        borderColor: "rgba(251, 191, 36, 0.3)",
+                        backgroundColor: "rgba(0, 0, 0, 0.8)",
+                        y: -4,
+                      }}
+                      transition={{ duration: 0.2 }}
+                      className="flex flex-col gap-3 rounded-xl border border-white/10 bg-black/60 p-4"
                     >
-                      <div className="group relative h-32 overflow-hidden rounded-xl bg-slate-800">
-                        <div className="absolute inset-0 bg-gradient-to-tr from-slate-900 via-slate-700 to-slate-500 grayscale transition group-hover:grayscale-0" />
-                        <div className="relative z-10 flex h-full items-end justify-between px-3 pb-2 text-[10px] text-slate-200">
+                      <div className="group relative h-32 overflow-hidden rounded-xl bg-zinc-800">
+                        <div className="absolute inset-0 bg-gradient-to-tr from-zinc-900 via-zinc-700 to-zinc-500 grayscale transition group-hover:grayscale-0" />
+                        <div className="relative z-10 flex h-full items-end justify-between px-3 pb-2 text-[10px] text-zinc-300">
                           <span>Profile Photo</span>
-                          <span className="rounded-full bg-black/60 px-2 py-0.5 text-orange-300">
+                          <span className="rounded-full bg-black/60 px-2 py-0.5 text-amber-400 ring-1 ring-amber-500/20">
                             Placeholder
                           </span>
                         </div>
                       </div>
                       <div className="flex items-center justify-between gap-2">
                         <div>
-                          <p className="text-sm font-semibold text-slate-50">{member.name}</p>
-                          <p className="text-[11px] text-slate-400">{member.title}</p>
+                          <p className="text-sm font-semibold text-white">{member.name}</p>
+                          <p className="text-[11px] text-zinc-400">{member.title}</p>
                         </div>
-                        <button
+                        <motion.button
                           type="button"
-                          className="inline-flex h-7 w-7 items-center justify-center rounded-full border border-slate-700 bg-slate-900 text-[13px] text-slate-300 transition hover:border-[#0a66c2] hover:text-[#0a66c2]"
+                          whileHover={{ scale: 1.1 }}
+                          whileTap={{ scale: 0.95 }}
+                          className="inline-flex h-7 w-7 items-center justify-center rounded-full border border-white/20 bg-black text-[13px] text-zinc-300 transition hover:border-amber-400 hover:text-amber-400"
                           aria-label="LinkedIn profile"
                         >
                           in
-                        </button>
+                        </motion.button>
                       </div>
-                    </div>
+                    </motion.div>
                   ))}
-              </div>
+              </motion.div>
             </div>
           </div>
 
-          <div className="mt-6 border-t border-slate-800 pt-6 text-center">
-            <p className="mx-auto max-w-3xl text-base font-semibold text-slate-100 md:text-lg">
-              &quot;Building the foundational data that allows Ethiopia to own its AI future.&quot;
+          <motion.div 
+            variants={fadeIn}
+            className="mt-6 border-t border-white/10 pt-6 text-center"
+          >
+            <p className="mx-auto max-w-3xl text-lg font-medium text-white heading-premium">
+              &quot;Building the foundational data that allows Ethiopia to <span className="text-gold-gradient">own its AI future.</span>&quot;
             </p>
-          </div>
-        </section>
+          </motion.div>
+        </motion.section>
       </main>
-    </div>
+    </motion.div>
   );
 }
 
