@@ -355,6 +355,61 @@ export default function Home() {
           </div>
         </section>
 
+        {/* ── Dashboard Quick Access ──────────────────────────── */}
+        <section className="space-y-6">
+          <div className="space-y-3">
+            <h2 className="text-2xl font-semibold tracking-tight md:text-3xl heading-premium">
+              Access Your <span className="text-gold-gradient">Dashboard</span>
+            </h2>
+            <p className="text-[1.0625rem] leading-[1.6] text-zinc-400 md:max-w-2xl">
+              Jump directly into your workspace or view project analytics. 
+              Manage annotations, track progress, and collaborate with your team.
+            </p>
+          </div>
+
+          <div className="grid gap-4 md:grid-cols-3">
+            {[
+              { 
+                href: "/dashboard", 
+                title: "Dashboard", 
+                desc: "View projects and analytics",
+                icon: "📊"
+              },
+              { 
+                href: "/workspace", 
+                title: "Workspace", 
+                desc: "Start annotating data",
+                icon: "🎯"
+              },
+              { 
+                href: "/projects", 
+                title: "Projects", 
+                desc: "Manage your datasets",
+                icon: "📁"
+              },
+            ].map((item) => (
+              <motion.a
+                key={item.href}
+                href={item.href}
+                whileHover={{ scale: 1.02, y: -2 }}
+                whileTap={{ scale: 0.98 }}
+                transition={{ duration: 0.2 }}
+                className="flex items-center gap-4 p-5 border bg-[#0a0a0a] hover:bg-[#111] transition-colors group"
+                style={{ borderColor: "rgba(255,224,2,0.15)" }}
+              >
+                <span className="text-2xl">{item.icon}</span>
+                <div className="flex-1">
+                  <h3 className="text-base font-semibold text-white heading-premium group-hover:text-gold-mid transition-colors">
+                    {item.title}
+                  </h3>
+                  <p className="text-sm text-zinc-500">{item.desc}</p>
+                </div>
+                <span className="text-gold-mid opacity-0 group-hover:opacity-100 transition-opacity">→</span>
+              </motion.a>
+            ))}
+          </div>
+        </section>
+
         {/* ── Why EthioAI ─────────────────────────────────────── */}
         <section className="space-y-8">
           <div className="space-y-3">

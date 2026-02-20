@@ -129,31 +129,42 @@ export function Navbar() {
               U
             </MagneticButton>
             {open && (
-              <div className="absolute right-0 mt-2 w-40 rounded-sm border border-white/10 bg-zinc-900/95 p-1 text-xs text-white shadow-lg">
+              <div className="absolute right-0 mt-2 w-48 rounded-md border border-white/10 bg-zinc-900/95 p-1.5 text-sm text-white shadow-lg">
+                <Link
+                  href="/dashboard"
+                  onClick={() => setOpen(false)}
+                  className="flex w-full items-center gap-2 rounded-sm px-3 py-2 text-left hover:bg-zinc-800 transition-colors"
+                >
+                  <span>📊</span>
+                  <span>Dashboard</span>
+                </Link>
+                <Link
+                  href="/profile"
+                  onClick={() => setOpen(false)}
+                  className="flex w-full items-center gap-2 rounded-sm px-3 py-2 text-left hover:bg-zinc-800 transition-colors"
+                >
+                  <span>⚙️</span>
+                  <span>Edit Profile</span>
+                </Link>
+                <div className="my-1 h-px bg-white/10" />
                 <button
                   type="button"
-                  className="flex w-full items-center justify-between rounded-sm px-2 py-1.5 text-left hover:bg-zinc-800"
+                  onClick={() => {
+                    setOpen(false);
+                    // Handle logout logic here
+                    console.log("Logging out...");
+                  }}
+                  className="flex w-full items-center gap-2 rounded-sm px-3 py-2 text-left text-red-400 hover:bg-red-950/40 transition-colors"
                 >
-                  <span>📊 Dashboard</span>
-                </button>
-                <button
-                  type="button"
-                  className="mt-0.5 flex w-full items-center justify-between rounded-sm px-2 py-1.5 text-left hover:bg-zinc-800"
-                >
-                  <span>⚙️ Edit Profile</span>
-                </button>
-                <button
-                  type="button"
-                  className="mt-0.5 flex w-full items-center justify-between rounded-sm px-2 py-1.5 text-left text-red-400 hover:bg-red-950/40"
-                >
-                  <span>🚪 Log Out</span>
+                  <span>🚪</span>
+                  <span>Log Out</span>
                 </button>
               </div>
             )}
           </div>
         </div>
       </div>
-    </header>
+    </motion.header>
   );
 }
 

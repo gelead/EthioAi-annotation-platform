@@ -4,7 +4,6 @@ import React from "react";
 import { motion } from "framer-motion";
 import { ModernButton } from "@/components/ui/ModernButton";
 import { InteractiveLink } from "@/components/ui/InteractiveLink";
-import { Footer } from "@/components/layout/Footer";
 
 const services = [
     {
@@ -168,7 +167,6 @@ export default function ServicesPage() {
                     ))}
                 </section>
             </div>
-            <Footer />
         </div>
     );
 }

@@ -2,7 +2,13 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { Footer } from "@/components/layout/Footer";
+import { 
+  Mail, 
+  Phone, 
+  MapPin, 
+  Clock,
+  Send
+} from "lucide-react";
 
 const contactInfo = [
   {
@@ -247,8 +253,6 @@ export default function ContactPage() {
           </motion.div>
         </motion.section>
       </div>
-      
-      <Footer />
     </div>
   );
 }
