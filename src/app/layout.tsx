@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Playfair_Display, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
+import { Footer } from "@/components/layout/Footer";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -40,11 +41,12 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${inter.variable} ${playfair.variable} ${geistMono.variable} antialiased bg-[#050505] text-white`}
+        className={`${inter.variable} ${playfair.variable} ${geistMono.variable} antialiased bg-ethio-onyx text-white`}
       >
-        <div className="min-h-screen bg-[#050505]">
+        <div className="min-h-screen bg-ethio-onyx">
           <Navbar />
           {children}
+          <Footer />
         </div>
       </body>
     </html>
