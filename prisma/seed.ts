@@ -20,13 +20,13 @@ async function main() {
   await prisma.user.deleteMany({});
   console.log('🧹 Cleared existing data\n');
 
-  // Create main test user
-  const hashedPassword = await bcrypt.hash('password123', 10);
+  // Create regular test user
+  const hashedUserPassword = await bcrypt.hash('password123', 10);
   const testUser = await prisma.user.create({
     data: {
       email: 'test@ethioai.com',
       name: 'Abebe Kebede',
-      password: hashedPassword,
+      password: hashedUserPassword,
       bio: 'Senior data annotator specializing in Ethiopian languages and agricultural AI. Passionate about building Ethiopia\'s digital future.',
       image: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Abebe',
       language: 'Amharic',
@@ -35,7 +35,25 @@ async function main() {
     },
   });
 
+  // Create admin user
+  const adminEmail = process.env.ADMIN_EMAIL || 'admin@ethioai.com';
+  const adminPassword = process.env.ADMIN_PASSWORD || 'admin123';
+  const hashedAdminPassword = await bcrypt.hash(adminPassword, 10);
+
+  const adminUser = await prisma.user.create({
+    data: {
+      email: adminEmail,
+      name: 'EthioAI Administrator',
+      password: hashedAdminPassword,
+      role: 'ADMIN',
+      bio: 'System Administrator for EthioAI Platform.',
+      language: 'English',
+      points: 0,
+    },
+  });
+
   console.log('✅ Created test user:', testUser.name, `(${testUser.id})`);
+  console.log('✅ Created admin user:', adminUser.name, `(${adminUser.id})`);
 
   // Create 15 diverse mock tasks
   const taskData = [
