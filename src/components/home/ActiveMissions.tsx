@@ -49,7 +49,7 @@ const MissionIcon = ({ type }: { type: TaskType }) => {
     }
 };
 
-const MissionCard = ({ mission }: { mission: Project }) => {
+const MissionCard = ({ mission }: { mission: any }) => {
     const { data: session } = useSession();
     const [isHovered, setIsHovered] = useState(false);
 
@@ -59,81 +59,93 @@ const MissionCard = ({ mission }: { mission: Project }) => {
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
             whileHover={{
-                scale: 1.03,
-                borderColor: "rgba(255, 224, 2, 0.4)",
-                boxShadow: "0 0 20px rgba(255, 224, 2, 0.1)"
+                y: -10,
+                transition: { duration: 0.4, ease: "easeOut" }
             }}
-            className="relative group overflow-hidden rounded-2xl border border-white/10 bg-white/5 backdrop-blur-lg p-6 flex flex-col h-full transition-colors duration-300"
+            className="relative group h-[500px] overflow-hidden rounded-[2rem] border border-white/10 bg-[#0a0a0a] shadow-2xl"
         >
-            {/* Glow Effect */}
-            <div className="absolute -inset-px bg-gradient-to-r from-gold-mid/0 via-gold-mid/0 to-gold-mid/0 group-hover:via-gold-mid/10 transition-all duration-500 opacity-0 group-hover:opacity-100 pointer-events-none" />
-
-            {/* Header */}
-            <div className="flex items-start justify-between mb-4">
-                <div className="p-2 rounded-lg bg-white/5 border border-white/10 shadow-[0_0_15px_rgba(255,224,2,0.1)] group-hover:shadow-[0_0_20px_rgba(255,224,2,0.2)] transition-all">
-                    <MissionIcon type={mission.type} />
-                </div>
-                <span className="text-[10px] uppercase tracking-widest text-zinc-500 font-geist-mono">
-                    ID: {mission.id.slice(-6)}
-                </span>
-            </div>
-
-            {/* Content */}
-            <div className="flex-1">
-                <h3 className="text-xl font-bold text-white mb-2 font-urbanist group-hover:text-gold-mid transition-colors">
-                    {mission.name}
-                </h3>
-                <p className="text-sm text-zinc-400 line-clamp-2 mb-6 font-urbanist leading-relaxed">
-                    {mission.description}
-                </p>
-
-                {/* Progress Section */}
-                <div className="space-y-2 mb-6">
-                    <div className="flex items-center justify-between text-[11px] font-geist-mono text-zinc-500">
-                        <span>Progress</span>
-                        <span className="text-gold-mid">{mission.progress}%</span>
-                    </div>
-                    <div className="h-1 w-full bg-white/5 rounded-full overflow-hidden">
-                        <motion.div
-                            initial={{ width: 0 }}
-                            whileInView={{ width: `${mission.progress}%` }}
-                            transition={{ duration: 1.5, ease: "easeOut" }}
-                            className="h-full bg-gradient-to-r from-gold-mid to-gold-light shadow-[0_0_8px_rgba(255,224,2,0.5)]"
-                        />
-                    </div>
-                </div>
-
-                {/* Stats */}
-                <div className="grid grid-cols-2 gap-4 pt-4 border-t border-white/5">
-                    <div className="space-y-1">
-                        <p className="text-[9px] uppercase tracking-tighter text-zinc-500 font-geist-mono">Reward / Task</p>
-                        <p className="text-sm font-bold text-white font-geist-mono">${mission.rewardPerTask.toFixed(2)}</p>
-                    </div>
-                    <div className="space-y-1">
-                        <p className="text-[9px] uppercase tracking-tighter text-zinc-500 font-geist-mono">Contributors</p>
-                        <p className="text-sm font-bold text-white font-geist-mono">{mission.contributors}</p>
-                    </div>
-                </div>
-            </div>
-
-            {/* Participate Button Overlay */}
-            <AnimatePresence>
-                {isHovered && (
-                    <motion.div
-                        initial={{ y: 20, opacity: 0 }}
-                        animate={{ y: 0, opacity: 1 }}
-                        exit={{ y: 20, opacity: 0 }}
-                        className="absolute bottom-6 left-6 right-6"
-                    >
-                        <Link
-                            href={session ? "/dashboard" : "/signup"}
-                            className="w-full py-3 rounded-xl bg-gold-mid text-black text-sm font-bold flex items-center justify-center gap-2 hover:bg-gold-light transition-colors shadow-lg"
-                        >
-                            Participate <ChevronRight className="w-4 h-4" />
-                        </Link>
-                    </motion.div>
+            {/* Project Image - Absolute Background */}
+            <div className="absolute inset-0 transition-transform duration-700 group-hover:scale-110">
+                {mission.image ? (
+                    <img
+                        src={mission.image}
+                        alt={mission.name}
+                        className="w-full h-full object-cover opacity-50 group-hover:opacity-60 transition-opacity duration-500"
+                    />
+                ) : (
+                    <div className="w-full h-full bg-gradient-to-br from-zinc-800 to-black opacity-50" />
                 )}
-            </AnimatePresence>
+                {/* Premium Gradient Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/80 to-transparent" />
+            </div>
+
+            {/* Content Container */}
+            <div className="relative h-full flex flex-col p-8 z-10">
+                {/* Top Badge & Icon */}
+                <div className="flex items-center justify-between mb-auto">
+                    <div className="backdrop-blur-xl bg-white/5 border border-white/10 p-3 rounded-2xl shadow-xl">
+                        <MissionIcon type={mission.type} />
+                    </div>
+                    <div className="px-3 py-1 rounded-full backdrop-blur-xl bg-gold-mid/10 border border-gold-mid/20 text-[10px] text-gold-mid font-black tracking-widest uppercase">
+                        {mission.type}
+                    </div>
+                </div>
+
+                {/* Main Content */}
+                <div className="space-y-4">
+                    <h3 className="text-3xl font-black text-white tracking-tight leading-none group-hover:text-gold-mid transition-colors duration-300">
+                        {mission.name}
+                    </h3>
+
+                    <p className="text-sm text-zinc-400 font-medium leading-relaxed line-clamp-3">
+                        {mission.description}
+                    </p>
+
+                    {/* Progress with Glow */}
+                    <div className="space-y-3 pt-4">
+                        <div className="flex items-center justify-between">
+                            <span className="text-[10px] font-black uppercase tracking-[0.2em] text-zinc-500">Milestone</span>
+                            <span className="text-sm font-black text-gold-mid">{mission.progress}%</span>
+                        </div>
+                        <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden border border-white/5">
+                            <motion.div
+                                initial={{ width: 0 }}
+                                whileInView={{ width: `${mission.progress}%` }}
+                                transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
+                                className="h-full bg-gradient-to-r from-gold-mid via-gold-light to-gold-mid shadow-[0_0_20px_rgba(255,224,2,0.6)]"
+                            />
+                        </div>
+                    </div>
+
+                    {/* Stats Grid */}
+                    <div className="grid grid-cols-2 gap-4 pt-6 mt-6 border-t border-white/10">
+                        <div>
+                            <p className="text-[9px] font-black uppercase tracking-widest text-zinc-500 mb-1">Incentive</p>
+                            <div className="flex items-baseline gap-1">
+                                <span className="text-lg font-black text-white">${mission.rewardPerTask.toFixed(2)}</span>
+                                <span className="text-[10px] text-zinc-500 font-bold">/task</span>
+                            </div>
+                        </div>
+                        <div className="text-right">
+                            <p className="text-[9px] font-black uppercase tracking-widest text-zinc-500 mb-1">Network</p>
+                            <p className="text-lg font-black text-white">{mission.contributors.toLocaleString()}</p>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Hover Reveal Button */}
+                <div className="absolute inset-x-0 bottom-0 p-8 translate-y-full group-hover:translate-y-0 transition-transform duration-500 bg-gradient-to-t from-[#050505] to-transparent">
+                    <Link
+                        href={session ? "/dashboard" : "/signup"}
+                        className="w-full py-4 rounded-2xl bg-gold-mid text-black text-[13px] font-black flex items-center justify-center gap-2 hover:bg-gold-light transition-all shadow-[0_0_30px_rgba(255,224,2,0.3)] hover:scale-[1.02]"
+                    >
+                        START MISSION <ChevronRight className="w-5 h-5 stroke-[3]" />
+                    </Link>
+                </div>
+            </div>
+
+            {/* Premium Border Highlight on Hover */}
+            <div className="absolute inset-0 border-2 border-gold-mid/0 group-hover:border-gold-mid/30 rounded-[2rem] transition-all duration-500 pointer-events-none" />
         </motion.div>
     );
 };

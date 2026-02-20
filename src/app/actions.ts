@@ -194,8 +194,8 @@ export async function getCurrentUser() {
 export async function getActiveMissions() {
   try {
     const projects = await prisma.project.findMany({
-      orderBy: { progress: "asc" }, // Show most "active" or needing help
-      take: 4,
+      orderBy: { progress: "asc" },
+      take: 10,
     });
     return { success: true, projects };
   } catch (error) {

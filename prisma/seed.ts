@@ -60,34 +60,65 @@ async function main() {
     {
       name: 'Project Gomen',
       type: TaskType.Image,
-      description: 'Identifying pests in highland vegetable farming.',
+      description: 'Harnessing computer vision to safeguard Ethiopia\'s food security by identifying early-stage pests in highland vegetable clusters.',
       progress: 65,
       rewardPerTask: 0.75,
       contributors: 124,
+      image: 'https://images.unsplash.com/photo-1560493676-04071c5f467b?q=80&w=1000&auto=format&fit=crop'
     },
     {
       name: 'Zelesn-AI',
       type: TaskType.Audio,
-      description: 'Transcribing Ge\'ez and Amharic liturgical chants.',
+      description: 'Preserving Ethiopia\'s oral heritage through advanced neural transcription of Ge\'ez liturgical chants and rare regional dialects.',
       progress: 42,
       rewardPerTask: 1.20,
       contributors: 56,
+      image: 'https://images.unsplash.com/photo-1508700115892-45ecd0562c3e?q=80&w=1000&auto=format&fit=crop'
     },
     {
       name: 'Sheger Flow',
       type: TaskType.Text,
-      description: 'Sentiment analysis for urban transport feedback.',
+      description: 'Optimizing urban mobility in Addis Ababa via sentiment-aware analysis of integrated transport infrastructure feedback.',
       progress: 88,
       rewardPerTask: 0.45,
       contributors: 312,
+      image: 'https://images.unsplash.com/photo-1514361892635-6b07e31e75f9?q=80&w=1000&auto=format&fit=crop'
     },
     {
       name: 'Health-Link',
       type: TaskType.Image,
-      description: 'Labeling X-rays for rural clinic diagnostic support.',
+      description: 'Pioneering remote diagnostic excellence through high-precision AI labeling of medical datasets for rural healthcare networks.',
       progress: 29,
       rewardPerTask: 2.50,
       contributors: 18,
+      image: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=1000&auto=format&fit=crop'
+    },
+    {
+      name: 'Agro-Pulse',
+      type: TaskType.Image,
+      description: 'Satellite-base crop yield prediction using advanced spectral analysis and machine learning for Ethiopian Rift Valley farms.',
+      progress: 15,
+      rewardPerTask: 1.85,
+      contributors: 34,
+      image: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=1000&auto=format&fit=crop'
+    },
+    {
+      name: 'Lingo-Bridge',
+      type: TaskType.Text,
+      description: 'Developing high-fidelity translation models for low-resource Ethiopian languages to enable inclusive digital government services.',
+      progress: 55,
+      rewardPerTask: 0.95,
+      contributors: 89,
+      image: 'https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?q=80&w=1000&auto=format&fit=crop'
+    },
+    {
+      name: 'Eco-Echo',
+      type: TaskType.Audio,
+      description: 'Acoustic monitoring of biodiversity in the Bale Mountains to track endangered species through AI-powered sound recognition.',
+      progress: 10,
+      rewardPerTask: 3.20,
+      contributors: 12,
+      image: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=1000&auto=format&fit=crop'
     },
   ];
 
