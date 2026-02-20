@@ -44,6 +44,7 @@ const revealOnScroll = {
 };
 
 import { AIDataCard } from "@/components/ui/AIDataCard";
+import { ActiveMissions } from "@/components/home/ActiveMissions";
 
 /* ─── Page ──────────────────────────────────────────────────── */
 export default function Home() {
@@ -126,6 +127,9 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        {/* ── Active Missions (New Section) ─────────────── */}
+        <ActiveMissions />
 
         {/* ── Services ────────────────────────────────────────── */}
         <motion.section

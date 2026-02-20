@@ -190,3 +190,16 @@ export async function getCurrentUser() {
     return null;
   }
 }
+
+export async function getActiveMissions() {
+  try {
+    const projects = await prisma.project.findMany({
+      orderBy: { progress: "asc" }, // Show most "active" or needing help
+      take: 4,
+    });
+    return { success: true, projects };
+  } catch (error) {
+    console.error("Failed to fetch active missions:", error);
+    return { success: false, error: "Failed to fetch missions" };
+  }
+}
