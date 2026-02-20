@@ -24,7 +24,7 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-inter);
-  --font-mono: var(--font-geist-mono);
+  --font-mono: var(--font-geist);
   --font-display: var(--font-urbanist), "Urbanist", system-ui, sans-serif;
 
   /* Palette */
@@ -35,8 +35,8 @@
   --color-gold-mid: #FFE002;
 
   /* Modern Premium Typography */
-  --font-heading: var(--font-outfit), "Outfit", sans-serif;
-  --font-body: var(--font-inter), "Inter", system-ui, -apple-system, sans-serif;
+  --font-heading: var(--font-urbanist), "Urbanist", sans-serif;
+  --font-body: var(--font-geist), "Geist", "Inter", system-ui, -apple-system, sans-serif;
 }
 
 /* ─── Base ───────────────────────────────────────────────────── */
@@ -54,12 +54,11 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-body);
-  font-size: 1.125rem;
-  /* 18px - Premium size */
+  font-size: 1.0625rem;
+  /* 17px - Refined size */
   line-height: 1.6;
   max-width: var(--screen-max);
   margin-inline: auto;
-  /* Golden grain noise overlay */
   position: relative;
 }
 
@@ -138,12 +137,24 @@ body::after {
 }
 
 /* Impactful hero text - Further Refined */
+/* Impactful hero text - Refined Minimalist */
 .text-hero-huge {
   font-family: var(--font-heading);
-  font-size: clamp(2.5rem, 8vw, 5.5rem);
-  font-weight: 900;
-  letter-spacing: -0.04em;
-  line-height: 1.05;
+  font-size: clamp(2.25rem, 6vw, 3rem);
+  /* text-4xl to text-5xl */
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+/* User specifically requested H1 resize to text-4xl (mobile) and text-5xl (desktop) */
+h1,
+.h1-premium {
+  font-family: var(--font-heading);
+  font-size: clamp(2.25rem, 6vw, 3rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
 }
 
 /* Refined body text - Secondary/Small contexts */
@@ -176,6 +187,7 @@ body::after {
 
 /* Tracking-widest label for section breadcrumbs/titles */
 .text-premium-label {
+  font-family: var(--font-heading);
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.25em;
@@ -332,9 +344,9 @@ body::after {
   border: none;
   cursor: pointer;
   transition:
-    transform 0.25s ease,
-    box-shadow 0.25s ease,
-    background-position 0.4s ease;
+    transform 0.3s ease-in-out,
+    box-shadow 0.3s ease-in-out,
+    background-position 0.4s ease-in-out;
 }
 
 .btn-gold-primary:hover {
@@ -396,4 +408,14 @@ body::after {
     linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 0);
   background-size: 180px 180px, 120px 120px, 120px 120px;
   opacity: 0.9;
+}
+
+/* Premium card hover refinement */
+.card-premium {
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: border-color 0.3s ease-in-out;
+}
+
+.card-premium:hover {
+  border-color: rgba(255, 255, 255, 0.2);
 }

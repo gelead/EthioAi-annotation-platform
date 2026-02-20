@@ -62,7 +62,7 @@ export function Navbar() {
 
   return (
     <motion.header
-      className="sticky top-0 z-40 border-b border-white/5 bg-black/40 backdrop-blur-md h-24"
+      className="sticky top-0 z-40 border-b border-white/5 bg-black/40 backdrop-blur-md h-20"
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}

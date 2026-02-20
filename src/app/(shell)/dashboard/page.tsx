@@ -42,18 +42,19 @@ export default async function DashboardPage() {
       totalRewards: "$0.00",
       totalTasks: "0",
     },
-    tasks: tasks.map((task: { id: string; title: string; status: string; type: string; reward: number }) => ({
+    tasks: (tasks || []).map((task: { id: string; title: string; status: string; type: string; reward: number }) => ({
       id: task.id,
       title: task.title,
       status: task.status,
       type: task.type,
       reward: task.reward,
     })),
-    recentActivity: recentTasks.map((task: { id: string; title: string; status: string; updatedAt: Date }) => ({
+    recentActivity: (recentTasks || []).map((task: { id: string; title: string; status: string; updatedAt: Date }) => ({
       id: task.id.slice(-4).toUpperCase(),
-      project: task.title,
-      status: task.status === "Completed" ? "Verified" : task.status === "Pending" ? "Pending Review" : "In Progress",
-      minutes: 5, // Using a fixed value for demo activity
+      category: task.title,
+      status: (task.status === "Completed" ? "Verified" : "Pending") as "Verified" | "Pending" | "Rejected",
+      earnings: `$${((parseInt(task.id.slice(-2), 16) % 10) + 1).toFixed(2)}`,
+      date: new Date(task.updatedAt).toLocaleDateString("en-US", { month: "short", day: "numeric" }),
     })),
   };
 
