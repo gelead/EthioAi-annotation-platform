@@ -15,32 +15,42 @@ datasource db {
 
 model User {
   id        String   @id @default(cuid())
-  name      String
+  name      String?
   email     String   @unique
+  password  String?
   bio       String?
   image     String?
+  role      UserRole @default(USER)
   language  String   @default("English")
+  points    Float    @default(0)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   tasks     Task[]
 }
 
 model Task {
-  id        String     @id @default(cuid())
-  title     String
-  status    TaskStatus @default(Pending)
-  type      TaskType
-  reward    Float
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt
-  description String?
-  userId      String
-  user        User       @relation(fields: [userId], references: [id])
+  id           String     @id @default(cuid())
+  title        String
+  description  String?
+  status       TaskStatus @default(PENDING)
+  type         TaskType
+  category     String?
+  rewardAmount Float      @default(0)
+  userId       String
+  user         User       @relation(fields: [userId], references: [id])
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+}
+
+enum UserRole {
+  USER
+  ADMIN
 }
 
 enum TaskStatus {
-  Pending
-  Completed
+  PENDING
+  IN_PROGRESS
+  COMPLETED
 }
 
 enum TaskType {

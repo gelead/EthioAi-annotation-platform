@@ -25,7 +25,54 @@ const staggerContainer = {
   },
 };
 
+import { signIn, useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
+
 export default function LoginPage() {
+  const router = useRouter();
+  const { status } = useSession();
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (status === "authenticated") {
+      router.push("/dashboard");
+    }
+  }, [status, router]);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setLoading(true);
+    setError("");
+
+    const formData = new FormData(e.currentTarget);
+    const email = formData.get("email") as string;
+    const password = formData.get("password") as string;
+
+    try {
+      const res = await signIn("credentials", {
+        email,
+        password,
+        redirect: false,
+      });
+
+      if (res?.error) {
+        setError("Invalid email or password");
+      } else {
+        router.push("/dashboard");
+      }
+    } catch (err) {
+      setError("Something went wrong");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleGoogleSignIn = () => {
+    signIn("google", { callbackUrl: "/dashboard" });
+  };
+
   return (
     <motion.div
       className="flex min-h-[calc(100vh-3.5rem)] items-stretch bg-[#0a0a0a] text-white"
@@ -33,7 +80,7 @@ export default function LoginPage() {
       initial="hidden"
       animate="visible"
     >
-      {/* Left Panel - Branding */}
+      {/* ... (Left Panel same) */}
       <motion.div
         variants={fadeIn}
         className="relative hidden w-1/2 flex-col justify-between overflow-hidden border-r border-white/10 bg-black/80 px-8 py-10 md:flex"
@@ -83,8 +130,19 @@ export default function LoginPage() {
             </p>
           </div>
 
+          {error && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              className="mt-4 rounded-lg bg-red-500/10 border border-red-500/20 p-3 text-xs text-red-500"
+            >
+              {error}
+            </motion.div>
+          )}
+
           <motion.button
             type="button"
+            onClick={handleGoogleSignIn}
             whileHover={{ borderColor: "rgba(251, 191, 36, 0.4)" }}
             whileTap={{ scale: 0.98 }}
             className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl border border-white/20 bg-black/40 px-4 py-2.5 text-sm font-medium text-white transition hover:bg-white/5"
@@ -116,15 +174,17 @@ export default function LoginPage() {
             <span className="h-px flex-1 bg-white/10" />
           </div>
 
-          <form className="mt-6 space-y-4">
+          <form onSubmit={handleSubmit} className="mt-6 space-y-4">
             <div className="space-y-1.5">
               <label htmlFor="email" className="block text-premium-label text-[10px] opacity-70">
                 Email Address
               </label>
               <input
                 id="email"
+                name="email"
                 type="email"
-                className="w-full rounded-xl border border-white/10 bg-black/40 px-4 py-3 text-sm text-white outline-none ring-0 placeholder:text-zinc-600 focus:border-gold-mid/50 focus:ring-1 focus:ring-gold-mid/20 transition-all"
+                required
+                className="w-full rounded-xl border border-white/10 bg-black/40 px-4 py-3 text-sm text-white outline-none ring-0 placeholder:text-zinc-600 focus:border-gold-mid/50 focus:ring-1 focus:ring-gold-mid/20 transition-all font-urbanist"
                 placeholder="you@example.com"
               />
             </div>
@@ -134,8 +194,10 @@ export default function LoginPage() {
               </label>
               <input
                 id="password"
+                name="password"
                 type="password"
-                className="w-full rounded-xl border border-white/10 bg-black/40 px-4 py-3 text-sm text-white outline-none ring-0 placeholder:text-zinc-600 focus:border-gold-mid/50 focus:ring-1 focus:ring-gold-mid/20 transition-all"
+                required
+                className="w-full rounded-xl border border-white/10 bg-black/40 px-4 py-3 text-sm text-white outline-none ring-0 placeholder:text-zinc-600 focus:border-gold-mid/50 focus:ring-1 focus:ring-gold-mid/20 transition-all font-urbanist"
                 placeholder="Enter your password"
               />
             </div>
@@ -150,11 +212,12 @@ export default function LoginPage() {
             </div>
             <motion.button
               type="submit"
+              disabled={loading}
               whileHover={{ scale: 1.02, boxShadow: "0 0 20px rgba(251, 191, 36, 0.3)" }}
               whileTap={{ scale: 0.98 }}
-              className="mt-2 inline-flex w-full items-center justify-center rounded-lg bg-gradient-to-r from-amber-500 to-amber-300 px-4 py-2.5 text-sm font-semibold text-black shadow-lg shadow-amber-500/20 transition"
+              className="mt-2 inline-flex w-full items-center justify-center rounded-lg bg-gradient-to-r from-amber-500 to-amber-300 px-4 py-2.5 text-sm font-semibold text-black shadow-lg shadow-amber-500/20 transition disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Login
+              {loading ? "Logging in..." : "Login"}
             </motion.button>
           </form>
 

@@ -25,7 +25,51 @@ const staggerContainer = {
   },
 };
 
+import { handleSignup } from "@/app/actions";
+import { signIn, useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
+
 export default function SignupPage() {
+  const router = useRouter();
+  const { status } = useSession();
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (status === "authenticated") {
+      router.push("/dashboard");
+    }
+  }, [status, router]);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setLoading(true);
+    setError("");
+    setSuccess("");
+
+    const formData = new FormData(e.currentTarget);
+
+    try {
+      const res = await handleSignup(formData);
+      if (res.success) {
+        setSuccess("Account created successfully! Redirecting to login...");
+        setTimeout(() => router.push("/login"), 2000);
+      } else {
+        setError(res.error || "Signup failed");
+      }
+    } catch (err) {
+      setError("Something went wrong");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleGoogleSignIn = () => {
+    signIn("google", { callbackUrl: "/dashboard" });
+  };
+
   return (
     <motion.div
       className="flex min-h-[calc(100vh-3.5rem)] items-stretch bg-[#0a0a0a] text-white"
@@ -33,7 +77,7 @@ export default function SignupPage() {
       initial="hidden"
       animate="visible"
     >
-      {/* Left Panel - Branding */}
+      {/* ... (Left Panel same) */}
       <motion.div
         variants={fadeIn}
         className="relative hidden w-1/2 flex-col justify-between overflow-hidden border-r border-white/10 bg-black/80 px-8 py-10 md:flex"
@@ -83,8 +127,29 @@ export default function SignupPage() {
             </p>
           </div>
 
+          {error && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              className="mt-4 rounded-lg bg-red-500/10 border border-red-500/20 p-3 text-xs text-red-500"
+            >
+              {error}
+            </motion.div>
+          )}
+
+          {success && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              className="mt-4 rounded-lg bg-green-500/10 border border-green-500/20 p-3 text-xs text-green-500"
+            >
+              {success}
+            </motion.div>
+          )}
+
           <motion.button
             type="button"
+            onClick={handleGoogleSignIn}
             whileHover={{ borderColor: "rgba(251, 191, 36, 0.4)" }}
             whileTap={{ scale: 0.98 }}
             className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl border border-white/20 bg-black/40 px-4 py-2.5 text-sm font-medium text-white transition hover:bg-white/5"
@@ -116,15 +181,17 @@ export default function SignupPage() {
             <span className="h-px flex-1 bg-white/10" />
           </div>
 
-          <form className="mt-6 space-y-4">
+          <form onSubmit={handleSubmit} className="mt-6 space-y-4">
             <div className="space-y-1.5">
               <label htmlFor="fullName" className="block text-premium-label text-[10px] opacity-70">
                 Full Name
               </label>
               <input
                 id="fullName"
+                name="name"
                 type="text"
-                className="w-full rounded-xl border border-white/10 bg-black/40 px-4 py-3 text-sm text-white outline-none ring-0 placeholder:text-zinc-600 focus:border-gold-mid/50 focus:ring-1 focus:ring-gold-mid/20 transition-all"
+                required
+                className="w-full rounded-xl border border-white/10 bg-black/40 px-4 py-3 text-sm text-white outline-none ring-0 placeholder:text-zinc-600 focus:border-gold-mid/50 focus:ring-1 focus:ring-gold-mid/20 transition-all font-urbanist"
                 placeholder="Your full name"
               />
             </div>
@@ -134,28 +201,12 @@ export default function SignupPage() {
               </label>
               <input
                 id="email"
+                name="email"
                 type="email"
-                className="w-full rounded-xl border border-white/10 bg-black/40 px-4 py-3 text-sm text-white outline-none ring-0 placeholder:text-zinc-600 focus:border-gold-mid/50 focus:ring-1 focus:ring-gold-mid/20 transition-all"
+                required
+                className="w-full rounded-xl border border-white/10 bg-black/40 px-4 py-3 text-sm text-white outline-none ring-0 placeholder:text-zinc-600 focus:border-gold-mid/50 focus:ring-1 focus:ring-gold-mid/20 transition-all font-urbanist"
                 placeholder="you@example.com"
               />
-            </div>
-            <div className="space-y-1.5">
-              <label htmlFor="expertise" className="block text-premium-label text-[10px] opacity-70">
-                Expertise Area
-              </label>
-              <select
-                id="expertise"
-                className="w-full rounded-xl border border-white/10 bg-black/40 px-4 py-3 text-sm text-white outline-none ring-0 focus:border-gold-mid/50 focus:ring-1 focus:ring-gold-mid/20 transition-all appearance-none"
-                defaultValue=""
-              >
-                <option value="" disabled className="bg-zinc-900 text-zinc-500">
-                  Select your expertise
-                </option>
-                <option value="amharic" className="bg-zinc-900 text-white">Amharic</option>
-                <option value="oromiffa" className="bg-zinc-900 text-white">Oromiffa</option>
-                <option value="medical" className="bg-zinc-900 text-white">Medical</option>
-                <option value="agriculture" className="bg-zinc-900 text-white">Agriculture</option>
-              </select>
             </div>
             <div className="space-y-1.5">
               <label htmlFor="password" className="block text-premium-label text-[10px] opacity-70">
@@ -163,18 +214,21 @@ export default function SignupPage() {
               </label>
               <input
                 id="password"
+                name="password"
                 type="password"
-                className="w-full rounded-xl border border-white/10 bg-black/40 px-4 py-3 text-sm text-white outline-none ring-0 placeholder:text-zinc-600 focus:border-gold-mid/50 focus:ring-1 focus:ring-gold-mid/20 transition-all"
+                required
+                className="w-full rounded-xl border border-white/10 bg-black/40 px-4 py-3 text-sm text-white outline-none ring-0 placeholder:text-zinc-600 focus:border-gold-mid/50 focus:ring-1 focus:ring-gold-mid/20 transition-all font-urbanist"
                 placeholder="Enter a strong password"
               />
             </div>
             <motion.button
               type="submit"
+              disabled={loading}
               whileHover={{ scale: 1.02, boxShadow: "0 0 20px rgba(251, 191, 36, 0.3)" }}
               whileTap={{ scale: 0.98 }}
-              className="mt-2 inline-flex w-full items-center justify-center rounded-lg bg-gradient-to-r from-amber-500 to-amber-300 px-4 py-2.5 text-sm font-semibold text-black shadow-lg shadow-amber-500/20 transition"
+              className="mt-2 inline-flex w-full items-center justify-center rounded-lg bg-gradient-to-r from-amber-500 to-amber-300 px-4 py-2.5 text-sm font-semibold text-black shadow-lg shadow-amber-500/20 transition disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Create Account
+              {loading ? "Creating Account..." : "Create Account"}
             </motion.button>
           </form>
 

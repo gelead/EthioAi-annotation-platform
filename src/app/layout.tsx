@@ -23,6 +23,8 @@ export const metadata: Metadata = {
   description: "National data annotation platform for Ethiopian AI systems",
 };
 
+import { Providers } from "@/components/Providers";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -33,7 +35,9 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${urbanist.variable} ${geist.variable} antialiased bg-[#050505] text-white`}
       >
-        <ConditionalNavigation>{children}</ConditionalNavigation>
+        <Providers>
+          <ConditionalNavigation>{children}</ConditionalNavigation>
+        </Providers>
       </body>
     </html>
   );

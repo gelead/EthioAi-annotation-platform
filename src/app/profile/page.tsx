@@ -1,49 +1,48 @@
-import { getUserByEmail, getRecentActivity, getDashboardStats } from "@/app/actions";
+import { getCurrentUser, fetchDashboardStats } from "@/app/actions";
 import { ProfileClient } from "./ProfileClient";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
+import { redirect } from "next/navigation";
+import { TaskStatus } from "@prisma/client";
 
 export default async function ProfilePage() {
-  // Fetch test user data
-  const testUserEmail = "test@ethioai.com";
+  const session = await getServerSession(authOptions);
 
-  const userResult = await getUserByEmail(testUserEmail);
-  const user = userResult.success ? userResult.user : null;
-
-  if (!user) {
-    return (
-      <div className="flex min-h-screen items-center justify-center bg-[#0a0a0a] text-white">
-        <p>User not found. Please run: npx prisma db seed</p>
-      </div>
-    );
+  if (!session?.user) {
+    redirect("/login");
   }
 
-  // Fetch recent activity
-  const activityResult = await getRecentActivity(user.id, 3);
-  const recentTasks = activityResult?.success ? activityResult.tasks : [];
+  const [user, statsResult] = await Promise.all([
+    getCurrentUser(),
+    fetchDashboardStats(),
+  ]);
 
-  // Fetch stats
-  const statsResult = await getDashboardStats(user.id);
+  if (!user) {
+    redirect("/login");
+  }
+
   const stats = statsResult?.success ? statsResult.stats : null;
 
   // Format data for client
   const profileData = {
     id: user.id,
-    name: user.name,
+    name: user.name || "Annotator",
     email: user.email,
-    role: "Contributor", // Default role as it's not in the schema yet
+    role: (user as any).role === "ADMIN" ? "Administrator" : "Contributor",
     bio: user.bio || "",
     image: user.image,
     language: user.language || "English",
     joinDate: new Date(user.createdAt).toLocaleDateString("en-US", { month: "long", year: "numeric" }),
     totalAnnotations: stats?.completedTasks || 0,
-    qualityScore: 98,
-    points: Math.round(stats?.totalRewards || 0),
-    expertise: ["Amharic", "Medical"],
+    qualityScore: 98.5, // Mock quality score for now
+    points: Math.round(stats?.totalBalance || 0),
+    expertise: ["Amharic", "Medical"], // To be added to schema later if needed
   };
 
-  const recentActivity = (recentTasks || []).map((task: { id: string; title: string; status: string; updatedAt: Date }) => ({
+  const recentActivity = (user.tasks || []).slice(0, 5).map((task) => ({
     id: `T-${task.id.slice(-4).toUpperCase()}`,
     project: task.title,
-    status: task.status === "COMPLETED" ? "Verified" : task.status === "PENDING" ? "Pending Review" : "In Progress",
+    status: (task.status as any) === "COMPLETED" ? "Verified" : (task.status as any) === "PENDING" ? "Pending Review" : "In Progress",
     date: new Date(task.updatedAt).toLocaleDateString("en-US", { month: "short", day: "numeric" }),
   }));
 

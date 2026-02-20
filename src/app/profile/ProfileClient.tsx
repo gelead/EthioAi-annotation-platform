@@ -88,7 +88,7 @@ export function ProfileClient({ user, recentActivity }: ProfileClientProps) {
     setSaveMessage("");
 
     startTransition(async () => {
-      const result = await updateProfile(user.id, formData);
+      const result = await updateProfile(formData);
 
       if (result.success) {
         setSaveMessage("Profile updated successfully!");
@@ -289,7 +289,7 @@ export function ProfileClient({ user, recentActivity }: ProfileClientProps) {
                   >
                     <p className="text-[11px] text-zinc-500 uppercase tracking-wider">{stat.label}</p>
                     <p className={`mt-1 text-2xl font-semibold ${stat.color === "emerald" ? "text-emerald-400" :
-                        stat.color === "amber" ? "text-amber-400" : "text-white"
+                      stat.color === "amber" ? "text-amber-400" : "text-white"
                       }`}>
                       {stat.value}
                     </p>
@@ -319,8 +319,8 @@ export function ProfileClient({ user, recentActivity }: ProfileClientProps) {
                         <td className="px-4 py-3">
                           <span
                             className={`inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-medium ${activity.status === "Verified"
-                                ? "bg-emerald-500/10 text-emerald-400 ring-1 ring-emerald-500/30"
-                                : "bg-amber-500/10 text-amber-400 ring-1 ring-amber-500/30"
+                              ? "bg-emerald-500/10 text-emerald-400 ring-1 ring-emerald-500/30"
+                              : "bg-amber-500/10 text-amber-400 ring-1 ring-amber-500/30"
                               }`}
                           >
                             {activity.status}

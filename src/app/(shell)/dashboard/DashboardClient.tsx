@@ -1,6 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { completeTask } from "@/app/actions";
+import { useTransition } from "react";
 
 interface DashboardData {
   name: string;
@@ -24,6 +26,10 @@ interface DashboardData {
     earnings: string;
     date: string;
   }[];
+}
+
+interface DashboardClientProps {
+  data: DashboardData;
 }
 
 // Animation variants for staggered animations
@@ -53,11 +59,8 @@ const fadeInUp = {
   },
 };
 
-interface DashboardClientProps {
-  data: DashboardData;
-}
-
 export function DashboardClient({ data }: DashboardClientProps) {
+  const [isPending, startTransition] = useTransition();
   const activeProjects = [
     {
       name: "Amharic Medical Text",
@@ -322,12 +325,34 @@ export function DashboardClient({ data }: DashboardClientProps) {
                         {task.earnings}
                       </td>
                       <td className="px-6 py-4">
-                        <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-[9px] font-bold tracking-tight ${task.status === "Verified" ? "bg-emerald-400/10 text-emerald-400" :
-                          task.status === "Pending" ? "bg-amber-400/10 text-amber-400" :
-                            "bg-red-400/10 text-red-400"
-                          }`}>
-                          {task.status}
-                        </span>
+                        <div className="flex items-center gap-3">
+                          <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-[9px] font-bold tracking-tight ${task.status === "Verified" ? "bg-emerald-400/10 text-emerald-400" :
+                            task.status === "Pending" ? "bg-amber-400/10 text-amber-400" :
+                              "bg-red-400/10 text-red-400"
+                            }`}>
+                            {task.status}
+                          </span>
+                          {task.status === "Pending" && (
+                            <button
+                              disabled={isPending}
+                              onClick={() => {
+                                startTransition(async () => {
+                                  // Find the actual task ID from data.tasks if needed, 
+                                  // but recentActivity task.id is sliced in the formatter. 
+                                  // Wait, task.id in dashboardData.tasks is the full ID.
+                                  // I should use the full ID from data.tasks or fix the formatter.
+                                  const fullTask = data.tasks.find(t => t.title === task.category);
+                                  if (fullTask) {
+                                    await completeTask(fullTask.id);
+                                  }
+                                });
+                              }}
+                              className="text-[10px] font-bold text-amber-400 hover:text-amber-300 transition-colors uppercase"
+                            >
+                              {isPending ? "..." : "Complete"}
+                            </button>
+                          )}
+                        </div>
                       </td>
                       <td className="px-6 py-4 text-right text-zinc-500 font-bold">
                         {task.date}
